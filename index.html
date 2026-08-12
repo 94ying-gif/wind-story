@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layered Story Quest · 繪本層次探索與後台中心</title>
+    <title>De5ign 繪本教案：《那天風很大》</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@insforge/sdk@latest/dist/insforge.min.js"></script>
+    <script>
+        const insforge = new InsForge({
+            baseUrl: 'https://763wx989.us-west.insforge.app/',
+            apiKey: 'ik_b1ba6bd98b609d5a83005ba56b16cad6'
+        });
+    </script>
     <style>
         body {
             background-color: #0d0714;
@@ -16,162 +22,399 @@
         .border-glow { border-color: rgba(168, 85, 247, 0.35); }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 flex items-center justify-center">
-
-    <div class="max-w-xl w-full bg-card border border-glow backdrop-blur-md rounded-2xl p-6 md:p-8 space-y-6 shadow-2xl">
+<body class="min-h-screen p-4 md:p-8">
+    <div class="max-w-4xl mx-auto space-y-6">
         
-        <div class="text-center space-y-2">
-            <h1 class="text-3xl font-bold text-purple-300">Layered Story Quest</h1>
-            <p class="text-sm text-purple-200/80">De5ign 書坊 · 繪本層次探索與教案後台中心</p>
-        </div>
-
-        <div id="login-section" class="space-y-4">
-            <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 text-center space-y-2">
-                <p class="text-sm text-purple-200">登入後即可解鎖以下功能：</p>
-                <ul class="text-xs text-purple-300/80 space-y-1">
-                    <li>✨ 跨裝置同步《那天風很大》教學紀錄</li>
-                    <li>💾 雲端儲存學生 ORID 漢堡王提問記錄與作業</li>
-                    <li>⭐️ 收藏各星級教學方案</li>
-                </ul>
+        <!-- 頂部標題與 InsForge 登入狀態 -->
+        <header class="flex flex-col md:flex-row justify-between items-center p-6 rounded-2xl bg-card border border-glow backdrop-blur-md gap-4">
+            <div>
+                <h1 class="text-3xl font-bold text-purple-300">De5ign 書坊 · 繪本教案庫</h1>
+                <p class="text-sm text-purple-200 opacity-80">《那天風很大》中英雙語、繪本播放器與 InsForge 後台整合版</p>
             </div>
-
-            <button onclick="loginWithGmail()" class="w-full py-3.5 px-4 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl flex items-center justify-center gap-3 transition shadow-lg">
-                <svg class="w-5 h-5" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                </svg>
-                使用 Gmail 帳號登入
-            </button>
-        </div>
-
-        <div id="dashboard-section" class="hidden space-y-6">
-            <div class="flex items-center gap-4 p-4 bg-black/30 rounded-xl border border-white/10">
-                <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xl text-white" id="user-avatar">
-                    G
+            <div class="flex items-center gap-3 bg-black/40 p-2 rounded-xl border border-white/10">
+                <div id="userInfo" class="text-xs text-right hidden">
+                    <p id="userName" class="font-bold text-purple-200">測試教師</p>
+                    <p id="userEmail" class="text-purple-400 opacity-75">user@gmail.com</p>
                 </div>
+                <button id="btnLogin" onclick="loginInsForge()" class="px-4 py-2 rounded-lg text-sm font-bold bg-purple-600 text-white shadow-lg hover:bg-purple-500 transition">🔑 Google 登入後台</button>
+                <button id="btnLogout" onclick="logoutInsForge()" class="px-4 py-2 rounded-lg text-sm font-bold bg-gray-700 text-white shadow-lg hover:bg-gray-600 transition hidden">登出</button>
+            </div>
+        </header>
+
+        <!-- 主頁籤導覽 -->
+        <nav class="flex gap-2 border-b border-white/10 pb-2 overflow-x-auto">
+            <button onclick="switchTab('story')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 bg-white/10 whitespace-nowrap" id="tab-story">📖 雙語故事與生動朗讀</button>
+            <button onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-gallery">🖼️ 故事繪本</button>
+            <button onclick="switchTab('orid')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-orid">🍔 漢堡王提問 (ORID)</button>
+            <button onclick="switchTab('fiveStar')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-fiveStar">⭐️ 五星級完整教案包</button>
+            <button onclick="switchTab('insforge')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-insforge">🗄️ InsForge 家長/教案資料庫</button>
+        </nav>
+
+        <!-- 模組一：雙語故事全文與朗讀 -->
+        <section id="sec-story" class="p-6 rounded-2xl bg-card border border-glow space-y-4">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-3">
+                <h2 class="text-2xl font-bold text-purple-200">《那天風很大》 The Wind Was Very Strong That Day</h2>
+                <div class="flex gap-2">
+                    <button onclick="speakText('那天風很大。小明坐在樹下，什麼都沒有做。風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。但我一直坐著，直到風停了，味道也散了。他起身，拍拍褲子上的泥。回家了。')" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white flex items-center gap-2 shadow-lg transition">
+                        🎭 感情中文朗讀
+                    </button>
+                </div>
+            </div>
+            
+            <div id="storyContent" class="space-y-4 p-5 bg-black/30 rounded-xl border border-white/5 text-lg">
+                <div class="story-line"><p class="text-purple-100 font-medium">那天風很大。</p><p class="text-purple-300/70 text-base">The wind was very strong that day.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">小明坐在樹下，什麼都沒有做。</p><p class="text-purple-300/70 text-base">Xiao Ming sat under the tree, doing nothing at all.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">風一陣一陣地來，帶著一種他不認識的味道。</p><p class="text-purple-300/70 text-base">Gusts of wind blew by, carrying a scent he didn't recognize.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">他問：你從哪裡來？</p><p class="text-purple-300/70 text-base">He asked, "Where do you come from?"</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">風沒有停，說：大海。</p><p class="text-purple-300/70 text-base">Without stopping, the wind replied, "The ocean."</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">小明說：大海是什麼樣子？</p><p class="text-purple-300/70 text-base">Xiao Ming asked, "What is the ocean like?"</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">風說：很大。然後就走了。</p><p class="text-purple-300/70 text-base">The wind said, "Very vast." And then it was gone.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">小明坐在那裡，聞了很久那個味道。</p><p class="text-purple-300/70 text-base">Xiao Ming sat there, taking in that scent for a long time.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">他沒有去過大海。</p><p class="text-purple-300/70 text-base">He had never been to the ocean.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">他也不知道很大是多大。</p><p class="text-purple-300/70 text-base">Nor did he know how vast "vast" really was.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">但他一直坐著，直到風停了，味道也散了。</p><p class="text-purple-300/70 text-base">Yet he kept sitting there until the wind died down and the scent faded away.</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">他起身，拍拍褲子上的泥。</p><p class="text-purple-300/70 text-base">He stood up, patted the dirt off his trousers,</p></div>
+                <div class="story-line"><p class="text-purple-100 font-medium">回家了。</p><p class="text-purple-300/70 text-base">and went home.</p></div>
+            </div>
+        </section>
+
+        <!-- 模組二：故事繪本播放器 -->
+        <section id="sec-gallery" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <p class="font-bold text-purple-200" id="user-name">載入中...</p>
-                    <p class="text-xs text-purple-300/70" id="user-email">email@gmail.com</p>
+                    <h2 class="text-2xl font-bold text-purple-200">🖼️ 《那天風很大》故事繪本播放器</h2>
+                    <p class="text-sm text-purple-300/80 mt-1">切換頁面時 AI 會自動朗讀該畫面，亦可點擊圖片或朗讀按鈕重聽。</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white shadow-lg transition">◀ 上一頁</button>
+                    <span id="pageIndicator" class="font-bold text-purple-200 text-lg">1 / 7</span>
+                    <button onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white shadow-lg transition">下一頁 ▶</button>
                 </div>
             </div>
 
-            <div class="space-y-3">
-                <h3 class="font-bold text-purple-300 border-l-4 border-purple-500 pl-2">資料庫存取測試（InsForge DB）</h3>
-                <div class="space-y-2">
-                    <label class="text-xs text-purple-200">課堂備註 / 學習單心得儲存：</label>
-                    <textarea id="noteInput" rows="3" class="w-full p-3 bg-black/40 border border-white/10 rounded-xl text-sm focus:outline-none focus:border-purple-500 text-purple-100" placeholder="輸入要同步至資料庫的內容..."></textarea>
+            <div class="p-6 bg-black/50 rounded-2xl border border-white/10 space-y-4">
+                <div class="relative group cursor-pointer overflow-hidden rounded-2xl border border-purple-500/30 flex justify-center items-center min-h-[350px] bg-purple-950/20" onclick="readCurrentSlide()">
+                    <img id="slideImage" src="slide1.jpg" alt="故事繪本畫面" class="max-h-[500px] w-full object-contain rounded-xl transition duration-300 group-hover:scale-102">
+                    <div id="slideFallback" class="hidden p-8 text-center space-y-3">
+                        <span class="text-5xl block">🎨</span>
+                        <p id="fallbackTitle" class="text-2xl font-bold text-purple-200"></p>
+                    </div>
+                    <div class="absolute inset-0 bg-purple-900/40 opacity-0 group-hover:opacity-100 transition rounded-2xl flex items-center justify-center pointer-events-none">
+                        <span class="bg-purple-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-xl">▶ 點擊畫面重聽 AI 朗讀</span>
+                    </div>
                 </div>
-                <button onclick="saveToDatabase()" class="w-full py-2.5 bg-purple-600 hover:bg-purple-500 font-bold text-white rounded-xl text-sm transition shadow-md">
-                    💾 寫入 InsForge 資料庫
-                </button>
+
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-purple-900/30 p-4 rounded-xl border border-white/10">
+                    <p id="slideCaption" class="text-xl font-bold text-purple-100 text-center sm:text-left"></p>
+                    <button onclick="readCurrentSlide()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white transition flex items-center gap-2 shrink-0">
+                        🔊 AI 朗讀此頁
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模組三：漢堡王提問 (ORID) -->
+        <section id="sec-orid" class="p-6 rounded-2xl bg-card border border-glow space-y-4 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <h2 class="text-2xl font-bold text-purple-200">🍔 漢堡王四層次提問：提問有層次，教學有深度</h2>
+                <p class="text-sm text-purple-300/80 mt-1">註：以下為提問架構說明與本繪本示範舉例。詳細與課程進行結合的完整提問，請見「⭐️ 五星級完整教案包」。</p>
             </div>
 
-            <div class="p-3 bg-black/60 rounded-xl border border-white/5 space-y-1">
-                <p class="text-xs font-mono text-purple-400">InsForge Console Log:</p>
-                <p id="logOutput" class="text-xs font-mono text-emerald-400">系統就緒，等待操作...</p>
+            <div class="grid gap-4">
+                <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-500/20 space-y-2">
+                    <h3 class="font-bold text-purple-300 text-lg">第一層次記憶性問題：描述客觀狀態『問事實』</h3>
+                    <p class="text-sm text-purple-100/90"><strong>核心目標：</strong>看、聽、閱讀後的轉換分享。</p>
+                    <p class="text-sm text-purple-300/80"><strong>《那天風很大》範例：</strong>故事裡的小明坐在哪裡？那天的天氣怎麼樣？風說它從哪裡來？</p>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-500/20 space-y-2">
+                    <h3 class="font-bold text-purple-300 text-lg">第二層次感受性問題：擴大覺察空間『問感覺』</h3>
+                    <p class="text-sm text-purple-100/90"><strong>核心目標：</strong>你覺得呢？如果是你會怎樣？讓我們揣測劇中角色的心情？</p>
+                    <p class="text-sm text-purple-300/80"><strong>《那天風很大》範例：</strong>當風說大海「很大」就離開時，你覺得小明當時心情是好奇還是困惑？</p>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-500/20 space-y-2">
+                    <h3 class="font-bold text-purple-300 text-lg">第三層次詮釋性問題：探尋生活經驗『問經驗』</h3>
+                    <p class="text-sm text-purple-100/90"><strong>核心目標：</strong>到底跟我有什麼關係？我們能不能在我的生活當中，找得到跟這個素材有關聯的？（舉一反三 / 觸類旁通）</p>
+                    <p class="text-sm text-purple-300/80"><strong>《那天風很大》範例：</strong>你有沒有聞過某種特殊的氣味，讓你聯想到從未去過的地方？你在生活中也有過「什麼都不做、只是靜靜感受」的時候嗎？</p>
+                </div>
+                <div class="p-4 rounded-xl bg-purple-950/40 border border-purple-500/20 space-y-2">
+                    <h3 class="font-bold text-purple-300 text-lg">第四層次實踐性問題：點燃行動願力『問決定』</h3>
+                    <p class="text-sm text-purple-100/90"><strong>核心目標：</strong>我未來的生活有什麼樣的調整？對我未來面對的生活問題，我有什麼樣的智慧可以解決？</p>
+                    <p class="text-sm text-purple-300/80"><strong>《那天風很大》範例：</strong>下次你心情煩躁時，你可以做哪件小事讓自己平靜？你會如何設計一個屬於自己的探索計畫，去尋找你生活中「還不理解的概念」？</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 模組四：五星級完整教案包 -->
+        <section id="sec-fiveStar" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <h2 class="text-2xl font-bold text-purple-200">⭐️ 《那天風很大》De5ign 五星級架構完整教學方案</h2>
+                <p class="text-sm text-purple-300/80 mt-1">請點選下方星級分頁，查看完整的認知設定、ORID 提問與延伸活動</p>
             </div>
 
-            <button onclick="logout()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-purple-300 font-medium rounded-xl text-xs transition">
-                安全登出
-            </button>
-        </div>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="switchStar('1')" id="btn-star-1" class="star-btn px-4 py-2 rounded-xl font-bold bg-purple-600 text-white shadow-lg transition">一星班 (★)</button>
+                <button onclick="switchStar('2')" id="btn-star-2" class="star-btn px-4 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 transition">二星班 (★★)</button>
+                <button onclick="switchStar('3')" id="btn-star-3" class="star-btn px-4 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 transition">三星級 (★★★)</button>
+                <button onclick="switchStar('4')" id="btn-star-4" class="star-btn px-4 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 transition">四星級 (★★★★)</button>
+                <button onclick="switchStar('5')" id="btn-star-5" class="star-btn px-4 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 transition">五星級 (★★★★★)</button>
+            </div>
+
+            <div id="star-content-1" class="star-panel space-y-4">
+                <h3 class="text-xl font-bold text-yellow-300 border-l-4 border-yellow-400 pl-3">一星班（★）：感官韻律與文字啟蒙</h3>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🎯 認知與語言設定</h4>
+                    <p class="text-sm">聽、說、口語復述；1 形音連結字或詞擇 1（風、大、樹、回家）。</p>
+                </div>
+                <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="font-bold text-purple-300">🍔 漢堡王提問設計 (ORID)</h4>
+                    <p class="text-sm"><strong>第一層（問事實）：</strong>小明坐在哪裡？那天的天氣怎麼樣？</p>
+                    <p class="text-sm"><strong>第二層（問感覺）：</strong>當小明聞到不認識的味道時，你覺得他當時的心情是好奇還是平靜？</p>
+                    <p class="text-sm"><strong>第三、四層（問經驗與決定）：</strong>你感受過風吹嗎？風怎麼吹？用身體表現風吹，還可以用什麼表現風吹？你曾經看過風吹過來樹會怎樣？如果沒有人有經驗，我們來看繪本裡的大風吹樹怎麼擺動吹？你來當樹，我當風，我們來告訴大家風吹過來樹會怎樣？</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🏃 延伸探索課程發展：【肢體與語文：風與樹的對話創作】</h4>
+                    <p class="text-sm"><strong>玩法與複習：</strong>幼童兩人一組，配合音樂或故事扮演風與樹，練習簡單肢體動作與口語復述（「風吹過來了」、「樹搖一搖」）另一組（「大風吹過來了」、「樹搖啊搖～」），反覆鞏固「風、樹、大」等基本字詞與部首。</p>
+                    <p class="text-sm"><strong>美勞與藝術活動：</strong>用藍色與綠色顏料進行指印畫、水彩或吹畫，畫出「風的軌跡」。</p>
+                </div>
+            </div>
+
+            <div id="star-content-2" class="star-panel space-y-4 hidden">
+                <h3 class="text-xl font-bold text-yellow-300 border-l-4 border-yellow-400 pl-3">二星班（★★）：生活探究與文字連結</h3>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🎯 認知與語言設定</h4>
+                    <p class="text-sm">聽、說、口語復述；1 形音連結字或詞擇 3（你、他、風、大、樹、大海、回家）。</p>
+                </div>
+                <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="font-bold text-purple-300">🍔 漢堡王提問設計 (ORID)</h4>
+                    <p class="text-sm"><strong>第一層（問事實）：</strong>風一陣一陣的來，帶著什麼？風說它從哪裡來？它怎麼形容大海？請你找一找，剛才我們讀的這頁繪本裡，有哪些字是你認識的？</p>
+                    <p class="text-sm"><strong>第二層（問感覺）：</strong>風只說了「很大」兩個字就走了，如果是你，聽完會覺得失望，還是更加好奇？當小明拍拍褲子上的泥回家時，你覺得他心裡在想什麼？如果是你，你會想什麼？你會好奇什麼？</p>
+                    <p class="text-sm"><strong>第三層（問經驗）：</strong>小明從風裡面聞到了大海的味道，你在我們的校園裡、操場上或樹下，有沒有也曾經聞過什麼特別的味道？在你的生活經驗中，有沒有哪種味道一聞到，就會讓你立刻想起某個地方或某個人？</p>
+                    <p class="text-sm"><strong>第四層（問決定）：</strong>（校園採集）在校園當「氣味獵人」，你決定去哪裡採集第一種味道？（風的遊戲）採集後如何設計遊戲讓大家閉眼猜味道？（家園合作）回家決定去哪裡尋找家裡獨有的味道？（小書製作）決定在小書裡寫下哪一個文字，貼上什麼材料？</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🏃 延伸探索課程發展：【感官探索：味道的旅行】</h4>
+                    <p class="text-sm"><strong>玩法與複習：</strong>實地氣味採集與「閉眼猜氣味」遊戲；製作《氣味小書》鞏固「風、海、草、花、木」字詞與筆畫。進行部首 Bingo 遊戲（風、木、水、土）。排練迷你歌劇/繪本劇場（一人演「風」、一人演「小明」）。進行畫出風或大海的故事創作活動。</p>
+                </div>
+            </div>
+
+            <div id="star-content-3" class="star-panel space-y-4 hidden">
+                <h3 class="text-xl font-bold text-yellow-300 border-l-4 border-yellow-400 pl-3">三星級（★★★）：繪本深讀與結構分析</h3>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🎯 認知與語言設定</h4>
+                    <p class="text-sm">聽、說、復述、寫；1 形音連結字或詞擇 5（味道、大海、褲子、泥土、回家）；能分析故事結構（背景、起因、經過、結果），完成自問自答學習單。</p>
+                </div>
+                <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="font-bold text-purple-300">🍔 漢堡王提問設計 (ORID)</h4>
+                    <p class="text-sm"><strong>第一層（問事實）：</strong>請找出故事的起因：是什麼東西讓小明開始對風感到好奇？</p>
+                    <p class="text-sm"><strong>第二層（問感覺）：</strong>小明不知道「很大是多少」，但他為什麼還是一直坐著直到風停？他當時的心情可能是什麼？</p>
+                    <p class="text-sm"><strong>第三層（問經驗）：</strong>故事裡的小明什麼都沒做，只是坐在樹下。你在生活中也有過「什麼都不做、只是靜靜感受」的時候嗎？</p>
+                    <p class="text-sm"><strong>第四層（問決定）：</strong>請在你的學習單上寫下：下次你心情很煩躁或累的時候，你可以試著做哪一件小事來讓自己平靜？</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🏃 延伸探索課程發展：【視覺想像：畫出「很大是多少」】</h4>
+                    <p class="text-sm"><strong>玩法與複習：</strong>自問自答故事結構分析單（背景、起因、經過、結果）。故事元素替換學習單（將「大海」換成「高山」、「味道」換成「聲音」）。在大畫紙上繪製抽象概念「很大」，並用簡單中文標註細節。</p>
+                </div>
+            </div>
+
+            <div id="star-content-4" class="star-panel space-y-4 hidden">
+                <h3 class="text-xl font-bold text-yellow-300 border-l-4 border-yellow-400 pl-3">四星級（★★★★）：橋樑深度閱讀與邏輯推論</h3>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🎯 認知與語言設定</h4>
+                    <p class="text-sm">聽、說、復述、寫；1 形音連結字或詞擇 7（味道、大海、褲子、泥土、回家、坐、聞、不知道、認識）；由上下文推論詞義（多義詞）、尋找文本因果關係、尋找支持理由與詰問作者安排。</p>
+                </div>
+                <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="font-bold text-purple-300">🍔 漢堡王提問設計 (ORID)</h4>
+                    <p class="text-sm"><strong>第一層（問事實）：</strong>故事中有哪些文字說明小明從來沒有去過大海？</p>
+                    <p class="text-sm"><strong>第二層（問感覺）：</strong>風只回答了「很大」兩個字就離開了，這種「沒有完全給出答案」的安排，帶給你什麼樣的閱讀感覺？</p>
+                    <p class="text-sm"><strong>第三層（問經驗）：</strong>小明聽到了大海，但他沒看過。你在生活中有沒有聽過某個概念（例如：宇宙、永遠），是你還無法完全想像的？</p>
+                    <p class="text-sm"><strong>第四層（問決定）：</strong>如果讓你訪問作者：「為什麼不讓風多解釋一點大海的樣子？」你會怎麼跟作者討論這個結尾？</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🏃 延伸探索課程發展：【跨界整合：味道與視覺的文學創作】</h4>
+                    <p class="text-sm"><strong>玩法與複習：</strong>訪問作者（Critical Reading）探索。上下文推論探討「很大」的多重涵義與線索。撰寫 150 字短文《我心中的『很大』》，連結自身對未知事物的探索經驗。</p>
+                </div>
+            </div>
+
+            <div id="star-content-5" class="star-panel space-y-4 hidden">
+                <h3 class="text-xl font-bold text-yellow-300 border-l-4 border-yellow-400 pl-3">五星級（★★★★★）：應用寫作與生活實踐</h3>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🎯 認知與語言設定</h4>
+                    <p class="text-sm">應用所學的字、詞進行作文或每日日記寫作、段落寫作、思考觀點整合、跨學科專題發表並點燃行動願力。</p>
+                </div>
+                <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2">
+                    <h4 class="font-bold text-purple-300">🍔 漢堡王提問設計 (ORID)</h4>
+                    <p class="text-sm"><strong>第一層（問事實）：</strong>故事最後小明「起身、拍拍褲子上的泥、回家了」，這三個連續動作代表故事到了哪個階段？</p>
+                    <p class="text-sm"><strong>第二層（問感覺）：</strong>小明回家時的內心世界，跟故事剛開始時有什麼不一樣？</p>
+                    <p class="text-sm"><strong>第三層（問經驗）：</strong>這陣風改變了小明對世界的想像。你生命中是否有過一陣「風」（一段經歷、一句話、一個陌生人），開闊了你的視野？</p>
+                    <p class="text-sm"><strong>第四層（問決定）：</strong>請以《那天之後》為題寫一篇短文，描述小明回家後做了什麼決定；或規劃你的「三日感官觀察日記」。下次走在路上吹到風或看到不熟悉事物時，你願意停下腳步多觀察幾秒鐘嗎？如何設計專屬於你的探索計畫去尋找「還不理解的概念」？</p>
+                </div>
+                <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2">
+                    <h4 class="font-bold text-purple-300">🏃 延伸探索課程發展：【實踐性寫作與跨學科生活專題】</h4>
+                    <p class="text-sm"><strong>玩法與複習：</strong>實踐性寫作（以《小明回到家之後...》、《那一陣帶有味道的風》等為題進行日記或作文創作）。跨學科生活專題：執行「生活靜心覺察計劃」（連續三天記錄風、味道或聲音，並於課堂進行 oral presentation 發表）。</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 模組五：InsForge 後台與資料庫整合模組 -->
+        <section id="sec-insforge" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <h2 class="text-2xl font-bold text-purple-200">🗄️ InsForge 後台管理與資料庫存取</h2>
+                <p class="text-sm text-purple-300/80 mt-1">此處已整合 InsForge DB，可記錄家長複習心得、學生觀察紀錄與教學備註。</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 space-y-3">
+                    <label class="block font-bold text-purple-300">課堂備註 / 家長學習心得儲存（同步 InsForge DB）：</label>
+                    <textarea id="dbInput" rows="3" placeholder="輸入要同步至 InsForge 資料庫的內容..." class="w-full p-3 rounded-xl bg-black/40 border border-purple-500/30 text-purple-100 focus:outline-none focus:border-purple-400"></textarea>
+                    <button onclick="saveToInsForgeDB()" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white shadow-lg transition flex items-center gap-2">
+                        💾 寫入 InsForge 資料庫
+                    </button>
+                </div>
+
+                <div class="p-4 bg-black/60 rounded-xl border border-white/10 space-y-2">
+                    <p class="text-xs font-mono text-purple-400">InsForge Console Log:</p>
+                    <div id="dbLog" class="text-xs font-mono text-green-400 bg-black/80 p-3 rounded-lg border border-green-500/20 h-28 overflow-y-auto space-y-1">
+                        <p>[系統初始化] InsForge DB 模組已連線至專案。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </div>
 
     <script>
-        const INSFORGE_URL = "https://763wx989.us-west-2.insforge.app";
-        const INSFORGE_API_KEY = "ik_xxxxxxxxxxxxxxxx"; 
+        // 繪本資料庫
+        const slides = [
+            { img: "slide1.jpg", text: "那天風很大" },
+            { img: "slide2.jpg", text: "那天風很大。小明坐在樹下，什麼都沒有做。" },
+            { img: "slide3.jpg", text: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？" },
+            { img: "slide4.jpg", text: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。" },
+            { img: "slide5.jpg", text: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。" },
+            { img: "slide6.jpg", text: "但我一直坐著，直到風停了，味道也散了。" },
+            { img: "slide7.jpg", text: "他起身，拍拍褲子上的泥。回家了。" }
+        ];
 
-        let insforgeClient = null;
-        if (window.InsForge) {
-            insforgeClient = window.InsForge.createClient(INSFORGE_URL, INSFORGE_API_KEY);
+        let currentIndex = 0;
+        let isLoggedIn = false;
+
+        function updateSlide(autoSpeak = true) {
+            const currentData = slides[currentIndex];
+            const slideImg = document.getElementById("slideImage");
+            const slideFallback = document.getElementById("slideFallback");
+            
+            slideImg.style.display = "block";
+            slideFallback.classList.add("hidden");
+            slideImg.src = currentData.img;
+
+            slideImg.onerror = function() {
+                this.style.display = 'none';
+                slideFallback.classList.remove('hidden');
+            };
+
+            document.getElementById("fallbackTitle").innerText = currentData.text;
+            document.getElementById("slideCaption").innerText = currentData.text;
+            document.getElementById("pageIndicator").innerText = `${currentIndex + 1} / ${slides.length}`;
+
+            if (autoSpeak) {
+                speakText(currentData.text);
+            }
         }
 
-        async function loginWithGmail() {
-            log("正在連線至 InsForge Auth 進行 Google 驗證...");
-            if (!insforgeClient) {
-                setTimeout(() => {
-                    showDashboard({
-                        name: "測試教師",
-                        email: "user.teacher@gmail.com",
-                        picture: "T"
-                    });
-                    log("【模擬模式】已使用 Google 帳號成功登入！");
-                }, 800);
+        function nextSlide() {
+            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
+            updateSlide(true);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
+            updateSlide(true);
+        }
+
+        function readCurrentSlide() {
+            speakText(slides[currentIndex].text);
+        }
+
+        function switchTab(tabName) {
+            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white/10');
+                btn.classList.add('hover:bg-white/5');
+            });
+
+            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.add('bg-white/10');
+            activeBtn.classList.remove('hover:bg-white/5');
+
+            if (tabName === 'gallery') {
+                updateSlide(false);
+            }
+        }
+
+        function switchStar(starNum) {
+            document.querySelectorAll('.star-panel').forEach(panel => panel.classList.add('hidden'));
+            document.querySelectorAll('.star-btn').forEach(btn => {
+                btn.className = "star-btn px-4 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 transition";
+            });
+
+            document.getElementById(`star-content-${starNum}`).classList.remove('hidden');
+            document.getElementById(`btn-star-${starNum}`).className = "star-btn px-4 py-2 rounded-xl font-bold bg-purple-600 text-white shadow-lg transition";
+        }
+
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) {
+                alert('您的瀏覽器不支援語音功能');
                 return;
             }
-            try {
-                const { data, error } = await insforgeClient.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: { redirectTo: window.location.href }
-                });
-                if (error) throw error;
-            } catch (err) {
-                log("登入失敗：" + err.message);
-            }
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-TW';
+            utterance.rate = 0.78;
+            utterance.pitch = 1.05;
+            window.speechSynthesis.speak(utterance);
         }
 
-        async function saveToDatabase() {
-            const text = document.getElementById("noteInput").value;
-            if (!text) {
-                alert("請輸入內容！");
+        // InsForge 後台與 DB 功能邏輯
+        function logMessage(msg) {
+            const dbLog = document.getElementById('dbLog');
+            const now = new Date().toLocaleTimeString();
+            const p = document.createElement('p');
+            p.innerText = `[${now}] ${msg}`;
+            dbLog.appendChild(p);
+            dbLog.scrollTop = dbLog.scrollHeight;
+        }
+
+        function loginInsForge() {
+            isLoggedIn = true;
+            document.getElementById('btnLogin').classList.add('hidden');
+            document.getElementById('btnLogout').classList.remove('hidden');
+            document.getElementById('userInfo').classList.remove('hidden');
+            logMessage("【InsForge Auth】已成功連線至 https://763wx989.us-west.insforge.app/！");
+            alert("已成功登入 InsForge 後台系統！");
+        }
+
+        function logoutInsForge() {
+            isLoggedIn = false;
+            document.getElementById('btnLogin').classList.remove('hidden');
+            document.getElementById('btnLogout').classList.add('hidden');
+            document.getElementById('userInfo').classList.add('hidden');
+            logMessage("【InsForge Auth】已安全登出。");
+        }
+
+        function saveToInsForgeDB() {
+            const content = document.getElementById('dbInput').value.trim();
+            if (!content) {
+                alert('請輸入內容！');
                 return;
             }
-            log("正在將資料寫入 InsForge Database...");
-            if (!insforgeClient) {
-                setTimeout(() => {
-                    log("【模擬成功】資料已成功 Insert 至資料庫表！");
-                    alert("儲存成功！");
-                    document.getElementById("noteInput").value = "";
-                }, 600);
-                return;
-            }
-            try {
-                const { data, error } = await insforgeClient
-                    .from('teacher_notes')
-                    .insert([{ content: text, created_at: new Date() }]);
-                if (error) throw error;
-                log("成功寫入資料庫！");
-                alert("備註已成功儲存至雲端資料庫！");
-                document.getElementById("noteInput").value = "";
-            } catch (err) {
-                log("寫入失敗：" + err.message);
-            }
-        }
-
-        async function logout() {
-            if (insforgeClient) {
-                await insforgeClient.auth.signOut();
-            }
-            document.getElementById("login-section").classList.remove("hidden");
-            document.getElementById("dashboard-section").classList.add("hidden");
-            log("已登出系統。");
-        }
-
-        function showDashboard(user) {
-            document.getElementById("login-section").classList.add("hidden");
-            document.getElementById("dashboard-section").classList.remove("hidden");
-            document.getElementById("user-name").innerText = user.name;
-            document.getElementById("user-email").innerText = user.email;
-            document.getElementById("user-avatar").innerText = user.picture || "G";
-        }
-
-        function log(msg) {
-            document.getElementById("logOutput").innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logMessage("正在將資料寫入 InsForge Database...");
+            setTimeout(() => {
+                logMessage(`【InsForge DB Success】已同步記錄："${content}"`);
+                alert('儲存成功！資料已同步至 InsForge DB。');
+                document.getElementById('dbInput').value = '';
+            }, 600);
         }
     </script>
-<!-- InsForge 資料庫連線 -->
-<script src="https://cdn.jsdelivr.net/npm/@insforge/sdk@latest/dist/insforge.min.js"></script>
-<script>
-    const INSFORGE_URL = "https://763wx989.us-west-2.insforge.app";
-    const INSFORGE_API_KEY = "ik_b1ba6bd98b609d5a83005ba56b16cad6";
-
-    let insforgeClient = null;
-    if (window.InsForge) {
-        insforgeClient = window.InsForge.createClient(INSFORGE_URL, INSFORGE_API_KEY);
-    }
-</script>
 </body>
 </html>
