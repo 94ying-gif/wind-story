@@ -162,5 +162,16 @@
             document.getElementById("logOutput").innerText = `[${new Date().toLocaleTimeString()}] ${msg}`;
         }
     </script>
+<!-- InsForge 資料庫連線 -->
+<script src="https://cdn.jsdelivr.net/npm/@insforge/sdk@latest/dist/insforge.min.js"></script>
+<script>
+    const INSFORGE_URL = "https://763wx989.us-west-2.insforge.app";
+    const INSFORGE_API_KEY = "ik_b1ba6bd98b609d5a83005ba56b16cad6";
+
+    let insforgeClient = null;
+    if (window.InsForge) {
+        insforgeClient = window.InsForge.createClient(INSFORGE_URL, INSFORGE_API_KEY);
+    }
+</script>
 </body>
 </html>
