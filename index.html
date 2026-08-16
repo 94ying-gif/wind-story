@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>De5ign 繪本教案：《那天風很大》6堂線上互動課程版</title>
+    <title>繪本教案：《那天風很大》6堂線上互動課程版</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@insforge/sdk@latest/dist/insforge.min.js"></script>
     <script>
@@ -22,636 +22,654 @@
         .border-glow { border-color: rgba(168, 85, 247, 0.35); }
         .card-active {
             border-color: #facc15 !important;
-            background-color: rgba(234, 179, 8, 0.2) !important;
-            transform: scale(1.05);
+            background-color: rgba(234, 179, 8, 0.25) !important;
+            transform: scale(1.04);
         }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8">
-    <div class="max-w-5xl mx-auto space-y-6">
+<body class="min-h-screen p-3 md:p-6 flex flex-col justify-between">
+    <div class="max-w-7xl w-full mx-auto space-y-5">
         
-        <!-- 頂部標題與 InsForge 登入狀態 -->
-        <header class="flex flex-col md:flex-row justify-between items-center p-6 rounded-2xl bg-card border border-glow backdrop-blur-md gap-4">
-            <div>
-                <h1 class="text-3xl font-bold text-purple-300">《那天風很大》線上繪本互動教室</h1>
-                <p class="text-sm text-purple-200 opacity-80">5歲幼兒中文 (一～二星) · 6堂線上鷹架教案 · 視覺抽卡配對機</p>
-            </div>
-            <div class="flex items-center gap-3 bg-black/40 p-2 rounded-xl border border-white/10">
-                <div id="userInfo" class="text-xs text-right hidden">
-                    <p id="userName" class="font-bold text-purple-200">線上授課教師</p>
-                    <p id="userEmail" class="text-purple-400 opacity-75">teacher@online.com</p>
+        <!-- 頂部精簡導航列 -->
+        <header class="flex justify-between items-center p-4 rounded-2xl bg-card border border-glow backdrop-blur-md">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+                <div class="p-2.5 bg-purple-600 rounded-xl font-bold text-xl text-white">🌪️</div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-black text-yellow-300">《那天風很大》線上繪本教室</h1>
+                    <p class="text-xs text-purple-200/80">5歲幼兒中文 · 全版沉浸教學介面</p>
                 </div>
-                <button id="btnLogin" onclick="loginInsForge()" class="px-4 py-2 rounded-lg text-sm font-bold bg-purple-600 text-white shadow-lg hover:bg-purple-500 transition">Google 登入後台</button>
-                <button id="btnLogout" onclick="logoutInsForge()" class="px-4 py-2 rounded-lg text-sm font-bold bg-gray-700 text-white shadow-lg hover:bg-gray-600 transition hidden">登出</button>
+            </div>
+            <div class="flex items-center gap-2">
+                <button id="btnBackHome" onclick="showHome()" class="hidden px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-xl text-sm transition flex items-center gap-1 shadow-lg">
+                    🏠 回課程首頁
+                </button>
+                <button onclick="openGalleryDirect(0)" class="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-purple-200 font-bold rounded-xl text-xs md:text-sm transition">
+                    🖼️ 全螢幕繪本
+                </button>
             </div>
         </header>
 
-        <!-- 主頁籤導覽 -->
-        <nav class="flex gap-2 border-b border-white/10 pb-2 overflow-x-auto">
-            <button onclick="switchTab('lessons')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 bg-white/10 whitespace-nowrap" id="tab-lessons">🎒 6堂線上課程方案</button>
-            <button onclick="switchTab('cards')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-cards">🎴 第4堂：風與味道配對卡</button>
-            <button onclick="switchTab('storyMachine')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-storyMachine">🎲 第5堂：故事大風吹抽卡機</button>
-            <button onclick="switchTab('gallery')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-gallery">🖼️ 故事繪本與即時提問</button>
-            <button onclick="switchTab('story')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-story">📖 雙語全文與朗讀</button>
-            <button onclick="switchTab('insforge')" class="tab-btn px-4 py-2 rounded-lg font-medium text-purple-300 hover:bg-white/5 whitespace-nowrap" id="tab-insforge">🗄️ InsForge 課堂紀錄庫</button>
-        </nav>
+        <!-- 視圖一：課程首頁 (6堂大卡片選擇) -->
+        <main id="view-home" class="space-y-6">
+            <div class="text-center space-y-2 py-4">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white">請選擇今日上課單元</h2>
+                <p class="text-purple-300 text-base md:text-lg">點選進入專屬單堂全螢幕教學模式，字體更大、畫面更專注！</p>
+            </div>
 
-        <!-- 模組一：6 堂線上課程方案 -->
-        <section id="sec-lessons" class="p-6 rounded-2xl bg-card border border-glow space-y-6">
-            <div class="border-b border-white/10 pb-4 flex flex-col md:flex-row justify-between md:items-center gap-2">
-                <div>
-                    <h2 class="text-2xl font-bold text-yellow-300">《那天風很大》六堂線上繪本課程 (每堂40分鐘)</h2>
-                    <p class="text-sm text-purple-200/80 mt-1">核心精神：從「提問」到「蓋故事」｜看見 ➔ 感受 ➔ 連結 ➔ 創造</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div onclick="openLesson(1)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 1 堂</span>
+                        <span class="text-2xl">💨</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">找到風</h3>
+                    <p class="text-purple-200 text-sm">「那天，風很大！」透過風聲引導感受與動作模仿。</p>
+                    <div class="text-xs text-purple-400 font-mono">核心詞：風／大／吹</div>
+                </div>
+
+                <div onclick="openLesson(2)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 2 堂</span>
+                        <span class="text-2xl">🌳</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">遇見樹</h3>
+                    <p class="text-purple-200 text-sm">「風來了，樹怎麼了？」化身為大樹進行肢體律動。</p>
+                    <div class="text-xs text-purple-400 font-mono">核心詞：樹／搖／動</div>
+                </div>
+
+                <div onclick="openLesson(3)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 3 堂</span>
+                        <span class="text-2xl">👃</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">發現味道</h3>
+                    <p class="text-purple-200 text-sm">「風裡面有什麼？」嗅覺感知與不認識味道的探索。</p>
+                    <div class="text-xs text-purple-400 font-mono">核心詞：聞／味道／香</div>
+                </div>
+
+                <div onclick="openLesson(4)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-yellow-500/50 hover:border-yellow-300 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 4 堂 · 互動</span>
+                        <span class="text-2xl">🎴</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-yellow-200 group-hover:text-yellow-300 transition">風的旅行</h3>
+                    <p class="text-purple-200 text-sm">「風從哪裡來？帶來什麼？」內建大圖配對語音發音台。</p>
+                    <div class="text-xs text-yellow-300 font-mono">內建：地點與氣味配對機</div>
+                </div>
+
+                <div onclick="openLesson(5)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-yellow-500/50 hover:border-yellow-300 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 5 堂 · 遊戲</span>
+                        <span class="text-2xl">🎲</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-yellow-200 group-hover:text-yellow-300 transition">吹亂故事</h3>
+                    <p class="text-purple-200 text-sm">「我們一起蓋故事！」大風吹隨機抽卡與搞笑故事組裝。</p>
+                    <div class="text-xs text-yellow-300 font-mono">內建：大風吹抽卡機</div>
+                </div>
+
+                <div onclick="openLesson(6)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold px-3 py-1 bg-yellow-400 text-black rounded-full">第 6 堂</span>
+                        <span class="text-2xl">🎓</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">小故事家</h3>
+                    <p class="text-purple-200 text-sm">「現在換我蓋故事！」繪本排序、成果發表與故事家認證。</p>
+                    <div class="text-xs text-purple-400 font-mono">核心：六堂全字詞總整合</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 視圖二：單堂全版沉浸模式 (大字體) -->
+        <main id="view-lesson" class="hidden space-y-6">
+            <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-purple-950/80 to-purple-900/40 border border-glow flex flex-col md:flex-row justify-between md:items-center gap-4">
+                <div class="space-y-2">
+                    <span id="lessonTag" class="text-sm font-bold bg-yellow-400 text-black px-3.5 py-1.5 rounded-full">第 1 堂主題</span>
+                    <h2 id="lessonTitle" class="text-3xl md:text-5xl font-black text-white tracking-wide">找到風：「那天，風很大！」</h2>
+                    <p id="lessonLang" class="text-base md:text-xl text-yellow-300 font-medium">核心語言：風／大／吹 ｜ 句型：風來了。風很大。</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button id="btnLessonSlide" onclick="openLessonSlide()" class="px-6 py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-lg transition shadow-xl flex items-center gap-2">
+                        🖼️ 開啟全滿版繪本投影
+                    </button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-                <button onclick="switchLesson(1)" id="btn-lesson-1" class="lesson-btn px-3 py-2 rounded-xl font-bold bg-purple-600 text-white shadow-lg text-sm transition">第 1 堂：找到風</button>
-                <button onclick="switchLesson(2)" id="btn-lesson-2" class="lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition">第 2 堂：遇見樹</button>
-                <button onclick="switchLesson(3)" id="btn-lesson-3" class="lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition">第 3 堂：發現味道</button>
-                <button onclick="switchLesson(4)" id="btn-lesson-4" class="lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition">第 4 堂：風的旅行</button>
-                <button onclick="switchLesson(5)" id="btn-lesson-5" class="lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition">第 5 堂：吹亂故事</button>
-                <button onclick="switchLesson(6)" id="btn-lesson-6" class="lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition">第 6 堂：小故事家</button>
-            </div>
+            <!-- 專屬互動內嵌區 (第4堂配對 或 第5堂抽卡) -->
+            <div id="lessonCustomEmbed" class="hidden"></div>
 
-            <!-- 第 1 堂 -->
-            <div id="lesson-content-1" class="lesson-panel space-y-4">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 1 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">找到風：「那天，風很大！」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>風／大／吹 ｜ <span class="text-purple-300 font-bold">句型：</span>風來了。風很大。</div>
+            <!-- 大字體流程與提問兩大板塊 -->
+            <div class="grid lg:grid-cols-12 gap-6">
+                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-card border border-white/10 space-y-4">
+                    <h3 class="text-2xl font-bold text-yellow-300 flex items-center gap-2">
+                        <span>⏱️</span> 40分鐘黃金流程
+                    </h3>
+                    <ul id="lessonFlow" class="space-y-3.5 text-lg md:text-xl text-purple-100 leading-relaxed list-none"></ul>
                 </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-5m 神秘聲音：</strong>播放「呼～」風聲讓孩子猜是什麼來了。</li>
-                            <li><strong>5-12m 小風/大風：</strong>小風「呼～」、大風「呼～～」、風停「不動！」。</li>
-                            <li><strong>12-20m 繪本探索 (Slide 1-2)：</strong>看見 ➔ 感受 ➔ 經驗 ➔ 想像。</li>
-                            <li><strong>20-32m 遊戲互動：</strong>聽指令做動作（小風吹、大風吹、風停了）。</li>
-                            <li><strong>32-37m 語言積木：</strong>建立「風 ＋ 很大」➔ 口說「風很大」。</li>
-                            <li><strong>37-40m 留下伏筆：</strong>風這麼大，把什麼吹動了？下回找大樹！</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>畫面裡有誰？他在哪裡？</p>
-                        <p><strong>❤️ 感受：</strong>風大不大？小明感覺舒服還是很冷？</p>
-                        <p><strong>🔗 連結：</strong>你有吹過這麼大的風嗎？吹在臉上會怎樣？</p>
-                        <p><strong>🎲 創造：</strong>如果大風吹進教室，你想做什麼動作？</p>
-                    </div>
+
+                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-purple-950/40 border border-purple-500/30 space-y-4">
+                    <h3 class="text-2xl font-bold text-yellow-300 flex items-center gap-2">
+                        <span>🍔</span> 漢堡王提問引導
+                    </h3>
+                    <div id="lessonQuestions" class="space-y-4 text-lg md:text-xl text-purple-100 leading-relaxed"></div>
                 </div>
             </div>
+        </main>
 
-            <!-- 第 2 堂 -->
-            <div id="lesson-content-2" class="lesson-panel space-y-4 hidden">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 2 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">遇見樹：「風來了，樹怎麼了？」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>樹／搖／動 ｜ <span class="text-purple-300 font-bold">句型：</span>我是樹。樹搖一搖。</div>
+        <!-- 視圖三：繪本全滿版播放器 (滿版大圖 + 暫停/重聽/朗讀 控制模組) -->
+        <main id="view-gallery" class="hidden space-y-5">
+            <!-- 播放控制導航 -->
+            <div class="flex flex-wrap justify-between items-center bg-card p-4 rounded-2xl border border-white/10 gap-3">
+                <div class="flex items-center gap-3">
+                    <button onclick="prevSlide()" class="px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white transition text-base">◀ 上一頁</button>
+                    <span id="pageIndicator" class="font-black text-yellow-300 text-2xl tracking-widest px-2">1 / 7</span>
+                    <button onclick="nextSlide()" class="px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white transition text-base">下一頁 ▶</button>
                 </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-5m 回到第一塊積木：</strong>「誰來了？」「風！」「風怎麼樣？」「很大！」</li>
-                            <li><strong>5-12m 變成樹：</strong>今天我們是樹！雙手當樹枝搖一搖。</li>
-                            <li><strong>12-20m 繪本找線索 (Slide 2)：</strong>樹在哪裡？樹被吹彎了嗎？</li>
-                            <li><strong>20-32m 角色對話遊戲：</strong>老師＝風、孩子＝樹（小風吹、樹小搖；大風吹、樹大搖）。</li>
-                            <li><strong>32-37m 語言積木：</strong>風 ➔ 樹 ➔ 搖 ➔「風來了，樹搖一搖。」</li>
-                            <li><strong>37-40m 留下伏筆：</strong>風除了吹樹，好像還帶來了一個東西……</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>樹被風吹得往哪邊彎？</p>
-                        <p><strong>❤️ 感受：</strong>樹一直被吹，會覺得很想跳舞還是很累？</p>
-                        <p><strong>🔗 連結：</strong>你在公園看過樹被吹動嗎？</p>
-                        <p><strong>🎲 創造：</strong>如果你是一棵超級大樹，大風吹來你會怎麼搖？</p>
-                    </div>
+
+                <!-- 語音控制器：播放、暫停/繼續、重聽、停止 -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="btnPlay" onclick="readCurrentSlide()" class="px-4 py-2 bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold rounded-xl transition text-sm shadow">
+                        ▶️ 朗讀
+                    </button>
+                    <button id="btnPause" onclick="togglePauseSpeech()" class="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-extrabold rounded-xl transition text-sm shadow">
+                        ⏸️ 暫停
+                    </button>
+                    <button onclick="replayCurrentSlide()" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-extrabold rounded-xl transition text-sm shadow">
+                        🔁 重聽本頁
+                    </button>
+                    <button onclick="stopSpeech()" class="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition text-sm">
+                        ⏹️ 停止
+                    </button>
                 </div>
             </div>
 
-            <!-- 第 3 堂 -->
-            <div id="lesson-content-3" class="lesson-panel space-y-4 hidden">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 3 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">發現味道：「風裡面有什麼？」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>聞／味道／香 ｜ <span class="text-purple-300 font-bold">句型：</span>我聞到了～。</div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-5m 故事回顧：</strong>「風來了，樹搖一搖，可是小明發現了什麼？」</li>
-                            <li><strong>5-12m 神秘味道：</strong>展示氣味圖片，引導聞一聞的動作。</li>
-                            <li><strong>12-20m 繪本探索 (Slide 3)：</strong>小明聞到了他不認識的味道。</li>
-                            <li><strong>20-32m 味道小偵探：</strong>「聞 ➔ 猜 ➔ 說」，練習「我聞到了橘子/花」。</li>
-                            <li><strong>32-37m 語言積木：</strong>手頭積木整合：風 ➔ 樹 ➔ 味道。</li>
-                            <li><strong>37-40m 留下伏筆：</strong>這個味道是誰帶來的？風從哪裡來？</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>小明聞到味道時，他的小臉是什麼表情？</p>
-                        <p><strong>❤️ 感受：</strong>聞到不認識的味道，是好奇還是害怕？</p>
-                        <p><strong>🔗 連結：</strong>家裡或學校有什麼味道讓你一聞就知道？</p>
-                        <p><strong>🎲 創造：</strong>如果你能向風要一個味道，你想要什麼味道？</p>
-                    </div>
-                </div>
+            <!-- 全滿版大圖展示區 -->
+            <div class="w-full rounded-3xl overflow-hidden border-2 border-purple-500/40 bg-black/80 flex justify-center items-center shadow-2xl relative min-h-[420px] md:min-h-[560px]">
+                <img id="slideImage" src="slide1.jpg" alt="繪本畫面" class="w-full max-h-[75vh] object-contain mx-auto">
             </div>
 
-            <!-- 第 4 堂 -->
-            <div id="lesson-content-4" class="lesson-panel space-y-4 hidden">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 4 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">風的旅行：「風從哪裡來？還可以從哪裡來？」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>大海／來／很大 ｜ <span class="text-purple-300 font-bold">句型：</span>風從大海來，帶來海的味道。</div>
+            <!-- 超大字幕與提問展開區 -->
+            <div class="grid lg:grid-cols-12 gap-5">
+                <div class="lg:col-span-7 bg-purple-950/70 p-6 md:p-8 rounded-3xl border border-yellow-500/40 flex flex-col justify-center space-y-2">
+                    <span class="text-xs text-yellow-400 font-bold tracking-wider uppercase">繪本故事內文</span>
+                    <p id="slideCaption" class="text-2xl md:text-4xl font-black text-white leading-relaxed tracking-wide"></p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-5m 繪本回扣 (Slide 4)：</strong>風說它從「大海」來，說大海「很大」。</li>
-                            <li><strong>5-12m 大海有多大：</strong>肢體比出小海（🤏）與大海（🙌）。</li>
-                            <li><strong>12-20m 切換至「🎴 第4堂配對卡」：</strong>線上操作地點與氣味卡配對！</li>
-                            <li><strong>20-28m 氣味配對組合：</strong>花園帶花香、麵包店帶麵包香。</li>
-                            <li><strong>28-35m 趣味語言組合：</strong>故意搭配「風從森林來帶來臭襪子/披薩」，激發笑聲。</li>
-                            <li><strong>35-40m 預告第5堂：</strong>我們要用抽卡機蓋出大故事！</li>
-                        </ul>
+
+                <div class="lg:col-span-5 bg-card p-6 rounded-3xl border border-white/10 space-y-3">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                        <h4 class="text-lg font-bold text-yellow-300 flex items-center gap-1">🍔 課堂互動提問</h4>
+                        <span id="promptTag" class="text-xs bg-purple-800 text-purple-200 px-2 py-0.5 rounded font-mono">Slide 1</span>
                     </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>風說了哪兩個字就飛走了？（大海、很大）</p>
-                        <p><strong>❤️ 感受：</strong>只聽到「很大」，你會想親自去看看嗎？</p>
-                        <p><strong>🔗 連結：</strong>你看過大海嗎？大海聽起來是什麼聲音？</p>
-                        <p><strong>🎲 創造：</strong>如果風從你最喜歡的糖果店吹來，會帶來什麼？</p>
-                    </div>
+                    <div id="slidePrompts" class="space-y-2.5 text-base md:text-lg text-purple-100 leading-normal"></div>
                 </div>
             </div>
+        </main>
 
-            <!-- 第 5 堂 -->
-            <div id="lesson-content-5" class="lesson-panel space-y-4 hidden">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 5 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">風把故事吹亂了：「我們一起蓋故事！」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>時間、人物、地點、事件 ｜ <span class="text-purple-300 font-bold">句型：</span>在＿＿，＿＿在＿＿做＿＿，最後＿＿。</div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-5m 積木回顧：</strong>回顧風從哪裡來、帶來什麼味道。</li>
-                            <li><strong>5-10m 切換至「🎲 第5堂抽卡機」：</strong>線上示範抽卡。</li>
-                            <li><strong>10-25m 線上抽卡造故事：</strong>讓小朋友喊停，隨機抽出搞笑故事組合。</li>
-                            <li><strong>25-35m 🌪️ 大風吹來了：</strong>加入風卡（風吹來披薩香），故事大變身！</li>
-                            <li><strong>35-40m 故事感受表達：</strong>選一選故事是好笑、奇怪還是剛剛好。</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>我們剛剛抽到了哪幾張故事卡片？</p>
-                        <p><strong>❤️ 感受：</strong>這個被大風吹亂的故事聽起來好笑還是奇怪？</p>
-                        <p><strong>🔗 連結：</strong>故事裡主角做的事情，你平常也會做嗎？</p>
-                        <p><strong>🎲 創造：</strong>你想把故事的最後改成什麼？</p>
-                    </div>
-                </div>
-            </div>
+        <!-- 底部註腳 -->
+        <footer class="text-center text-xs text-purple-400/60 pt-4 pb-2">
+            De5ign 線上雙語課堂系統 · 《那天風很大》專案
+        </footer>
 
-            <!-- 第 6 堂 -->
-            <div id="lesson-content-6" class="lesson-panel space-y-4 hidden">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 flex flex-wrap gap-4 items-center justify-between">
-                    <div>
-                        <span class="text-xs bg-yellow-400 text-black font-bold px-2.5 py-1 rounded-full">第 6 堂主題</span>
-                        <h3 class="text-xl font-bold text-yellow-300 mt-1">我是小小故事家：「現在換我蓋故事！」</h3>
-                    </div>
-                    <div class="text-sm"><span class="text-purple-300 font-bold">核心語言：</span>全課字詞總整合 ｜ <span class="text-purple-300 font-bold">句型：</span>那天風很大，風從＿＿來，帶來＿＿。</div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-white/5 rounded-xl border border-white/10 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">⏱️ 40分鐘黃金流程</h4>
-                        <ul class="list-disc list-inside space-y-1 text-purple-200">
-                            <li><strong>0-8m 六堂地圖：</strong>回顧風、樹、味道、大海與抽卡故事。</li>
-                            <li><strong>8-15m 繪本排序：</strong>排序樹下 ➔ 風 ➔ 聞味道 ➔ 大海 ➔ 回家。</li>
-                            <li><strong>15-22m 四層提問回顧：</strong>看見 ➔ 感受 ➔ 經驗 ➔ 決定。</li>
-                            <li><strong>22-32m 我的風之故事：</strong>五個搭橋提問，引導孩子說出自己的專屬句子。</li>
-                            <li><strong>32-37m 線上小劇場：</strong>孩子扮演動作，老師念旁白。</li>
-                            <li><strong>37-40m 故事家畢業：</strong>頒發認證，每位小朋友輪流發表一句話！</li>
-                        </ul>
-                    </div>
-                    <div class="p-4 bg-purple-950/30 rounded-xl border border-purple-500/20 space-y-2 text-sm">
-                        <h4 class="font-bold text-purple-300">🍔 本堂漢堡王提問（幼兒化）</h4>
-                        <p><strong>👀 看見：</strong>整本繪本裡，小明最後做了什麼動作？（拍拍泥土回家）</p>
-                        <p><strong>❤️ 感受：</strong>讀完整本故事，你最喜歡哪一張圖的顏色？</p>
-                        <p><strong>🔗 連結：</strong>你今天學會了哪一句最厲害的中文故事？</p>
-                        <p><strong>🎲 創造：</strong>回家後你想把這個故事講給誰聽？</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    </div>
 
-        <!-- 模組二：第 4 堂專屬「風與味道配對卡片庫」 -->
-        <section id="sec-cards" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
-            <div class="border-b border-white/10 pb-4 flex flex-col md:flex-row justify-between md:items-center gap-2">
-                <div>
-                    <h2 class="text-2xl font-bold text-yellow-300">🎴 第4堂：風從哪裡來？帶來什麼味道？（視覺配對卡）</h2>
-                    <p class="text-sm text-purple-200/80 mt-1">點擊「地點卡」與「氣味卡」，線上自動連線發音並造句！</p>
-                </div>
-                <button onclick="speakLesson4Sentence()" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-xl shadow-lg transition text-sm flex items-center gap-2">
+    <!-- 第4堂配對機樣板 -->
+    <template id="tmpl-lesson4">
+        <div class="p-6 rounded-3xl bg-purple-950/60 border border-yellow-500/40 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+                <h3 class="text-2xl font-black text-yellow-300">🎴 第4堂專屬：風從哪裡來？帶來什麼味道？</h3>
+                <button onclick="speakLesson4Sentence()" class="px-5 py-2.5 bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold rounded-xl transition text-base shadow-lg">
                     🔊 朗讀配對句子
                 </button>
             </div>
-
-            <!-- 配對句子即時展示台 -->
-            <div class="p-4 bg-black/60 rounded-2xl border border-yellow-500/30 text-center space-y-1">
-                <span class="text-xs text-purple-300">【當前配對生成的句子】</span>
-                <p id="lesson4Sentence" class="text-2xl font-bold text-yellow-300">風從大海來，帶來海水的味道。</p>
+            
+            <div class="p-5 bg-black/60 rounded-2xl border border-yellow-500/30 text-center">
+                <span class="text-sm text-purple-300">【當前配對合成句子】</span>
+                <p id="lesson4Sentence" class="text-3xl md:text-4xl font-black text-yellow-300 mt-1">風從大海來，帶來海水的味道。</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-6">
-                <!-- 左邊：地點卡庫 -->
-                <div class="p-4 bg-purple-950/40 rounded-2xl border border-purple-500/20 space-y-3">
-                    <h3 class="font-bold text-purple-300 flex items-center gap-2">📍 1. 風從哪裡來？（點擊選擇地點）</h3>
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button onclick="selectPlace('大海', '🌊', '大海')" class="place-card card-active p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                <div class="p-4 bg-black/40 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="text-lg font-bold text-purple-300">📍 1. 選擇風從哪裡來：</h4>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="selectPlace('大海', '🌊')" class="place-btn card-active p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🌊</span>
-                            <span class="text-sm font-bold text-purple-100">大海</span>
+                            <span class="text-base font-bold">大海</span>
                         </button>
-                        <button onclick="selectPlace('花園', '🌸', '花園')" class="place-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectPlace('花園', '🌸')" class="place-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🌸</span>
-                            <span class="text-sm font-bold text-purple-100">花園</span>
+                            <span class="text-base font-bold">花園</span>
                         </button>
-                        <button onclick="selectPlace('森林', '🌳', '森林')" class="place-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectPlace('森林', '🌳')" class="place-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🌳</span>
-                            <span class="text-sm font-bold text-purple-100">森林</span>
+                            <span class="text-base font-bold">森林</span>
                         </button>
-                        <button onclick="selectPlace('麵包店', '🍞', '麵包店')" class="place-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectPlace('麵包店', '🍞')" class="place-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🍞</span>
-                            <span class="text-sm font-bold text-purple-100">麵包店</span>
+                            <span class="text-base font-bold">麵包店</span>
                         </button>
-                        <button onclick="selectPlace('家裡', '🏠', '家裡')" class="place-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectPlace('家裡', '🏠')" class="place-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🏠</span>
-                            <span class="text-sm font-bold text-purple-100">家裡</span>
+                            <span class="text-base font-bold">家裡</span>
                         </button>
-                        <button onclick="selectPlace('披薩店', '🍕', '披薩店')" class="place-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectPlace('披薩店', '🍕')" class="place-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🍕</span>
-                            <span class="text-sm font-bold text-purple-100">披薩店</span>
+                            <span class="text-base font-bold">披薩店</span>
                         </button>
                     </div>
                 </div>
 
-                <!-- 右邊：氣味卡庫 -->
-                <div class="p-4 bg-purple-950/40 rounded-2xl border border-purple-500/20 space-y-3">
-                    <h3 class="font-bold text-cyan-300 flex items-center gap-2">👃 2. 帶來什麼味道？（點擊選擇氣味）</h3>
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button onclick="selectScent('海水的味道', '🌊', '海水的味道')" class="scent-card card-active p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                <div class="p-4 bg-black/40 rounded-2xl border border-white/10 space-y-3">
+                    <h4 class="text-lg font-bold text-cyan-300">👃 2. 選擇帶來什麼味道：</h4>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="selectScent('海水的味道', '🌊')" class="scent-btn card-active p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🌊</span>
-                            <span class="text-sm font-bold text-cyan-200">海水的味道</span>
+                            <span class="text-base font-bold">海水的味道</span>
                         </button>
-                        <button onclick="selectScent('花香', '🌸', '花香')" class="scent-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectScent('花香', '🌸')" class="scent-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🌸</span>
-                            <span class="text-sm font-bold text-cyan-200">花香</span>
+                            <span class="text-base font-bold">花香</span>
                         </button>
-                        <button onclick="selectScent('橘子香', '🍊', '橘子香')" class="scent-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectScent('橘子香', '🍊')" class="scent-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🍊</span>
-                            <span class="text-sm font-bold text-cyan-200">橘子香</span>
+                            <span class="text-base font-bold">橘子香</span>
                         </button>
-                        <button onclick="selectScent('麵包香', '🍞', '麵包香')" class="scent-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectScent('麵包香', '🍞')" class="scent-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🍞</span>
-                            <span class="text-sm font-bold text-cyan-200">麵包香</span>
+                            <span class="text-base font-bold">麵包香</span>
                         </button>
-                        <button onclick="selectScent('披薩香', '🍕', '披薩香')" class="scent-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectScent('披薩香', '🍕')" class="scent-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🍕</span>
-                            <span class="text-sm font-bold text-cyan-200">披薩香</span>
+                            <span class="text-base font-bold">披薩香</span>
                         </button>
-                        <button onclick="selectScent('臭襪子味', '🧦', '臭襪子味')" class="scent-card p-3 bg-black/40 rounded-xl border border-purple-500/30 hover:border-yellow-400 transition flex flex-col items-center gap-1">
+                        <button onclick="selectScent('臭襪子味', '🧦')" class="scent-btn p-3 bg-purple-900/30 rounded-2xl border border-purple-500/40 hover:border-yellow-400 transition flex flex-col items-center gap-1">
                             <span class="text-4xl">🧦</span>
-                            <span class="text-sm font-bold text-red-300">臭襪子味 😂</span>
+                            <span class="text-base font-bold text-red-300">臭襪子味 😂</span>
                         </button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </template>
 
-        <!-- 模組三：第 5 堂「故事大風吹抽卡機」 -->
-        <section id="sec-storyMachine" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
-            <div class="border-b border-white/10 pb-4">
-                <h2 class="text-2xl font-bold text-yellow-300">🎲 第5堂：故事大風吹抽卡機</h2>
-                <p class="text-sm text-purple-200/80 mt-1">點擊各欄位抽卡，或點擊「大風吹」一鍵生成！</p>
+    <!-- 第5堂抽卡機樣板 -->
+    <template id="tmpl-lesson5">
+        <div class="p-6 rounded-3xl bg-purple-950/60 border border-yellow-500/40 space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+                <h3 class="text-2xl font-black text-yellow-300">🎲 第5堂專屬：故事大風吹抽卡機</h3>
+                <div class="flex gap-2">
+                    <button onclick="drawAllCards()" class="px-5 py-2.5 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold rounded-xl transition text-base shadow-lg">
+                        🌪️ 全部大風吹！
+                    </button>
+                    <button onclick="speakCombinedStory()" class="px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl transition text-base">
+                        🔊 朗讀故事
+                    </button>
+                </div>
             </div>
 
-            <!-- 卡片展示台 -->
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-                <div class="p-4 bg-purple-950/50 rounded-xl border border-purple-500/30 text-center space-y-2">
+                <div class="p-4 bg-black/50 rounded-2xl border border-white/10 text-center space-y-2">
                     <span class="text-xs text-purple-300 font-bold block">① 時間</span>
-                    <div id="card-time" class="text-2xl font-bold text-yellow-300 h-16 flex flex-col items-center justify-center bg-black/40 rounded-lg">
-                        <span class="text-2xl" id="icon-time">🌞</span>
-                        <span class="text-sm" id="text-time">白天</span>
+                    <div class="text-2xl font-bold text-yellow-300 h-20 flex flex-col items-center justify-center bg-purple-950/50 rounded-xl">
+                        <span class="text-3xl" id="icon-time">🌞</span>
+                        <span class="text-base mt-1" id="text-time">白天</span>
                     </div>
                     <button onclick="drawCard('time')" class="w-full py-1.5 bg-purple-700 hover:bg-purple-600 rounded-lg text-xs font-bold text-white transition">抽時間</button>
                 </div>
-                <div class="p-4 bg-purple-950/50 rounded-xl border border-purple-500/30 text-center space-y-2">
+                <div class="p-4 bg-black/50 rounded-2xl border border-white/10 text-center space-y-2">
                     <span class="text-xs text-purple-300 font-bold block">② 主角</span>
-                    <div id="card-char" class="text-2xl font-bold text-yellow-300 h-16 flex flex-col items-center justify-center bg-black/40 rounded-lg">
-                        <span class="text-2xl" id="icon-char">👦</span>
-                        <span class="text-sm" id="text-char">小明</span>
+                    <div class="text-2xl font-bold text-yellow-300 h-20 flex flex-col items-center justify-center bg-purple-950/50 rounded-xl">
+                        <span class="text-3xl" id="icon-char">👦</span>
+                        <span class="text-base mt-1" id="text-char">小明</span>
                     </div>
                     <button onclick="drawCard('char')" class="w-full py-1.5 bg-purple-700 hover:bg-purple-600 rounded-lg text-xs font-bold text-white transition">抽主角</button>
                 </div>
-                <div class="p-4 bg-purple-950/50 rounded-xl border border-purple-500/30 text-center space-y-2">
+                <div class="p-4 bg-black/50 rounded-2xl border border-white/10 text-center space-y-2">
                     <span class="text-xs text-purple-300 font-bold block">③ 地點</span>
-                    <div id="card-place" class="text-2xl font-bold text-yellow-300 h-16 flex flex-col items-center justify-center bg-black/40 rounded-lg">
-                        <span class="text-2xl" id="icon-place">🌳</span>
-                        <span class="text-sm" id="text-place">樹下</span>
+                    <div class="text-2xl font-bold text-yellow-300 h-20 flex flex-col items-center justify-center bg-purple-950/50 rounded-xl">
+                        <span class="text-3xl" id="icon-place">🌳</span>
+                        <span class="text-base mt-1" id="text-place">樹下</span>
                     </div>
                     <button onclick="drawCard('place')" class="w-full py-1.5 bg-purple-700 hover:bg-purple-600 rounded-lg text-xs font-bold text-white transition">抽地點</button>
                 </div>
-                <div class="p-4 bg-purple-950/50 rounded-xl border border-purple-500/30 text-center space-y-2">
+                <div class="p-4 bg-black/50 rounded-2xl border border-white/10 text-center space-y-2">
                     <span class="text-xs text-purple-300 font-bold block">④ 在做什麼</span>
-                    <div id="card-action" class="text-2xl font-bold text-yellow-300 h-16 flex flex-col items-center justify-center bg-black/40 rounded-lg">
-                        <span class="text-2xl" id="icon-action">😴</span>
-                        <span class="text-sm" id="text-action">睡覺</span>
+                    <div class="text-2xl font-bold text-yellow-300 h-20 flex flex-col items-center justify-center bg-purple-950/50 rounded-xl">
+                        <span class="text-3xl" id="icon-action">😴</span>
+                        <span class="text-base mt-1" id="text-action">睡覺</span>
                     </div>
                     <button onclick="drawCard('action')" class="w-full py-1.5 bg-purple-700 hover:bg-purple-600 rounded-lg text-xs font-bold text-white transition">抽動作</button>
                 </div>
-                <div class="p-4 bg-purple-950/50 rounded-xl border border-purple-500/30 text-center space-y-2">
-                    <span class="text-xs text-purple-300 font-bold block">⑤ 🌪️ 風帶來的味道</span>
-                    <div id="card-wind" class="text-xl font-bold text-cyan-300 h-16 flex flex-col items-center justify-center bg-black/40 rounded-lg">
-                        <span class="text-2xl" id="icon-wind">🍊</span>
-                        <span class="text-sm" id="text-wind">橘子香</span>
+                <div class="p-4 bg-black/50 rounded-2xl border border-white/10 text-center space-y-2">
+                    <span class="text-xs text-purple-300 font-bold block">⑤ 🌪️ 帶來的味道</span>
+                    <div class="text-xl font-bold text-cyan-300 h-20 flex flex-col items-center justify-center bg-purple-950/50 rounded-xl">
+                        <span class="text-3xl" id="icon-wind">🍊</span>
+                        <span class="text-base mt-1" id="text-wind">橘子香</span>
                     </div>
                     <button onclick="drawCard('wind')" class="w-full py-1.5 bg-cyan-700 hover:bg-cyan-600 rounded-lg text-xs font-bold text-white transition">吹來風</button>
                 </div>
             </div>
 
-            <!-- 一鍵重抽與組裝 -->
-            <div class="p-5 bg-black/50 rounded-2xl border border-purple-500/30 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-3">
-                    <button onclick="drawAllCards()" class="px-6 py-2.5 bg-gradient-to-r from-yellow-500 to-amber-600 hover:from-yellow-400 hover:to-amber-500 text-black font-bold rounded-xl shadow-lg transition">
-                        🌪️ 全部隨機大風吹！
-                    </button>
-                    <button onclick="speakCombinedStory()" class="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl shadow-lg transition flex items-center gap-2">
-                        🔊 朗讀組合故事
-                    </button>
-                </div>
-                <div class="p-4 bg-purple-950/30 rounded-xl border border-white/10">
-                    <p class="text-xs text-purple-300 mb-1">【現在組裝的故事句子】</p>
-                    <p id="combinedStoryText" class="text-xl font-bold text-yellow-200">白天，小明在樹下睡覺。大風吹來了，風帶來橘子香，最後回家了！</p>
-                </div>
+            <div class="p-5 bg-black/70 rounded-2xl border border-yellow-500/30">
+                <p class="text-sm text-purple-300 mb-1">【現在組裝的故事句子】</p>
+                <p id="combinedStoryText" class="text-2xl md:text-3xl font-black text-yellow-200 leading-relaxed">白天，小明在樹下睡覺。大風吹來了，風帶來橘子香，最後回家了！</p>
             </div>
-        </section>
-
-        <!-- 模組四：繪本播放器與即時提問 -->
-        <section id="sec-gallery" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
-            <div class="border-b border-white/10 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-purple-200">🖼️ 《那天風很大》故事繪本播放器</h2>
-                    <p class="text-sm text-purple-300/80 mt-1">切換畫面自動朗讀，並同步顯示專屬的漢堡王圖文互動提問。</p>
-                </div>
-                <div class="flex items-center gap-3">
-                    <button onclick="prevSlide()" class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white shadow-lg transition">◀ 上一頁</button>
-                    <span id="pageIndicator" class="font-bold text-purple-200 text-lg">1 / 7</span>
-                    <button onclick="nextSlide()" class="px-4 py-2 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white shadow-lg transition">下一頁 ▶</button>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-12 gap-6 items-start">
-                <div class="lg:col-span-7 space-y-4">
-                    <div class="relative group cursor-pointer overflow-hidden rounded-2xl border border-purple-500/30 flex justify-center items-center min-h-[360px] bg-purple-950/20" onclick="readCurrentSlide()">
-                        <img id="slideImage" src="slide1.jpg" alt="故事繪本畫面" class="max-h-[460px] w-full object-contain rounded-xl transition duration-300">
-                        <div id="slideFallback" class="hidden p-8 text-center space-y-3">
-                            <span class="text-6xl block">🎨</span>
-                            <p id="fallbackTitle" class="text-2xl font-bold text-purple-200"></p>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center bg-purple-900/30 p-4 rounded-xl border border-white/10">
-                        <p id="slideCaption" class="text-xl font-bold text-purple-100"></p>
-                        <button onclick="readCurrentSlide()" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white transition flex items-center gap-2">
-                            🔊 朗讀
-                        </button>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-5 space-y-3 p-4 bg-purple-950/40 rounded-2xl border border-purple-500/20">
-                    <div class="flex items-center justify-between border-b border-white/10 pb-2">
-                        <h3 class="font-bold text-yellow-300 flex items-center gap-2">🍔 本頁圖文互動提問</h3>
-                        <span id="promptTag" class="text-xs bg-purple-700 text-purple-100 px-2 py-0.5 rounded-md font-mono">Slide 1</span>
-                    </div>
-                    <div id="slidePrompts" class="space-y-2 text-sm text-purple-100"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 模組五：雙語故事全文與朗讀 -->
-        <section id="sec-story" class="p-6 rounded-2xl bg-card border border-glow space-y-4 hidden">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/10 pb-4 gap-3">
-                <h2 class="text-2xl font-bold text-purple-200">《那天風很大》 The Wind Was Very Strong That Day</h2>
-                <button onclick="speakText('那天風很大。小明坐在樹下，什麼都沒有做。風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。但我一直坐著，直到風停了，味道也散了。他起身，拍拍褲子上的泥。回家了。')" class="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white shadow-lg transition">
-                    🎭 全文連續朗讀
-                </button>
-            </div>
-            
-            <div id="storyContent" class="space-y-4 p-5 bg-black/30 rounded-xl border border-white/5 text-lg">
-                <div class="story-line"><p class="text-purple-100 font-medium">那天風很大。</p><p class="text-purple-300/70 text-base">The wind was very strong that day.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">小明坐在樹下，什麼都沒有做。</p><p class="text-purple-300/70 text-base">Xiao Ming sat under the tree, doing nothing at all.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">風一陣一陣地來，帶著一種他不認識的味道。</p><p class="text-purple-300/70 text-base">Gusts of wind blew by, carrying a scent he didn't recognize.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">他問：你從哪裡來？</p><p class="text-purple-300/70 text-base">He asked, "Where do you come from?"</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">風沒有停，說：大海。</p><p class="text-purple-300/70 text-base">Without stopping, the wind replied, "The ocean."</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">小明說：大海是什麼樣子？</p><p class="text-purple-300/70 text-base">Xiao Ming asked, "What is the ocean like?"</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">風說：很大。然後就走了。</p><p class="text-purple-300/70 text-base">The wind said, "Very vast." And then it was gone.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">小明坐在那裡，聞了很久那個味道。</p><p class="text-purple-300/70 text-base">Xiao Ming sat there, taking in that scent for a long time.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">他沒有去過大海。</p><p class="text-purple-300/70 text-base">He had never been to the ocean.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">他也不知道很大是多大。</p><p class="text-purple-300/70 text-base">Nor did he know how vast "vast" really was.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">但我一直坐著，直到風停了，味道也散了。</p><p class="text-purple-300/70 text-base">Yet he kept sitting there until the wind died down and the scent faded away.</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">他起身，拍拍褲子上的泥。</p><p class="text-purple-300/70 text-base">He stood up, patted the dirt off his trousers,</p></div>
-                <div class="story-line"><p class="text-purple-100 font-medium">回家了。</p><p class="text-purple-300/70 text-base">and went home.</p></div>
-            </div>
-        </section>
-
-        <!-- 模組六：InsForge 後台與資料庫整合模組 -->
-        <section id="sec-insforge" class="p-6 rounded-2xl bg-card border border-glow space-y-6 hidden">
-            <div class="border-b border-white/10 pb-4">
-                <h2 class="text-2xl font-bold text-purple-200">🗄️ InsForge 課堂紀錄與資料庫存取</h2>
-                <p class="text-sm text-purple-300/80 mt-1">連線至 InsForge DB，記錄 5 歲學生的線上發言亮點與家長課後回饋。</p>
-            </div>
-
-            <div class="space-y-4">
-                <div class="p-4 bg-purple-950/40 rounded-xl border border-purple-500/20 space-y-3">
-                    <label class="block font-bold text-purple-300">課堂觀察筆記 / 學生發言紀錄（同步 InsForge DB）：</label>
-                    <textarea id="dbInput" rows="3" placeholder="輸入今日線上學生的造句創意或學習紀錄..." class="w-full p-3 rounded-xl bg-black/40 border border-purple-500/30 text-purple-100 focus:outline-none focus:border-purple-400"></textarea>
-                    <button onclick="saveToInsForgeDB()" class="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 font-bold text-white shadow-lg transition flex items-center gap-2">
-                        💾 寫入 InsForge 資料庫
-                    </button>
-                </div>
-
-                <div class="p-4 bg-black/60 rounded-xl border border-white/10 space-y-2">
-                    <p class="text-xs font-mono text-purple-400">InsForge Console Log:</p>
-                    <div id="dbLog" class="text-xs font-mono text-green-400 bg-black/80 p-3 rounded-lg border border-green-500/20 h-28 overflow-y-auto space-y-1">
-                        <p>[系統初始化] InsForge DB 模組已連線至專案。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
+        </div>
+    </template>
 
     <script>
-        // 繪本資料庫與提問
-        const slides = [
-            { 
-                img: "slide1.jpg", 
-                text: "那天風很大",
-                prompts: [
-                    "👀 看見：畫面裡有什麼顏色和漩渦？風好像在做什麼？",
-                    "❤️ 感受：紫藍色的光芒帶給你什麼感覺？涼涼的還是溫暖的？",
-                    "🔗 連結：你有吹過很大的風嗎？風吹在身上是什麼感覺？",
-                    "🎲 創造：如果大風吹進來，你想做什麼動作？一起做做看！"
+        const lessonsData = {
+            1: {
+                title: "找到風：「那天，風很大！」",
+                lang: "核心語言：風／大／吹 ｜ 句型：風來了。風很大。",
+                slideIndex: 0,
+                flow: [
+                    "🔊 <strong>0-5m 神秘聲音：</strong>播放「呼～」風聲讓孩子猜是什麼來了。",
+                    "💨 <strong>5-12m 小風與大風：</strong>小風「呼～」、大風「呼～～」、風停「不動！」。",
+                    "📖 <strong>12-20m 繪本探索 (Slide 1-2)：</strong>看見 ➔ 感受 ➔ 經驗 ➔ 想像。",
+                    "🎮 <strong>20-32m 聽指令互動：</strong>聽老師指令做動作（小風吹、大風吹、風停了）。",
+                    "🧱 <strong>32-37m 語言積木：</strong>建立「風 ＋ 很大」➔ 開口說「風很大」。",
+                    "✨ <strong>37-40m 留下伏筆：</strong>風這麼大，把什麼吹動了？下回找大樹！"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>畫面裡有誰？他在哪裡？",
+                    "❤️ <strong>感受：</strong>風大不大？小明感覺舒服還是很冷？",
+                    "🔗 <strong>連結：</strong>你有吹過這麼大的風嗎？吹在臉上會怎樣？",
+                    "🎲 <strong>創造：</strong>如果大風吹進教室，你想做什麼動作？"
                 ]
             },
-            { 
-                img: "slide2.jpg", 
-                text: "那天風很大。小明坐在樹下，什麼都沒有做。",
-                prompts: [
-                    "👀 看見：小明坐在哪裡？樹枝和落葉往哪邊倒？",
-                    "❤️ 感受：小明嘴角微微笑著，他現在舒服嗎？從哪裡看出來？",
-                    "🔗 連結：你很舒服的時候也會微笑嗎？有沒有不一樣的動作？",
-                    "🎲 創造：我們一起閉上眼睛 5 秒鐘，想像坐在樹下聽風聲！"
+            2: {
+                title: "遇見樹：「風來了，樹怎麼了？」",
+                lang: "核心語言：樹／搖／動 ｜ 句型：我是樹。樹搖一搖。",
+                slideIndex: 1,
+                flow: [
+                    "🔄 <strong>0-5m 回到積木：</strong>「誰來了？」「風！」「風怎麼樣？」「很大！」",
+                    "🌳 <strong>5-12m 變成樹：</strong>今天我們是樹！雙手當樹枝搖一搖。",
+                    "📖 <strong>12-20m 繪本找線索 (Slide 2)：</strong>樹在哪裡？樹被吹彎了嗎？",
+                    "🎭 <strong>20-32m 角色對話：</strong>老師＝風、孩子＝樹（小風吹小搖、大風吹大搖）。",
+                    "🧱 <strong>32-37m 語言積木：</strong>風 ➔ 樹 ➔ 搖 ➔「風來了，樹搖一搖。」",
+                    "✨ <strong>37-40m 留下伏筆：</strong>風除了吹樹，好像還帶來了一個神秘東西……"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>樹被風吹得往哪邊彎？",
+                    "❤️ <strong>感受：</strong>樹一直被吹，會覺得很想跳舞還是很累？",
+                    "🔗 <strong>連結：</strong>你在公園看過樹被吹動嗎？",
+                    "🎲 <strong>創造：</strong>如果你是一棵超級大樹，大風吹來你會怎麼搖？"
                 ]
             },
-            { 
-                img: "slide3.jpg", 
-                text: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？",
-                prompts: [
-                    "👀 看見：小明的眉毛和眼神在想什麼？畫面哪裡看出好奇？",
-                    "❤️ 感受：聞到不認識的味道，你會想聞聞看還是後退？",
-                    "🔗 連結：你在校園或家裡聞過什麼特別難忘的味道嗎？",
-                    "🎲 創造：如果風站在你面前，你想開口問它什麼秘密？"
+            3: {
+                title: "發現味道：「風裡面有什麼？」",
+                lang: "核心語言：聞／味道／香 ｜ 句型：我聞到了～。",
+                slideIndex: 2,
+                flow: [
+                    "🔄 <strong>0-5m 故事回顧：</strong>「風來了，樹搖一搖，可是小明發現了什麼？」",
+                    "👃 <strong>5-12m 神秘味道：</strong>展示氣味圖示，引導聞一聞的動作。",
+                    "📖 <strong>12-20m 繪本探索 (Slide 3)：</strong>小明聞到了他不認識的味道。",
+                    "🕵️ <strong>20-32m 味道小偵探：</strong>「聞 ➔ 猜 ➔ 說」，練習「我聞到了花香/橘子香」。",
+                    "🧱 <strong>32-37m 語言積木：</strong>風 ➔ 樹 ➔ 味道三塊積木整合。",
+                    "✨ <strong>37-40m 留下伏筆：</strong>這個味道是誰帶來的？風從哪裡來？"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>小明聞到味道時，他的小臉是什麼表情？",
+                    "❤️ <strong>感受：</strong>聞到不認識的味道，是好奇還是害怕？",
+                    "🔗 <strong>連結：</strong>家裡或學校有什麼味道讓你一聞就知道？",
+                    "🎲 <strong>創造：</strong>如果你能向風要一個味道，你想要什麼味道？"
                 ]
             },
-            { 
-                img: "slide4.jpg", 
-                text: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。",
-                prompts: [
-                    "👀 看見：風像白色的彩帶飛過，小明伸出小手想摸摸看嗎？",
-                    "❤️ 感受：風只說了「很大」兩個字，你會覺得好奇還是想笑？",
-                    "🔗 連結：你看過大海嗎？大海聽起來像什麼？",
-                    "🎲 創造：用你的雙手向鏡頭比出「你心中的很大有多大」！"
+            4: {
+                title: "風的旅行：「風從哪裡來？還可以從哪裡來？」",
+                lang: "核心語言：大海／來／很大 ｜ 句型：風從大海來，帶來海的味道。",
+                slideIndex: 3,
+                customType: "lesson4",
+                flow: [
+                    "📖 <strong>0-5m 繪本回扣 (Slide 4)：</strong>風說它從「大海」來，說大海「很大」。",
+                    "🌊 <strong>5-12m 大海有多大：</strong>肢體比出小海（🤏）與大海（🙌）。",
+                    "🎴 <strong>12-25m 視覺配對卡互動：</strong>在下方點選地點卡與氣味卡配對！",
+                    "😂 <strong>25-35m 趣味語言大混搭：</strong>故意搭配「風從森林來帶來臭襪子」，激發笑聲。",
+                    "✨ <strong>35-40m 預告第5堂：</strong>下回我們要用大風吹抽卡機蓋出大故事！"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>風說了哪兩個字就飛走了？（大海、很大）",
+                    "❤️ <strong>感受：</strong>只聽到「很大」，你會想親自去看看嗎？",
+                    "🔗 <strong>連結：</strong>你看過大海嗎？大海聽起來是什麼聲音？",
+                    "🎲 <strong>創造：</strong>如果風從你最喜歡的店吹來，會帶來什麼？"
                 ]
             },
-            { 
-                img: "slide5.jpg", 
-                text: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。",
-                prompts: [
-                    "👀 看見：頭頂上的大綠色海浪是真實的，還是小明腦袋裡的想像？",
-                    "❤️ 感受：小明抱著雙腿閉眼笑著，他是不是正在享受想像？",
-                    "🔗 連結：你有沒有閉上眼睛想像過外太空或海底世界？",
-                    "🎲 創造：如果想像大海，你的腦袋裡會聽到什麼聲音？"
+            5: {
+                title: "風把故事吹亂了：「我們一起蓋故事！」",
+                lang: "核心語言：時間、人物、地點、事件 ｜ 句型：在＿＿，＿＿在＿＿做＿＿，最後＿＿。",
+                slideIndex: 4,
+                customType: "lesson5",
+                flow: [
+                    "🔄 <strong>0-5m 積木回顧：</strong>回顧風從哪裡來、帶來什麼味道。",
+                    "🎲 <strong>5-10m 抽卡機示範：</strong>下方點選抽時間、主角、地點與動作。",
+                    "🌪️ <strong>10-25m 課堂隨機大風吹：</strong>全班喊停，一鍵生成搞笑故事組合。",
+                    "🎨 <strong>25-35m 角色情境演繹：</strong>讓孩子用肢體演出抽到的故事事件。",
+                    "✨ <strong>35-40m 故事感受表達：</strong>選一選這個故事是好笑、奇怪還是剛剛好。"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>我們剛剛抽到了哪幾張故事卡片？",
+                    "❤️ <strong>感受：</strong>這個被大風吹亂的故事聽起來好笑還是奇怪？",
+                    "🔗 <strong>連結：</strong>故事裡主角做的事情，你平常也會做嗎？",
+                    "🎲 <strong>創造：</strong>你想把故事的最後改成什麼？"
                 ]
             },
-            { 
-                img: "slide6.jpg", 
-                text: "但我一直坐著，直到風停了，味道也散了。",
-                prompts: [
-                    "👀 看見：金黃色的太陽快下山了，小明的身體姿勢發生了什麼變化？",
-                    "❤️ 感受：整個天空金黃平靜，帶給你放鬆還是充實的感覺？",
-                    "🔗 連結：事情結束的時候，你通常會想休息還是做下一件事？",
-                    "🎲 創造：風雖然走了，小明心裡是不是多裝了什麼寶物回家？"
-                ]
-            },
-            { 
-                img: "slide7.jpg", 
-                text: "他起身，拍拍褲子上的泥。回家了。",
-                prompts: [
-                    "👀 看見：小明邁開腳步往前走，手上有拍泥土的灰塵，遠處是什麼？",
-                    "❤️ 感受：比起第一頁坐在樹下，現在的小明看起來有沒有更有精神？",
-                    "🔗 連結：今天讀完整本繪本，你最喜歡哪一張圖？",
-                    "🎲 創造：小明回家後第一句話會跟媽媽說什麼？"
+            6: {
+                title: "我是小小故事家：「現在換我蓋故事！」",
+                lang: "核心語言：全課字詞總整合 ｜ 句型：那天風很大，風從＿＿來，帶來＿＿。",
+                slideIndex: 5,
+                flow: [
+                    "🗺️ <strong>0-8m 六堂地圖：</strong>回顧風、樹、味道、大海與抽卡故事。",
+                    "🧩 <strong>8-15m 繪本排序：</strong>樹下 ➔ 風 ➔ 聞味道 ➔ 大海 ➔ 回家。",
+                    "🍔 <strong>15-22m 四層提問回顧：</strong>看見 ➔ 感受 ➔ 經驗 ➔ 決定。",
+                    "🎤 <strong>22-32m 我的風之故事：</strong>引導孩子說出自己的專屬完整句子。",
+                    "🎓 <strong>32-40m 小小故事家畢業：</strong>頒發認證，每位小朋友輪流發表一句話！"
+                ],
+                questions: [
+                    "👀 <strong>看見：</strong>整本繪本裡，小明最後做了什麼動作？（拍拍泥土回家）",
+                    "❤️ <strong>感受：</strong>讀完整本故事，你最喜歡哪一張圖的顏色？",
+                    "🔗 <strong>連結：</strong>你今天學會了哪一句最厲害的中文故事？",
+                    "🎲 <strong>創造：</strong>回家後你想把這個故事講給誰聽？"
                 ]
             }
+        };
+
+        const slides = [
+            { img: "slide1.jpg", text: "那天風很大", prompts: ["👀 看見：畫面裡有什麼顏色和漩渦？", "❤️ 感受：風帶給你涼涼的還是溫暖的感覺？", "🔗 連結：你有吹過很大的風嗎？", "🎲 創造：如果大風吹進來，你想做什麼動作？"] },
+            { img: "slide2.jpg", text: "那天風很大。小明坐在樹下，什麼都沒有做。", prompts: ["👀 看見：小明坐在哪裡？樹枝往哪邊倒？", "❤️ 感受：小明嘴角笑著，他現在舒服嗎？", "🔗 連結：你很舒服的時候也會微笑嗎？", "🎲 創造：閉上眼睛 5 秒鐘，想像坐在樹下聽風聲！"] },
+            { img: "slide3.jpg", text: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？", prompts: ["👀 看見：小明的表情是什麼？", "❤️ 感受：聞到不認識的味道，會好奇還是害怕？", "🔗 連結：你在校園聞過什麼難忘的味道？", "🎲 創造：如果風站在你面前，你想問它什麼？"] },
+            { img: "slide4.jpg", text: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。", prompts: ["👀 看見：風像白色彩帶飛過，小明在做什麼？", "❤️ 感受：風只說了「很大」，你會想笑嗎？", "🔗 連結：你看過大海嗎？大海聽起來像什麼？", "🎲 創造：用雙手向鏡頭比出「你心中的很大有多大」！"] },
+            { img: "slide5.jpg", text: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。", prompts: ["👀 看見：頭頂上的海浪是真實的還是想像的？", "❤️ 感受：小明閉眼笑著，他在享受想像嗎？", "🔗 連結：你有沒有閉上眼睛想像過外太空？", "🎲 創造：如果想像大海，你會聽到什麼聲音？"] },
+            { img: "slide6.jpg", text: "但我一直坐著，直到風停了，味道也散了。", prompts: ["👀 看見：金黃色的太陽快下山了。", "❤️ 感受：天空金黃平靜，帶給你放鬆的感覺嗎？", "🔗 連結：事情結束時你會想休息嗎？", "🎲 創造：風走了，小明心裡裝了什麼寶物？"] },
+            { img: "slide7.jpg", text: "他起身，拍拍褲子上的泥。回家了。", prompts: ["👀 看見：小明手上有拍泥土的灰塵，遠處是什麼？", "❤️ 感受：小明看起來是不是更有精神了？", "🔗 連結：今天讀完繪本，你最喜歡哪一張圖？", "🎲 創造：小明回家後第一句話會跟媽媽說什麼？"] }
         ];
 
-        let currentIndex = 0;
-        let isLoggedIn = false;
+        let currentLessonNum = 1;
+        let currentSlideIdx = 0;
+        let isPaused = false;
 
-        // 第4堂配對變數
-        let selPlace = { name: "大海", icon: "🌊" };
-        let selScent = { name: "海水的味道", icon: "🌊" };
+        function showHome() {
+            stopSpeech();
+            document.getElementById('view-home').classList.remove('hidden');
+            document.getElementById('view-lesson').classList.add('hidden');
+            document.getElementById('view-gallery').classList.add('hidden');
+            document.getElementById('btnBackHome').classList.add('hidden');
+        }
 
-        function selectPlace(name, icon, speakWord) {
-            selPlace = { name, icon };
-            document.querySelectorAll('.place-card').forEach(btn => btn.classList.remove('card-active'));
+        function openLesson(num) {
+            stopSpeech();
+            currentLessonNum = num;
+            const data = lessonsData[num];
+
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-gallery').classList.add('hidden');
+            document.getElementById('view-lesson').classList.remove('hidden');
+            document.getElementById('btnBackHome').classList.remove('hidden');
+
+            document.getElementById('lessonTag').innerText = `第 ${num} 堂主題`;
+            document.getElementById('lessonTitle').innerText = data.title;
+            document.getElementById('lessonLang').innerText = data.lang;
+
+            document.getElementById('lessonFlow').innerHTML = data.flow.map(f => `<li class="p-3 bg-black/40 rounded-xl border border-white/5">${f}</li>`).join('');
+            document.getElementById('lessonQuestions').innerHTML = data.questions.map(q => `<div class="p-3.5 bg-black/40 rounded-xl border border-white/5">${q}</div>`).join('');
+
+            const embedArea = document.getElementById('lessonCustomEmbed');
+            embedArea.innerHTML = '';
+            if (data.customType === 'lesson4') {
+                embedArea.classList.remove('hidden');
+                const tmpl = document.getElementById('tmpl-lesson4').content.cloneNode(true);
+                embedArea.appendChild(tmpl);
+                updateLesson4Sentence();
+            } else if (data.customType === 'lesson5') {
+                embedArea.classList.remove('hidden');
+                const tmpl = document.getElementById('tmpl-lesson5').content.cloneNode(true);
+                embedArea.appendChild(tmpl);
+                updateCombinedStory();
+            } else {
+                embedArea.classList.add('hidden');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function openLessonSlide() {
+            const lData = lessonsData[currentLessonNum];
+            openGalleryDirect(lData.slideIndex || 0);
+        }
+
+        function openGalleryDirect(idx) {
+            stopSpeech();
+            currentSlideIdx = idx;
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-lesson').classList.add('hidden');
+            document.getElementById('view-gallery').classList.remove('hidden');
+            document.getElementById('btnBackHome').classList.remove('hidden');
+            updateSlideView();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function updateSlideView() {
+            stopSpeech();
+            const data = slides[currentSlideIdx];
+            document.getElementById('slideImage').src = data.img;
+            document.getElementById('slideCaption').innerText = data.text;
+            document.getElementById('pageIndicator').innerText = `${currentSlideIdx + 1} / ${slides.length}`;
+            document.getElementById('promptTag').innerText = `Slide ${currentSlideIdx + 1}`;
+            document.getElementById('slidePrompts').innerHTML = data.prompts.map(p => `
+                <div class="p-3 bg-black/50 rounded-xl border border-white/10">${p}</div>
+            `).join('');
+        }
+
+        function nextSlide() {
+            currentSlideIdx = (currentSlideIdx < slides.length - 1) ? currentSlideIdx + 1 : 0;
+            updateSlideView();
+        }
+
+        function prevSlide() {
+            currentSlideIdx = (currentSlideIdx > 0) ? currentSlideIdx - 1 : slides.length - 1;
+            updateSlideView();
+        }
+
+        // 語音控制核心功能：朗讀、暫停/繼續、重聽、停止
+        function speakText(text) {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            isPaused = false;
+            updatePauseButtonUI();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-TW';
+            utterance.rate = 0.82;
+            utterance.pitch = 1.05;
+
+            utterance.onend = () => {
+                isPaused = false;
+                updatePauseButtonUI();
+            };
+
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function readCurrentSlide() {
+            speakText(slides[currentSlideIdx].text);
+        }
+
+        function togglePauseSpeech() {
+            if (!('speechSynthesis' in window)) return;
+            if (window.speechSynthesis.speaking) {
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                    isPaused = false;
+                } else {
+                    window.speechSynthesis.pause();
+                    isPaused = true;
+                }
+                updatePauseButtonUI();
+            }
+        }
+
+        function updatePauseButtonUI() {
+            const btn = document.getElementById('btnPause');
+            if (!btn) return;
+            if (isPaused) {
+                btn.innerHTML = '▶️ 繼續';
+                btn.className = 'px-4 py-2 bg-green-600 hover:bg-green-500 text-white font-extrabold rounded-xl transition text-sm shadow';
+            } else {
+                btn.innerHTML = '⏸️ 暫停';
+                btn.className = 'px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white font-extrabold rounded-xl transition text-sm shadow';
+            }
+        }
+
+        function replayCurrentSlide() {
+            stopSpeech();
+            readCurrentSlide();
+        }
+
+        function stopSpeech() {
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+            isPaused = false;
+            updatePauseButtonUI();
+        }
+
+        // 第4堂配對
+        let curPlace = '大海';
+        let curScent = '海水的味道';
+
+        function selectPlace(name, icon) {
+            curPlace = name;
+            document.querySelectorAll('.place-btn').forEach(b => b.classList.remove('card-active'));
             event.currentTarget.classList.add('card-active');
-            speakText(speakWord);
+            speakText(name);
             updateLesson4Sentence();
         }
 
-        function selectScent(name, icon, speakWord) {
-            selScent = { name, icon };
-            document.querySelectorAll('.scent-card').forEach(btn => btn.classList.remove('card-active'));
+        function selectScent(name, icon) {
+            curScent = name;
+            document.querySelectorAll('.scent-btn').forEach(b => b.classList.remove('card-active'));
             event.currentTarget.classList.add('card-active');
-            speakText(speakWord);
+            speakText(name);
             updateLesson4Sentence();
         }
 
         function updateLesson4Sentence() {
-            const txt = `風從${selPlace.name}來，帶來${selScent.name}。`;
-            document.getElementById('lesson4Sentence').innerText = txt;
+            const el = document.getElementById('lesson4Sentence');
+            if (el) el.innerText = `風從${curPlace}來，帶來${curScent}。`;
         }
 
         function speakLesson4Sentence() {
-            speakText(document.getElementById('lesson4Sentence').innerText);
+            const el = document.getElementById('lesson4Sentence');
+            if (el) speakText(el.innerText);
         }
 
-        // 第5堂抽卡庫
+        // 第5堂抽卡
         const cardDeck = {
-            time: [
-                { text: "白天", icon: "🌞" },
-                { text: "晚上", icon: "🌙" },
-                { text: "早上", icon: "🌅" },
-                { text: "半夜", icon: "⭐" }
-            ],
-            char: [
-                { text: "小明", icon: "👦" },
-                { text: "貓咪", icon: "🐱" },
-                { text: "恐龍", icon: "🦖" },
-                { text: "小兔子", icon: "🐰" },
-                { text: "大熊", icon: "🐻" }
-            ],
-            place: [
-                { text: "樹下", icon: "🌳" },
-                { text: "大海邊", icon: "🌊" },
-                { text: "家裡", icon: "🏠" },
-                { text: "花園裡", icon: "🌸" },
-                { text: "麵包店", icon: "🍞" }
-            ],
-            action: [
-                { text: "睡覺", icon: "😴" },
-                { text: "跑步", icon: "🏃" },
-                { text: "吃麵", icon: "🍜" },
-                { text: "畫畫", icon: "🎨" },
-                { text: "跳舞", icon: "💃" }
-            ],
-            wind: [
-                { text: "橘子香", icon: "🍊" },
-                { text: "花朵香", icon: "🌸" },
-                { text: "麵包香", icon: "🍞" },
-                { text: "海水味", icon: "🌊" },
-                { text: "披薩香", icon: "🍕" },
-                { text: "臭襪子味", icon: "🧦" }
-            ]
+            time: [{ text: "白天", icon: "🌞" }, { text: "晚上", icon: "🌙" }, { text: "早上", icon: "🌅" }, { text: "半夜", icon: "⭐" }],
+            char: [{ text: "小明", icon: "👦" }, { text: "貓咪", icon: "🐱" }, { text: "恐龍", icon: "🦖" }, { text: "小兔子", icon: "🐰" }, { text: "大熊", icon: "🐻" }],
+            place: [{ text: "樹下", icon: "🌳" }, { text: "大海邊", icon: "🌊" }, { text: "家裡", icon: "🏠" }, { text: "花園裡", icon: "🌸" }, { text: "麵包店", icon: "🍞" }],
+            action: [{ text: "睡覺", icon: "😴" }, { text: "跑步", icon: "🏃" }, { text: "吃麵", icon: "🍜" }, { text: "畫畫", icon: "🎨" }, { text: "跳舞", icon: "💃" }],
+            wind: [{ text: "橘子香", icon: "🍊" }, { text: "花朵香", icon: "🌸" }, { text: "麵包香", icon: "🍞" }, { text: "海水味", icon: "🌊" }, { text: "披薩香", icon: "🍕" }, { text: "臭襪子味", icon: "🧦" }]
         };
 
-        let currentStory = {
+        let storyObj = {
             time: { text: "白天", icon: "🌞" },
             char: { text: "小明", icon: "👦" },
             place: { text: "樹下", icon: "🌳" },
@@ -662,7 +680,7 @@
         function drawCard(type) {
             const list = cardDeck[type];
             const chosen = list[Math.floor(Math.random() * list.length)];
-            currentStory[type] = chosen;
+            storyObj[type] = chosen;
             document.getElementById(`icon-${type}`).innerText = chosen.icon;
             document.getElementById(`text-${type}`).innerText = chosen.text;
             speakText(chosen.text);
@@ -673,151 +691,29 @@
             Object.keys(cardDeck).forEach(type => {
                 const list = cardDeck[type];
                 const chosen = list[Math.floor(Math.random() * list.length)];
-                currentStory[type] = chosen;
-                document.getElementById(`icon-${type}`).innerText = chosen.icon;
-                document.getElementById(`text-${type}`).innerText = chosen.text;
+                storyObj[type] = chosen;
+                const iconEl = document.getElementById(`icon-${type}`);
+                const textEl = document.getElementById(`text-${type}`);
+                if (iconEl && textEl) {
+                    iconEl.innerText = chosen.icon;
+                    textEl.innerText = chosen.text;
+                }
             });
             updateCombinedStory();
             speakCombinedStory();
         }
 
         function updateCombinedStory() {
-            const text = `${currentStory.time.text}，${currentStory.char.text}在${currentStory.place.text}${currentStory.action.text}。大風吹來了，風帶來${currentStory.wind.text}，最後回家了！`;
-            document.getElementById('combinedStoryText').innerText = text;
+            const el = document.getElementById('combinedStoryText');
+            if (el) {
+                el.innerText = `${storyObj.time.text}，${storyObj.char.text}在${storyObj.place.text}${storyObj.action.text}。大風吹來了，風帶來${storyObj.wind.text}，最後回家了！`;
+            }
         }
 
         function speakCombinedStory() {
-            speakText(document.getElementById('combinedStoryText').innerText);
+            const el = document.getElementById('combinedStoryText');
+            if (el) speakText(el.innerText);
         }
-
-        function updateSlide(autoSpeak = true) {
-            const currentData = slides[currentIndex];
-            const slideImg = document.getElementById("slideImage");
-            const slideFallback = document.getElementById("slideFallback");
-            
-            slideImg.style.display = "block";
-            slideFallback.classList.add("hidden");
-            slideImg.src = currentData.img;
-
-            slideImg.onerror = function() {
-                this.style.display = 'none';
-                slideFallback.classList.remove('hidden');
-            };
-
-            document.getElementById("fallbackTitle").innerText = currentData.text;
-            document.getElementById("slideCaption").innerText = currentData.text;
-            document.getElementById("pageIndicator").innerText = `${currentIndex + 1} / ${slides.length}`;
-            document.getElementById("promptTag").innerText = `Slide ${currentIndex + 1}`;
-
-            const promptBox = document.getElementById("slidePrompts");
-            promptBox.innerHTML = currentData.prompts.map(p => `
-                <p class="p-2 bg-black/40 rounded-lg border border-white/5">${p}</p>
-            `).join('');
-
-            if (autoSpeak) {
-                speakText(currentData.text);
-            }
-        }
-
-        function nextSlide() {
-            currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-            updateSlide(true);
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-            updateSlide(true);
-        }
-
-        function readCurrentSlide() {
-            speakText(slides[currentIndex].text);
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-white/10');
-                btn.classList.add('hover:bg-white/5');
-            });
-
-            document.getElementById(`sec-${tabName}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tab-${tabName}`);
-            activeBtn.classList.add('bg-white/10');
-            activeBtn.classList.remove('hover:bg-white/5');
-
-            if (tabName === 'gallery') {
-                updateSlide(false);
-            }
-        }
-
-        function switchLesson(num) {
-            document.querySelectorAll('.lesson-panel').forEach(panel => panel.classList.add('hidden'));
-            document.querySelectorAll('.lesson-btn').forEach(btn => {
-                btn.className = "lesson-btn px-3 py-2 rounded-xl font-bold text-purple-300 hover:bg-white/10 text-sm transition";
-            });
-
-            document.getElementById(`lesson-content-${num}`).classList.remove('hidden');
-            document.getElementById(`btn-lesson-${num}`).className = "lesson-btn px-3 py-2 rounded-xl font-bold bg-purple-600 text-white shadow-lg text-sm transition";
-        }
-
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) {
-                return;
-            }
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'zh-TW';
-            utterance.rate = 0.8;
-            utterance.pitch = 1.1;
-            window.speechSynthesis.speak(utterance);
-        }
-
-        // InsForge 後台
-        function logMessage(msg) {
-            const dbLog = document.getElementById('dbLog');
-            const now = new Date().toLocaleTimeString();
-            const p = document.createElement('p');
-            p.innerText = `[${now}] ${msg}`;
-            dbLog.appendChild(p);
-            dbLog.scrollTop = dbLog.scrollHeight;
-        }
-
-        function loginInsForge() {
-            isLoggedIn = true;
-            document.getElementById('btnLogin').classList.add('hidden');
-            document.getElementById('btnLogout').classList.remove('hidden');
-            document.getElementById('userInfo').classList.remove('hidden');
-            logMessage("【InsForge Auth】已成功連線至後台資料庫！");
-            alert("已成功登入 InsForge 後台系統！");
-        }
-
-        function logoutInsForge() {
-            isLoggedIn = false;
-            document.getElementById('btnLogin').classList.remove('hidden');
-            document.getElementById('btnLogout').classList.add('hidden');
-            document.getElementById('userInfo').classList.add('hidden');
-            logMessage("【InsForge Auth】已安全登出。");
-        }
-
-        function saveToInsForgeDB() {
-            const content = document.getElementById('dbInput').value.trim();
-            if (!content) {
-                alert('請輸入課堂觀察紀錄！');
-                return;
-            }
-            logMessage("正在將課堂紀錄寫入 InsForge Database...");
-            setTimeout(() => {
-                logMessage(`【InsForge DB 成功寫入】"${content}"`);
-                alert('儲存成功！紀錄已同步至 InsForge DB。');
-                document.getElementById('dbInput').value = '';
-            }, 500);
-        }
-
-        window.onload = function() {
-            updateSlide(false);
-            updateLesson4Sentence();
-            updateCombinedStory();
-        };
     </script>
 </body>
 </html>
