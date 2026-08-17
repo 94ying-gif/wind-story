@@ -25,6 +25,20 @@
             background-color: rgba(234, 179, 8, 0.25) !important;
             transform: scale(1.04);
         }
+        .vocab-focus {
+            color: #fde047;
+            font-weight: 900;
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 4px;
+        }
+        .spoken-word-active {
+            background-color: #eab308;
+            color: #000 !important;
+            padding: 0 4px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px #eab308;
+        }
     </style>
 </head>
 <body class="min-h-screen p-3 md:p-6 flex flex-col justify-between">
@@ -75,7 +89,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">找到風</h3>
                     <p class="text-purple-200 text-sm">那天，風很大 透過風聲引導感受與動作模仿</p>
-                    <div class="text-xs text-purple-400 font-mono">核心詞：風／大／吹</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">風</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">大</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">吹</span>
+                    </div>
                 </div>
 
                 <div onclick="openLesson(2)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
@@ -85,7 +103,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">遇見樹</h3>
                     <p class="text-purple-200 text-sm">風來了，樹怎麼了 化身為大樹進行肢體律動</p>
-                    <div class="text-xs text-purple-400 font-mono">核心詞：樹／搖／動</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">樹</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">搖</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">動</span>
+                    </div>
                 </div>
 
                 <div onclick="openLesson(3)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
@@ -95,7 +117,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">發現味道</h3>
                     <p class="text-purple-200 text-sm">風裡面有什麼 嗅覺感知與不認識味道的探索</p>
-                    <div class="text-xs text-purple-400 font-mono">核心詞：聞／味道／香</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">聞</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">味道</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">香</span>
+                    </div>
                 </div>
 
                 <div onclick="openLesson(4)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-yellow-500/50 hover:border-yellow-300 transition-all hover:scale-[1.02] shadow-xl space-y-3">
@@ -105,7 +131,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-yellow-200 group-hover:text-yellow-300 transition">風的旅行</h3>
                     <p class="text-purple-200 text-sm">風從哪裡來 帶來什麼 內建大圖配對語音發音台</p>
-                    <div class="text-xs text-yellow-300 font-mono">內建：地點與氣味配對機</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">大海</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">來</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">很大</span>
+                    </div>
                 </div>
 
                 <div onclick="openLesson(5)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-yellow-500/50 hover:border-yellow-300 transition-all hover:scale-[1.02] shadow-xl space-y-3">
@@ -115,7 +145,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-yellow-200 group-hover:text-yellow-300 transition">吹亂故事</h3>
                     <p class="text-purple-200 text-sm">我們一起蓋故事 大風吹隨機抽卡與搞笑故事組裝</p>
-                    <div class="text-xs text-yellow-300 font-mono">內建：大風吹抽卡機</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">時間</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">主角</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">地點</span>
+                    </div>
                 </div>
 
                 <div onclick="openLesson(6)" class="group cursor-pointer p-6 rounded-2xl bg-gradient-to-br from-purple-900/40 to-black/60 border border-purple-500/30 hover:border-yellow-400 transition-all hover:scale-[1.02] shadow-xl space-y-3">
@@ -125,7 +159,11 @@
                     </div>
                     <h3 class="text-2xl font-bold text-white group-hover:text-yellow-300 transition">小故事家</h3>
                     <p class="text-purple-200 text-sm">現在換我蓋故事 繪本排序、成果發表與故事家認證</p>
-                    <div class="text-xs text-purple-400 font-mono">核心：六堂全字詞總整合</div>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">故事</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">作家</span>
+                        <span class="px-2 py-0.5 bg-yellow-400/20 text-yellow-300 text-xs font-bold rounded">回家</span>
+                    </div>
                 </div>
             </div>
 
@@ -165,6 +203,16 @@
                 </div>
             </div>
 
+            <div class="p-6 rounded-3xl bg-card border border-yellow-500/30 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-yellow-300 flex items-center gap-2">
+                        本堂重點生字卡（點擊聽發音）
+                    </h3>
+                    <span class="text-xs text-purple-300">帶領孩子指讀與認字</span>
+                </div>
+                <div id="lessonVocabList" class="flex flex-wrap gap-3"></div>
+            </div>
+
             <div id="lessonCustomEmbed" class="hidden"></div>
 
             <div class="grid lg:grid-cols-12 gap-6">
@@ -187,6 +235,9 @@
         <main id="view-gallery" class="hidden space-y-5">
             <div class="flex flex-wrap justify-between items-center bg-card p-4 rounded-2xl border border-white/10 gap-3">
                 <div class="flex items-center gap-3">
+                    <button id="btnReturnToLesson" onclick="returnToLesson()" class="px-4 py-2.5 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl transition text-sm flex items-center gap-1 shadow">
+                        返回課堂
+                    </button>
                     <button onclick="prevSlide()" class="px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white transition text-base">上一頁</button>
                     <span id="pageIndicator" class="font-black text-yellow-300 text-2xl tracking-widest px-2">1 / 7</span>
                     <button onclick="nextSlide()" class="px-4 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-600 font-bold text-white transition text-base">下一頁</button>
@@ -214,7 +265,10 @@
 
             <div class="grid lg:grid-cols-12 gap-5">
                 <div class="lg:col-span-7 bg-purple-950/70 p-6 md:p-8 rounded-3xl border border-yellow-500/40 flex flex-col justify-center space-y-2">
-                    <span class="text-xs text-yellow-400 font-bold tracking-wider uppercase">繪本故事內文</span>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-yellow-400 font-bold tracking-wider uppercase">繪本故事內文（朗讀高亮中）</span>
+                        <span class="text-xs text-purple-300">亮黃底線為本課重點字</span>
+                    </div>
                     <p id="slideCaption" class="text-2xl md:text-4xl font-black text-white leading-relaxed tracking-wide"></p>
                 </div>
 
@@ -366,6 +420,12 @@
                 lang: "核心語言：風／大／吹 ｜ 句型：風來了。風很大。",
                 stage: "鷹架目標：看見（找到故事裡的東西）",
                 slideIndex: 0,
+                vocab: [
+                    { char: "風", pinyin: "fēng", desc: "自然吹來的風" },
+                    { char: "大", pinyin: "dà", desc: "很大的風" },
+                    { char: "吹", pinyin: "chuī", desc: "風吹過來" },
+                    { char: "來", pinyin: "lái", desc: "風來了" }
+                ],
                 flow: [
                     "0–5m 神秘聲音：播放呼～～風聲讓孩子猜是什麼來了，揭曉「風！」。",
                     "5–12m 小風與大風：小風「呼」、大風「呼～～」、風停「不動」，身體律動。",
@@ -386,6 +446,12 @@
                 lang: "核心語言：樹／搖／動 ｜ 句型：我是樹。樹搖一搖。",
                 stage: "鷹架目標：感受（用表情動作表達）",
                 slideIndex: 1,
+                vocab: [
+                    { char: "樹", pinyin: "shù", desc: "大樹" },
+                    { char: "搖", pinyin: "yáo", desc: "搖一搖" },
+                    { char: "動", pinyin: "dòng", desc: "被吹動" },
+                    { char: "坐", pinyin: "zuò", desc: "坐在樹下" }
+                ],
                 flow: [
                     "0–5m 回到第一塊積木：「誰來了？風！」「風怎麼樣？很大！」",
                     "5–12m 變成樹：今天我們是樹！雙手當樹枝隨風搖一搖。",
@@ -406,6 +472,12 @@
                 lang: "核心語言：聞／味道／香 ｜ 句型：我聞到了～。",
                 stage: "鷹架目標：連結（連到生活經驗）",
                 slideIndex: 2,
+                vocab: [
+                    { char: "聞", pinyin: "wén", desc: "用鼻子聞" },
+                    { char: "味", pinyin: "wèi", desc: "氣味" },
+                    { char: "道", pinyin: "dào", desc: "味道" },
+                    { char: "香", pinyin: "xiāng", desc: "很香" }
+                ],
                 flow: [
                     "0–5m 故事回顧：「風來了，樹搖一搖，小明還發現了什麼？」",
                     "5–12m 神秘味道：引導生活氣味（橘子、花朵、麵包），做聞一聞動作。",
@@ -427,6 +499,12 @@
                 stage: "鷹架目標：轉化積木（橋樑單元）",
                 slideIndex: 3,
                 customType: "lesson4",
+                vocab: [
+                    { char: "海", pinyin: "hǎi", desc: "大海" },
+                    { char: "大", pinyin: "dà", desc: "大海很大" },
+                    { char: "從", pinyin: "cóng", desc: "從哪裡來" },
+                    { char: "帶", pinyin: "dài", desc: "帶來味道" }
+                ],
                 flow: [
                     "0–5m 繪本回扣 (Slide 4)：風說它從「大海」來，說大海「很大」。",
                     "5–12m 大海很大：用身體比出小海與大海，大聲說「很大！」。",
@@ -448,6 +526,12 @@
                 stage: "鷹架目標：重組故事（大風吹抽卡）",
                 slideIndex: 4,
                 customType: "lesson5",
+                vocab: [
+                    { char: "時", pinyin: "shí", desc: "時間" },
+                    { char: "人", pinyin: "rén", desc: "主角人物" },
+                    { char: "地", pinyin: "dì", desc: "地點地方" },
+                    { char: "事", pinyin: "shì", desc: "做什麼事" }
+                ],
                 flow: [
                     "0–5m 積木回顧：回顧風從哪裡來、帶來什麼味道。",
                     "5–10m 老師示範：抽卡展示「晚上，小明在大海睡覺，最後回家」，引導感受。",
@@ -468,6 +552,12 @@
                 lang: "核心語言：六堂全字詞總整合 ｜ 句型：那天風很大，風從＿＿來，帶來＿＿。",
                 stage: "鷹架目標：自主創造（故事家畢業）",
                 slideIndex: 5,
+                vocab: [
+                    { char: "故", pinyin: "gù", desc: "故事" },
+                    { char: "事", pinyin: "shì", desc: "故事家" },
+                    { char: "家", pinyin: "jiā", desc: "回家、故事家" },
+                    { char: "起", pinyin: "qǐ", desc: "起身回家" }
+                ],
                 flow: [
                     "0–8m 六堂地圖：快速回顧 風、樹、味道、大海、故事與我。",
                     "8–15m 重新整理繪本：五張畫面（樹下、風大、聞味道、大海、回家）排序，理解故事結構。",
@@ -498,6 +588,7 @@
         let currentLessonNum = 1;
         let currentSlideIdx = 0;
         let isPaused = false;
+        let speechTimer = null;
 
         function showHome() {
             stopSpeech();
@@ -521,6 +612,15 @@
             document.getElementById('lessonFrameworkTag').innerText = data.stage;
             document.getElementById('lessonTitle').innerText = data.title;
             document.getElementById('lessonLang').innerText = data.lang;
+
+            const vocabEl = document.getElementById('lessonVocabList');
+            vocabEl.innerHTML = data.vocab.map(v => `
+                <div onclick="speakText('${v.char}')" class="cursor-pointer px-4 py-3 bg-purple-900/60 hover:bg-yellow-400 hover:text-black rounded-2xl border border-purple-400/40 transition flex flex-col items-center min-w-[80px] shadow">
+                    <span class="text-xs opacity-75">${v.pinyin}</span>
+                    <span class="text-2xl font-black">${v.char}</span>
+                    <span class="text-[10px] mt-1 opacity-80">${v.desc}</span>
+                </div>
+            `).join('');
 
             document.getElementById('lessonFlow').innerHTML = data.flow.map(f => `<li class="p-3.5 bg-black/40 rounded-xl border border-white/5">${f}</li>`).join('');
             document.getElementById('lessonQuestions').innerHTML = data.questions.map(q => `<div class="p-3.5 bg-black/40 rounded-xl border border-white/5 font-medium">${q}</div>`).join('');
@@ -549,6 +649,11 @@
             openGalleryDirect(lData.slideIndex || 0);
         }
 
+        function returnToLesson() {
+            stopSpeech();
+            openLesson(currentLessonNum);
+        }
+
         function openGalleryDirect(idx) {
             stopSpeech();
             currentSlideIdx = idx;
@@ -556,15 +661,35 @@
             document.getElementById('view-lesson').classList.add('hidden');
             document.getElementById('view-gallery').classList.remove('hidden');
             document.getElementById('btnBackHome').classList.remove('hidden');
+            
+            const btnReturn = document.getElementById('btnReturnToLesson');
+            if (btnReturn) {
+                btnReturn.innerText = `返回第 ${currentLessonNum} 堂課堂`;
+            }
+
             updateSlideView();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderSlideCaption() {
+            const text = slides[currentSlideIdx].text;
+            const curVocabChars = lessonsData[currentLessonNum].vocab.map(v => v.char);
+            
+            let html = '';
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const isVocab = curVocabChars.includes(char);
+                const classStr = isVocab ? 'slide-char vocab-focus' : 'slide-char';
+                html += `<span id="char-${i}" class="${classStr}">${char}</span>`;
+            }
+            document.getElementById('slideCaption').innerHTML = html;
         }
 
         function updateSlideView() {
             stopSpeech();
             const data = slides[currentSlideIdx];
             document.getElementById('slideImage').src = data.img;
-            document.getElementById('slideCaption').innerText = data.text;
+            renderSlideCaption();
             document.getElementById('pageIndicator').innerText = `${currentSlideIdx + 1} / ${slides.length}`;
             document.getElementById('promptTag').innerText = `Slide ${currentSlideIdx + 1}`;
             document.getElementById('slidePrompts').innerHTML = data.prompts.map(p => `
@@ -582,9 +707,15 @@
             updateSlideView();
         }
 
+        function clearSpeechHighlight() {
+            document.querySelectorAll('.spoken-word-active').forEach(el => el.classList.remove('spoken-word-active'));
+        }
+
         function speakText(text) {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
+            clearInterval(speechTimer);
+            clearSpeechHighlight();
             isPaused = false;
             updatePauseButtonUI();
 
@@ -593,8 +724,18 @@
             utterance.rate = 0.82;
             utterance.pitch = 1.05;
 
+            utterance.onboundary = function(event) {
+                if (event.name === 'word' || event.charIndex !== undefined) {
+                    const charIdx = event.charIndex;
+                    clearSpeechHighlight();
+                    const el = document.getElementById(`char-${charIdx}`);
+                    if (el) el.classList.add('spoken-word-active');
+                }
+            };
+
             utterance.onend = () => {
                 isPaused = false;
+                clearSpeechHighlight();
                 updatePauseButtonUI();
             };
 
@@ -602,7 +743,24 @@
         }
 
         function readCurrentSlide() {
-            speakText(slides[currentSlideIdx].text);
+            const rawText = slides[currentSlideIdx].text;
+            speakText(rawText);
+
+            let charIndex = 0;
+            const totalChars = rawText.length;
+            clearInterval(speechTimer);
+
+            speechTimer = setInterval(() => {
+                if (!isPaused && window.speechSynthesis.speaking) {
+                    clearSpeechHighlight();
+                    const el = document.getElementById(`char-${charIndex}`);
+                    if (el) el.classList.add('spoken-word-active');
+                    charIndex++;
+                    if (charIndex >= totalChars) {
+                        clearInterval(speechTimer);
+                    }
+                }
+            }, 300);
         }
 
         function togglePauseSpeech() {
@@ -639,6 +797,8 @@
         function stopSpeech() {
             if (!('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
+            clearInterval(speechTimer);
+            clearSpeechHighlight();
             isPaused = false;
             updatePauseButtonUI();
         }
