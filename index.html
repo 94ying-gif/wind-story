@@ -205,13 +205,19 @@
 
         <main id="view-lesson" class="hidden space-y-6">
             <div class="p-6 md:p-8 rounded-3xl bg-gradient-to-r from-purple-950/80 to-purple-900/40 border border-glow flex flex-col md:flex-row justify-between md:items-center gap-4">
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <div class="flex items-center gap-2">
                         <span id="lessonTag" class="text-sm font-bold bg-yellow-400 text-black px-3.5 py-1.5 rounded-full">第 1 堂主題</span>
                         <span id="lessonFrameworkTag" class="text-xs bg-purple-800 text-purple-200 px-3 py-1 rounded-full">鷹架目標：看見</span>
                     </div>
-                    <h2 id="lessonTitle" class="text-3xl md:text-5xl font-black text-white tracking-wide">找到風：那天，風很大</h2>
-                    <p id="lessonLang" class="text-base md:text-xl text-yellow-300 font-medium">核心語言：風／大／吹 ｜ 句型：風來了。風很大。</p>
+                    <h2 id="lessonTitle" class="text-2xl md:text-3xl font-extrabold text-white tracking-wide">找到風：「那天，風很大！」</h2>
+                    <div class="flex flex-wrap items-center gap-3 pt-1">
+                        <span id="lessonLang" class="text-lg md:text-xl font-black text-amber-300 bg-black/50 px-4 py-2 rounded-2xl border border-amber-400/30">核心：風／大／吹</span>
+                        <button onclick="speakCurrentSentence()" class="text-lg md:text-xl font-black text-yellow-200 bg-purple-900/70 hover:bg-yellow-400 hover:text-black px-4 py-2 rounded-2xl border border-yellow-400/40 transition flex items-center gap-2 shadow cursor-pointer">
+                            <span id="lessonSentence">句型：風來了。風很大。</span>
+                            <span class="text-xs px-2 py-0.5 bg-black/40 rounded-full text-yellow-300">點擊朗讀</span>
+                        </button>
+                    </div>
                 </div>
                 <div class="flex flex-wrap gap-2">
                     <button id="btnLessonSlide" onclick="openLessonSlide()" class="px-6 py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-lg transition shadow-xl flex items-center gap-2">
@@ -239,14 +245,14 @@
                     <h3 class="text-2xl font-bold text-yellow-300 flex items-center gap-2">
                         40分鐘黃金流程
                     </h3>
-                    <ul id="lessonFlow" class="space-y-3.5 text-lg md:text-xl text-purple-100 leading-relaxed list-none"></ul>
+                    <div id="lessonFlow" class="space-y-4 text-base md:text-lg text-purple-100 leading-relaxed"></div>
                 </div>
 
                 <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-purple-950/40 border border-purple-500/30 space-y-4">
                     <h3 class="text-2xl font-bold text-yellow-300 flex items-center gap-2">
                         四層提問引導（看見 感受 連結 創造）
                     </h3>
-                    <div id="lessonQuestions" class="space-y-4 text-lg md:text-xl text-purple-100 leading-relaxed"></div>
+                    <div id="lessonQuestions" class="space-y-4 text-base md:text-lg text-purple-100 leading-relaxed"></div>
                 </div>
             </div>
         </main>
@@ -269,10 +275,10 @@
                     <button id="btnPlay" onclick="readCurrentSlide()" class="px-3.5 py-1.5 bg-yellow-400 hover:bg-yellow-300 text-black font-extrabold rounded-xl transition text-xs md:text-sm shadow">
                         朗讀
                     </button>
-                    <button id="btnPause" onclick="togglePauseSpeech()" class="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-extrabold rounded-xl transition text-xs md:text-sm shadow">
+                    <button id="btnPause" onclick="togglePauseSpeech()" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-500 text-white font-extrabold rounded-xl transition text-xs md:text-sm shadow">
                         暫停
                     </button>
-                    <button onclick="replayCurrentSlide()" class="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-extrabold rounded-xl transition text-xs md:text-sm shadow">
+                    <button onclick="replayCurrentSlide()" class="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-extrabold rounded-xl transition text-xs md:text-sm shadow">
                         重聽
                     </button>
                     <button onclick="stopSpeech()" class="px-2.5 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition text-xs">
@@ -309,6 +315,49 @@
         </footer>
 
     </div>
+
+    <template id="tmpl-lesson3">
+        <div class="p-6 rounded-3xl bg-purple-950/60 border border-yellow-500/40 space-y-5">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                <div>
+                    <h3 class="text-2xl font-black text-yellow-300">第3堂專屬：神秘氣味感知台</h3>
+                    <p class="text-xs text-purple-300">點選氣味卡聽發音，引導孩子做「聞一聞」動作與生活氣味連結</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div onclick="playScentItem('橘子', '我聞到了橘子。', 'scent-orange')" id="scent-orange" class="cursor-pointer p-5 bg-purple-900/50 hover:bg-yellow-400 hover:text-black rounded-3xl border-2 border-orange-500/40 transition flex items-center justify-between shadow-lg hover:scale-105">
+                    <div>
+                        <span class="text-xs opacity-75 font-bold">生活氣味 1</span>
+                        <h4 class="text-2xl font-black text-orange-300">橘子</h4>
+                        <p class="text-sm mt-1">「我聞到了橘子。」</p>
+                    </div>
+                    <div class="vocab-illus">
+                        <svg class="w-12 h-12 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M10 3l4 3"/></svg>
+                    </div>
+                </div>
+                <div onclick="playScentItem('花朵', '我聞到了花香。', 'scent-flower')" id="scent-flower" class="cursor-pointer p-5 bg-purple-900/50 hover:bg-yellow-400 hover:text-black rounded-3xl border-2 border-pink-500/40 transition flex items-center justify-between shadow-lg hover:scale-105">
+                    <div>
+                        <span class="text-xs opacity-75 font-bold">生活氣味 2</span>
+                        <h4 class="text-2xl font-black text-pink-300">花朵</h4>
+                        <p class="text-sm mt-1">「我聞到了花香。」</p>
+                    </div>
+                    <div class="vocab-illus">
+                        <svg class="w-12 h-12 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a4 4 0 0 0-4 4c0 3 4 6 4 6s4-3 4-6a4 4 0 0 0-4-4zM2 12a4 4 0 0 0 4 4c3 0 6-4 6-4s-3-4-6-4a4 4 0 0 0-4 4zM22 12a4 4 0 0 0-4-4c-3 0-6 4-6 4s3 4 6 4a4 4 0 0 0 4-4zM12 22a4 4 0 0 0 4-4c0-3-4-6-4-6s-4 3-4 6a4 4 0 0 0 4 4z"/></svg>
+                    </div>
+                </div>
+                <div onclick="playScentItem('麵包', '我聞到了麵包。', 'scent-bread')" id="scent-bread" class="cursor-pointer p-5 bg-purple-900/50 hover:bg-yellow-400 hover:text-black rounded-3xl border-2 border-amber-500/40 transition flex items-center justify-between shadow-lg hover:scale-105">
+                    <div>
+                        <span class="text-xs opacity-75 font-bold">生活氣味 3</span>
+                        <h4 class="text-2xl font-black text-amber-300">麵包</h4>
+                        <p class="text-sm mt-1">「我聞到了麵包。」</p>
+                    </div>
+                    <div class="vocab-illus">
+                        <svg class="w-12 h-12 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 11a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-5z"/><path d="M8 11v3M12 10v4M16 11v3"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
 
     <template id="tmpl-lesson4">
         <div class="p-6 rounded-3xl bg-purple-950/60 border border-yellow-500/40 space-y-6">
@@ -439,7 +488,9 @@
         const lessonsData = {
             1: {
                 title: "找到風：「那天，風很大！」",
-                lang: "核心語言：風／大／吹 ｜ 句型：風來了。風很大。",
+                langText: "風／大／吹",
+                sentenceText: "句型：風來了。風很大。",
+                rawSentence: "風來了。風很大。",
                 stage: "鷹架目標：看見（找到故事裡的東西）",
                 slideIndex: 0,
                 vocab: [
@@ -448,24 +499,26 @@
                     { char: "吹", pinyin: "chuī", word: "吹風", svg: `<svg class="w-12 h-12 text-purple-300 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="7" cy="12" r="3"/><path d="M12 9h7a2 2 0 1 1-2 2M12 15h9a2 2 0 1 0-2-2"/></svg>` },
                     { char: "來", pinyin: "lái", word: "風來了", svg: `<svg class="w-12 h-12 text-green-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>` }
                 ],
-                flow: [
-                    "0–5m 神秘聲音：播放呼～～風聲讓孩子猜是什麼來了，揭曉「風！」。",
-                    "5–12m 小風與大風：小風「呼」、大風「呼～～」、風停「不動」，身體律動。",
-                    "12–20m 繪本探索：觀察小明、樹與風，啟動四層提問搭鷹架。",
-                    "20–32m 遊戲風來了：老師喊「小風吹、大風吹、風停了」做反應互動。",
-                    "32–37m 語言積木：建立「風 ＋ 很大」，齊聲說「風很大」。",
-                    "37–40m 留下問題：風這麼大，把什麼吹動了？下回找大樹！"
+                flowItems: [
+                    { tag: "0–5分鐘", title: "神秘聲音", tagColor: "bg-purple-800 text-purple-200", content: "老師：「你聽！什麼來了？」呼～～～讓孩子猜。最後：「風！」" },
+                    { tag: "5–12分鐘", title: "小風／大風", tagColor: "bg-blue-800 text-blue-200", content: "小風：「呼～」、大風：「呼～～～～」、風停：「不動！」讓孩子用身體回答。" },
+                    { tag: "12–20分鐘", title: "繪本探索", tagColor: "bg-emerald-800 text-emerald-200", content: "看到小明、樹、風。啟動四層提問依序搭鷹架。" },
+                    { tag: "20–32分鐘", title: "遊戲：風來了", tagColor: "bg-amber-800 text-amber-200", content: "老師喊：小風吹！大風吹！風停了！" },
+                    { tag: "32–37分鐘", title: "語言積木", tagColor: "bg-indigo-800 text-indigo-200", content: "建立：風 ＋ 很大。一起說：風很大。" },
+                    { tag: "37–40分鐘", title: "留下問題", tagColor: "bg-rose-800 text-rose-200", content: "「風這麼大，它把什麼吹動了？」預告：「下一次，我們去找一棵樹。」" }
                 ],
                 questions: [
-                    "👀 第一層 看見：「畫面裡有誰？他在哪裡？」",
-                    "❤️ 第二層 感受：「風大不大？吹在身上舒服嗎？」",
-                    "🔗 第三層 經驗：「你有吹過這麼大的風嗎？吹在臉上會怎樣？」",
+                    "👀 第一層 看見：「誰？在哪裡？」",
+                    "❤️ 第二層 感受：「風大不大？」",
+                    "🔗 第三層 經驗：「你有吹過風嗎？（可用動作回答）」",
                     "🎲 第四層 創造：「如果你是小明，遇到大風，你會怎麼做？」"
                 ]
             },
             2: {
                 title: "遇見樹：「風來了，樹怎麼了？」",
-                lang: "核心語言：樹／搖／動 ｜ 句型：我是樹。樹搖一搖。",
+                langText: "樹／搖／動",
+                sentenceText: "句型：我是樹。樹搖一搖。",
+                rawSentence: "我是樹。樹搖一搖。",
                 stage: "鷹架目標：感受（用表情動作表達）",
                 slideIndex: 1,
                 vocab: [
@@ -474,50 +527,55 @@
                     { char: "動", pinyin: "dòng", word: "吹動", svg: `<svg class="w-12 h-12 text-cyan-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>` },
                     { char: "坐", pinyin: "zuò", word: "坐下", svg: `<svg class="w-12 h-12 text-purple-300 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="5" r="2"/><path d="M8 12h8v4H8zM8 16v5M16 16v5M6 10h12"/></svg>` }
                 ],
-                flow: [
-                    "0–5m 回到第一塊積木：「誰來了？風！」「風怎麼樣？很大！」",
-                    "5–12m 變成樹：今天我們是樹！雙手當樹枝隨風搖一搖。",
-                    "12–20m 繪本找線索 (Slide 2)：樹在哪裡？樹被吹得往哪邊彎？",
-                    "20–32m 角色對話遊戲：老師當風、孩子當樹，小風小搖、大風大搖，再交換角色。",
-                    "32–37m 語言積木：風 → 樹 → 搖，串聯「風來了，樹搖一搖。」",
-                    "37–40m 伏筆：風除了吹樹，好像還帶來了一個神秘東西……是什麼呢？"
+                flowItems: [
+                    { tag: "0–5分鐘", title: "回到第一塊積木", tagColor: "bg-purple-800 text-purple-200", content: "老師：「誰來了？」「風。」「風怎麼樣？」「很大。」" },
+                    { tag: "5–12分鐘", title: "變成樹", tagColor: "bg-blue-800 text-blue-200", content: "「今天我們不是小朋友。」「我們是樹！」雙手擺動感受大樹律動。" },
+                    { tag: "12–20分鐘", title: "繪本找線索", tagColor: "bg-emerald-800 text-emerald-200", content: "第一層：樹在哪裡？ 第二層：風來了，樹怎麼樣？ 第三層：你看過樹被風吹嗎？ 第四層：如果你是樹，遇到大風會怎麼辦？" },
+                    { tag: "20–32分鐘", title: "角色遊戲", tagColor: "bg-amber-800 text-amber-200", content: "老師＝風，孩子＝樹。「小風吹～」「大風吹～～」「風停了。」再交換角色。" },
+                    { tag: "32–37分鐘", title: "語言積木", tagColor: "bg-indigo-800 text-indigo-200", content: "風 → 樹 → 搖。「風來了，樹搖一搖。」" },
+                    { tag: "37–40分鐘", title: "留下伏筆", tagColor: "bg-rose-800 text-rose-200", content: "老師：「可是風除了吹樹，好像還帶來了一個東西……是什麼呢？」" }
                 ],
                 questions: [
-                    "👀 第一層 看見：「樹在哪裡？樹被風吹得往哪邊彎？」",
-                    "❤️ 第二層 感受：「風來了，樹怎麼樣？它想跳舞還是很累？」",
-                    "🔗 第三層 經驗：「你在公園看過樹被大風吹動嗎？」",
-                    "🎲 第四層 創造：「如果你是一棵樹，遇到超級大風你會怎麼辦？」"
+                    "👀 第一層 看見：「樹在哪裡？」",
+                    "❤️ 第二層 感受：「風來了，樹怎麼樣？」",
+                    "🔗 第三層 經驗：「你看過樹被風吹嗎？」",
+                    "🎲 第四層 創造：「如果你是樹，遇到大風會怎麼辦？」"
                 ]
             },
             3: {
                 title: "發現味道：「風裡面有什麼？」",
-                lang: "核心語言：聞／味道／香 ｜ 句型：我聞到了～。",
-                stage: "鷹架目標：連結（連到生活經驗）",
+                langText: "聞／味道／香",
+                sentenceText: "句型：我聞到了～。",
+                rawSentence: "我聞到了～。",
+                stage: "鷹架目標：連結（把故事和自己的生活連起來）",
                 slideIndex: 2,
+                customType: "lesson3",
                 vocab: [
                     { char: "聞", pinyin: "wén", word: "聞一聞", svg: `<svg class="w-12 h-12 text-pink-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 4v11a3 3 0 0 1-3 3H8M12 15a3 3 0 0 0 3 3h1"/></svg>` },
                     { char: "味", pinyin: "wèi", word: "氣味", svg: `<svg class="w-12 h-12 text-yellow-300 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9a6 6 0 0 1 12 0c0 4-6 9-6 9s-6-5-6-9z"/><circle cx="12" cy="9" r="2"/></svg>` },
                     { char: "道", pinyin: "dào", word: "味道", svg: `<svg class="w-12 h-12 text-cyan-300 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 19L10 5M14 5l6 14M12 5v14"/></svg>` },
                     { char: "香", pinyin: "xiāng", word: "好香", svg: `<svg class="w-12 h-12 text-rose-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 3a9 9 0 0 1 9 9 9 9 0 0 1-9 9 9 9 0 0 1-9-9 9 9 0 0 1 9-9z"/></svg>` }
                 ],
-                flow: [
-                    "0–5m 故事回顧：「風來了，樹搖一搖，小明還發現了什麼？」",
-                    "5–12m 神秘味道：引導生活氣味（橘子、花朵、麵包），做聞一聞動作。",
-                    "12–20m 回到繪本 (Slide 3)：小明聞到了他不認識的味道。",
-                    "20–32m 味道小偵探：聞 → 猜 → 說，練習「我聞到了橘子/花香」。",
-                    "32–37m 語言積木：手上的積木累加為「風 → 樹 → 味道」。",
-                    "37–40m 留下問題：這個味道是誰帶來的？風從哪裡來？"
+                flowItems: [
+                    { tag: "0–5分鐘", title: "故事回顧", tagColor: "bg-purple-800 text-purple-200", content: "老師：「風來了，樹怎麼了？」孩子：「搖一搖。」老師：「可是小明還發現了什麼？」" },
+                    { tag: "5–12分鐘", title: "神秘味道", tagColor: "bg-blue-800 text-blue-200", content: "老師準備 2～3 種生活氣味引導觀察：🍊 橘子、🌸 花、🍞 麵包，做聞一聞動作。" },
+                    { tag: "12–20分鐘", title: "回到繪本", tagColor: "bg-emerald-800 text-emerald-200", content: "依序提問：第一層「小明聞到了什麼？」第二層「他喜歡嗎？奇怪嗎？」第三層「你有沒有聞過很香的味道？」第四層「如果你是小明，你想知道這個味道從哪裡來嗎？」" },
+                    { tag: "20–32分鐘", title: "味道偵探", tagColor: "bg-amber-800 text-amber-200", content: "聞 → 猜 → 說。程度低：「橘子！」程度高：「我聞到了橘子。」" },
+                    { tag: "32–37分鐘", title: "語言積木", tagColor: "bg-indigo-800 text-indigo-200", content: "目前孩子手上的積木累加為：風 → 樹 → 味道。" },
+                    { tag: "37–40分鐘", title: "留下問題", tagColor: "bg-rose-800 text-rose-200", content: "老師：「這個味道是誰帶來的？」孩子：「風。」老師：「那風從哪裡來？」下一堂揭曉。" }
                 ],
                 questions: [
-                    "👀 第一層 看見：「小明聞到了什麼？他的小臉是什麼表情？」",
-                    "❤️ 第二層 感受：「聞到不認識的味道，他喜歡嗎？還是很奇怪？」",
-                    "🔗 第三層 經驗：「你有沒有聞過很香、讓你很舒服的味道？」",
-                    "🎲 第四層 創造：「如果你是小明，你想知道這個味道從哪裡來嗎？」"
+                    "👀 第一層 看見：「小明聞到了什麼？」",
+                    "❤️ 第二層 感受：「他喜歡嗎？奇怪嗎？」",
+                    "🔗 第三層 經驗：「你有沒有聞過很香的味道？」",
+                    "🎲 第四層 創造：「如果你是小明，你想知道這個味道從哪裡來嗎？（直接帶向第四堂）」"
                 ]
             },
             4: {
                 title: "風的旅行：「風從哪裡來？還可以從哪裡來？」",
-                lang: "核心語言：大海／來／味道 ｜ 句型：風從＿＿來，帶來＿＿。",
+                langText: "大海／來／味道",
+                sentenceText: "句型：風從大海來。帶來海的味道。",
+                rawSentence: "風從大海來。帶來海的味道。",
                 stage: "鷹架目標：轉化積木（橋樑單元）",
                 slideIndex: 3,
                 customType: "lesson4",
@@ -527,13 +585,13 @@
                     { char: "從", pinyin: "cóng", word: "從哪來", svg: `<svg class="w-12 h-12 text-purple-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>` },
                     { char: "帶", pinyin: "dài", word: "帶來", svg: `<svg class="w-12 h-12 text-orange-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg>` }
                 ],
-                flow: [
-                    "0–5m 繪本回扣 (Slide 4)：風說它從「大海」來，說大海「很大」。",
-                    "5–12m 大海很大：用身體比出小海與大海，大聲說「很大！」。",
-                    "12–20m 風還可以從哪裡來：出示大海、花園、森林、麵包店、家，讓孩子自主選擇。",
-                    "20–28m 風帶來什麼：配對大海海味、花園花香、麵包店麵包香。",
-                    "28–35m 語言組合機：製造「風從森林來帶來臭襪子」等搞笑組合，體驗積木重組樂趣。",
-                    "35–40m 橋到第五堂：預告下回要用時間、人物、地點蓋出大故事！"
+                flowItems: [
+                    { tag: "0–5分鐘", title: "繪本回扣", tagColor: "bg-purple-800 text-purple-200", content: "老師：「小明聞到什麼？」「味道。」「風從哪裡來？」「大海。」保留故事原本核心關係。" },
+                    { tag: "5–12分鐘", title: "大海很大", tagColor: "bg-blue-800 text-blue-200", content: "讓孩子用身體表現小海與大海。老師：「大海大不大？」孩子：「很大！」把故事中的「很大」留下來。" },
+                    { tag: "12–20分鐘", title: "風還可以從哪裡來", tagColor: "bg-emerald-800 text-emerald-200", content: "出示：大海、花園、森林、麵包店、家。問：「風還可以從哪裡來？」答案不用唯一，讓孩子開始做選擇。" },
+                    { tag: "20–28分鐘", title: "風帶來什麼", tagColor: "bg-amber-800 text-amber-200", content: "配對：大海→海的味道、花園→花香、麵包店→麵包香、水果店→水果香。老師問：「風從花園來，帶來什麼？」孩子：「花香。」" },
+                    { tag: "28–35分鐘", title: "語言組合機", tagColor: "bg-indigo-800 text-indigo-200", content: "建立：風從＿＿來 ＋ 帶來＿＿。製造「風從森林來帶來臭襪子」搞笑重組，體驗語言積木樂趣。" },
+                    { tag: "35–40分鐘", title: "橋到第五堂", tagColor: "bg-rose-800 text-rose-200", content: "出示時間、誰、哪裡、做什麼、最後。「下一堂我們要用這些積木蓋一個故事！」" }
                 ],
                 questions: [
                     "👀 第一層 看見：「風說了哪兩個字就飛走了？（大海、很大）」",
@@ -544,8 +602,10 @@
             },
             5: {
                 title: "風把故事吹亂了：「我們一起蓋故事！」",
-                lang: "核心語言：時間、主角、地點、動作、結局 ｜ 句型：在＿＿，＿＿在＿＿做＿＿，最後＿＿。",
-                stage: "鷹架目標：重組故事（大風吹抽卡）",
+                langText: "時間／主角／地點／事件／結局",
+                sentenceText: "句型：晚上，小明在大海睡覺，最後回家。",
+                rawSentence: "晚上，小明在大海睡覺，最後回家。",
+                stage: "鷹架目標：重組鷹架（故事製造機）",
                 slideIndex: 4,
                 customType: "lesson5",
                 vocab: [
@@ -554,13 +614,13 @@
                     { char: "地", pinyin: "dì", word: "地方", svg: `<svg class="w-12 h-12 text-cyan-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>` },
                     { char: "事", pinyin: "shì", word: "故事", svg: `<svg class="w-12 h-12 text-purple-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>` }
                 ],
-                flow: [
-                    "0–5m 積木回顧：回顧風從哪裡來、帶來什麼味道。",
-                    "5–10m 老師示範：抽卡展示「晚上，小明在大海睡覺，最後回家」，引導感受。",
-                    "10–20m 製作卡片：以畫圖大於寫字為原則，老師協助標註。",
-                    "20–30m 抽故事：依序抽取 時間 → 主角 → 地點 → 動作 → 最後，口語串聯。",
-                    "30–35m 大風吹：加入第四堂的風卡，故事瞬間搞笑大轉折！",
-                    "35–40m 故事感受：選一選故事是好笑、奇怪、剛好還是驚訝，回扣感受層。"
+                flowItems: [
+                    { tag: "0–5分鐘", title: "積木回顧", tagColor: "bg-purple-800 text-purple-200", content: "老師：「我們昨天玩了什麼？」「風從哪裡來？」「風帶來什麼？」找回第四堂的積木。" },
+                    { tag: "5–10分鐘", title: "老師示範", tagColor: "bg-blue-800 text-blue-200", content: "抽：晚上、小明、大海、睡覺、回家。老師：「晚上，小明在大海睡覺，最後回家。」「奇怪嗎？很好笑嗎？」" },
+                    { tag: "10–20分鐘", title: "製作卡片", tagColor: "bg-emerald-800 text-emerald-200", content: "每一項畫兩張。老師協助標字，以畫圖大於寫字為原則。" },
+                    { tag: "20–30分鐘", title: "抽故事", tagColor: "bg-amber-800 text-amber-200", content: "依序抽：時間 → 主角 → 地點 → 做什麼 → 最後。老師用口語幫孩子串起來。" },
+                    { tag: "30–35分鐘", title: "大風吹", tagColor: "bg-indigo-800 text-indigo-200", content: "抽風卡（例如大海＋橘子味）：故事變成「晚上，小明在大海睡覺。大風吹來了！風從大海來，帶來橘子的味道。最後，小明回家。」" },
+                    { tag: "35–40分鐘", title: "故事感受", tagColor: "bg-rose-800 text-rose-200", content: "讓孩子選：好笑、奇怪、剛剛好、驚訝。讓第二層感受循環回歸。" }
                 ],
                 questions: [
                     "👀 第一層 看見：「我們剛剛抽到了哪幾張故事積木卡片？」",
@@ -571,7 +631,9 @@
             },
             6: {
                 title: "我是小小故事家：「現在換我蓋故事！」",
-                lang: "核心語言：六堂全字詞總整合 ｜ 句型：那天風很大，風從＿＿來，帶來＿＿。",
+                langText: "六堂全字詞總整合",
+                sentenceText: "句型：那天風很大，風從大海來，帶來海的味道。",
+                rawSentence: "那天風很大，風從大海來，帶來海的味道。",
                 stage: "鷹架目標：自主創造（故事家畢業）",
                 slideIndex: 5,
                 vocab: [
@@ -580,19 +642,19 @@
                     { char: "家", pinyin: "jiā", word: "回家", svg: `<svg class="w-12 h-12 text-emerald-400 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>` },
                     { char: "起", pinyin: "qǐ", word: "起身", svg: `<svg class="w-12 h-12 text-cyan-300 vocab-illus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="7" r="3"/><path d="M12 10v6M9 13l3-3 3 3M8 21h8"/></svg>` }
                 ],
-                flow: [
-                    "0–8m 六堂地圖：快速回顧 風、樹、味道、大海、故事與我。",
-                    "8–15m 重新整理繪本：五張畫面（樹下、風大、聞味道、大海、回家）排序，理解故事結構。",
-                    "15–22m 四層提問總回顧：看見、感受、經驗、決定一次打通。",
-                    "22–32m 我的風之故事：老師問五個搭橋問題，孩子自主說出自己的完整故事。",
-                    "32–37m 小小故事劇場：孩子選角色（風、小明、樹、大海），老師旁白、孩子演出。",
-                    "37–40m 故事家畢業：發表「那天風很大，風從＿＿來，帶來＿＿」，頒發小故事家認證！"
+                flowItems: [
+                    { tag: "0–8分鐘", title: "六堂故事地圖", tagColor: "bg-purple-800 text-purple-200", content: "快速回顧：風、樹、味道、大海、故事與我。" },
+                    { tag: "8–15分鐘", title: "重新整理繪本", tagColor: "bg-blue-800 text-blue-200", content: "五張主要畫面：小明坐在樹下、風很大、聞到味道、大海、回家。讓孩子排序進行初階故事結構理解。" },
+                    { tag: "15–22分鐘", title: "漢堡王四層提問回顧", tagColor: "bg-emerald-800 text-emerald-200", content: "第一層「小明在哪裡？」第二層「小明好奇嗎？」第三層「你有聞過特別的味道嗎？」第四層「如果風來找你，你希望它帶來什麼味道？」" },
+                    { tag: "22–32分鐘", title: "我的風之故事", tagColor: "bg-amber-800 text-amber-200", content: "孩子拿第五堂自己的故事。老師負責問五個搭橋問題：「什麼時候？」「誰？」「在哪裡？」「做什麼？」「最後呢？」「風來了嗎？帶來什麼？」孩子自主說出自己的故事。" },
+                    { tag: "32–37分鐘", title: "小小故事劇場", tagColor: "bg-indigo-800 text-indigo-200", content: "孩子選角色（風、小明、樹、大海），老師旁白，孩子做動作演出。" },
+                    { tag: "37–40分鐘", title: "故事家畢業", tagColor: "bg-rose-800 text-rose-200", content: "每個孩子完成：「那天風很大，風從大海來，帶來海的味道。」老師：「你現在會自己蓋故事了！」" }
                 ],
                 questions: [
-                    "👀 第一層 看見：「整本繪本裡，小明最後做了什麼動作？（拍泥土回家）」",
-                    "❤️ 第二層 感受：「讀完整本故事，你最喜歡哪一張圖的顏色？」",
-                    "🔗 第三層 經驗：「今天學會了哪一句最厲害的中文故事？」",
-                    "🎲 第四層 創造：「回家後你想把這個故事講給誰聽？」"
+                    "👀 第一層 看見：「小明在哪裡？」",
+                    "❤️ 第二層 感受：「小明好奇嗎？」",
+                    "🔗 第三層 經驗：「你有聞過特別的味道嗎？」",
+                    "🎲 第四層 創造：「如果風來找你，你希望它帶來什麼味道？」"
                 ]
             }
         };
@@ -633,7 +695,8 @@
             document.getElementById('lessonTag').innerText = `第 ${num} 堂主題`;
             document.getElementById('lessonFrameworkTag').innerText = data.stage;
             document.getElementById('lessonTitle').innerText = data.title;
-            document.getElementById('lessonLang').innerText = data.lang;
+            document.getElementById('lessonLang').innerText = `核心：${data.langText}`;
+            document.getElementById('lessonSentence').innerText = data.sentenceText;
 
             const vocabEl = document.getElementById('lessonVocabList');
             vocabEl.innerHTML = data.vocab.map((v, i) => `
@@ -651,12 +714,26 @@
                 </div>
             `).join('');
 
-            document.getElementById('lessonFlow').innerHTML = data.flow.map(f => `<li class="p-3.5 bg-black/40 rounded-xl border border-white/5">${f}</li>`).join('');
-            document.getElementById('lessonQuestions').innerHTML = data.questions.map(q => `<div class="p-3.5 bg-black/40 rounded-xl border border-white/5 font-medium">${q}</div>`).join('');
+            const flowEl = document.getElementById('lessonFlow');
+            flowEl.innerHTML = data.flowItems.map(item => `
+                <div class="p-4 bg-black/40 rounded-2xl border border-white/5 space-y-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${item.tagColor}">${item.tag}</span>
+                        <span class="font-bold text-yellow-300 text-base md:text-lg">${item.title}</span>
+                    </div>
+                    <p class="text-purple-100 text-base leading-relaxed pl-1">${item.content}</p>
+                </div>
+            `).join('');
+
+            document.getElementById('lessonQuestions').innerHTML = data.questions.map(q => `<div class="p-4 bg-black/40 rounded-2xl border border-white/5 font-medium">${q}</div>`).join('');
 
             const embedArea = document.getElementById('lessonCustomEmbed');
             embedArea.innerHTML = '';
-            if (data.customType === 'lesson4') {
+            if (data.customType === 'lesson3') {
+                embedArea.classList.remove('hidden');
+                const tmpl = document.getElementById('tmpl-lesson3').content.cloneNode(true);
+                embedArea.appendChild(tmpl);
+            } else if (data.customType === 'lesson4') {
                 embedArea.classList.remove('hidden');
                 const tmpl = document.getElementById('tmpl-lesson4').content.cloneNode(true);
                 embedArea.appendChild(tmpl);
@@ -673,12 +750,29 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function speakCurrentSentence() {
+            const data = lessonsData[currentLessonNum];
+            if (data && data.rawSentence) {
+                speakText(data.rawSentence);
+            }
+        }
+
         function playVocabCard(char, word, cardId) {
             document.querySelectorAll('[id^="vcard-"]').forEach(c => c.classList.remove('card-reading-active'));
             const card = document.getElementById(cardId);
             if (card) card.classList.add('card-reading-active');
             
             speakText(`${char}。${word}。`);
+            setTimeout(() => {
+                if (card) card.classList.remove('card-reading-active');
+            }, 2500);
+        }
+
+        function playScentItem(name, sentence, cardId) {
+            document.querySelectorAll('[id^="scent-"]').forEach(c => c.classList.remove('card-reading-active'));
+            const card = document.getElementById(cardId);
+            if (card) card.classList.add('card-reading-active');
+            speakText(`${name}。${sentence}`);
             setTimeout(() => {
                 if (card) card.classList.remove('card-reading-active');
             }, 2500);
