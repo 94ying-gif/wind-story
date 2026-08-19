@@ -122,7 +122,6 @@ body.theme-botanical .botanical-header {
     border: 1px solid var(--bot-line) !important;
 }
 
-/* 全新截圖風格的教研核心理念區塊 */
 .botanical-hero {
     position: relative;
     padding: clamp(1.1rem, 2vw, 1.6rem);
@@ -170,7 +169,6 @@ body.theme-botanical .botanical-header {
 .framework-pill-card.layer-experience { background: #fbf4db; border-color: #e5cf92; color: #8c6a24; }
 .framework-pill-card.layer-decision { background: #edf7ef; border-color: #bfd6c5; color: #4f7b62; }
 
-/* 階段卡片風格 */
 .course-journey > div {
     min-height: 140px;
     padding: 1rem 1.15rem;
@@ -183,7 +181,7 @@ body.theme-botanical .botanical-header {
 .lesson-quick-nav button { background: #e9eddf !important; color: #40503b !important; border: 1px solid #cdd5c3; font-weight: 900; padding: .35rem 0; font-size: .82rem; }
 .lesson-quick-nav button:hover { background: #586844 !important; color: #fff !important; }
 
-/* 首頁課堂卡片：柔和紫色米底色 + 黃色標籤 */
+/* 首頁課堂卡片 */
 .lesson-card-grid > div {
     min-height: 140px;
     padding: 1rem 1.15rem !important;
@@ -220,6 +218,21 @@ body.theme-botanical .botanical-header {
     border-radius: .5rem;
     font-size: .85rem;
     font-weight: 900;
+}
+
+/* 家長專區八堂練習寬敞卡片風格 */
+.parent-lesson-card {
+    min-height: 140px;
+    padding: 1.25rem 1.5rem !important;
+    border-radius: 1.25rem !important;
+    background: #ffffff !important;
+    border: 1.5px solid #ded7c6 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: all 0.15s ease;
+}
+.parent-lesson-card:hover {
+    border-color: #596d43 !important;
+    transform: translateY(-2px);
 }
 
 .classic-question-card {
@@ -374,10 +387,18 @@ body.theme-botanical .botanical-header {
 }
 .parent-play-audio-btn:hover { background: #4a4066 !important; }
 
+/* 正向語言術語表格樣式 */
+.talk-table-wrap { overflow-x: auto; margin-top: 1rem; }
+.talk-table { width: 100%; border-collapse: collapse; background: white; border-radius: 1rem; overflow: hidden; border: 1px solid #d9d2c1; }
+.talk-table th, .talk-table td { padding: .85rem 1rem; border-bottom: 1px solid #e2e8f0; text-align: left; vertical-align: top; }
+.talk-table th { background: #4d5f38; color: white; font-weight: 900; font-size: .95rem; }
+.talk-table td:nth-child(1) { font-weight: 900; color: #314055; width: 18%; }
+.talk-table td:nth-child(2) { background: #f0f7f4; color: #1f4e3e; font-weight: 800; width: 41%; }
+.talk-table td:nth-child(3) { background: #fdf5f5; color: #8a3b3b; font-weight: 700; width: 41%; }
+
 .support-sheet { background: #ffffff; color: #1f2937; border: 1px solid var(--bot-line); border-radius: 1rem; }
 .support-sheet table { width: 100%; border-collapse: collapse; }
 .support-sheet th, .support-sheet td { border: 1px solid #cbd5e1; padding: .6rem .55rem; vertical-align: top; }
-.support-sheet .talk-table th { background: #566b43; color: #fff; }
 .support-sheet .assessment-table th { background: #35463a; color: #fff; }
 
 .teacher-score-row {
@@ -589,76 +610,128 @@ body.theme-botanical .botanical-header {
     </div>
 </main>
 
-<main class="hidden space-y-3" id="view-parent">
-    <section class="space-y-3" id="parentHomeSection">
-        <div class="p-4 rounded-2xl bg-white border border-[#d9d2c1] space-y-1">
+<main class="hidden space-y-4" id="view-parent">
+    <section class="space-y-4" id="parentHomeSection">
+        <div class="p-5 rounded-2xl bg-white border border-[#d9d2c1] space-y-2">
             <div class="flex justify-between items-center">
-                <span class="text-xs font-black px-2.5 py-0.5 bg-[#596d43] text-white rounded-full">家長專區</span>
-                <h2 class="text-xl md:text-2xl font-black text-[#314055]">離堂後 3～5 分鐘親子練習</h2>
+                <span class="text-xs font-black px-3 py-1 bg-[#596d43] text-white rounded-full">家長專區</span>
+                <h2 class="text-2xl md:text-3xl font-black text-[#314055]">離堂後 3～5 分鐘親子練習</h2>
             </div>
-            <p class="text-xs text-[#5f6a61]">八堂課均依照預設流程走一個小循環。</p>
+            <p class="text-sm md:text-base text-[#5f6a61] font-bold">八堂課均依照預設流程走一個小循環。</p>
         </div>
         
-        <section class="p-4 rounded-2xl bg-white border border-[#d9d2c1] space-y-2">
-            <h3 class="text-base font-black text-[#314055]">先選家長協助方式</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                <button class="parent-mode-btn p-3 rounded-xl text-left parent-mode-active" data-parent-mode="chinese" onclick="setParentAssistMode('chinese')">
-                    <span class="text-2xl">📖</span><span class="block text-base font-black text-[#314055] mt-1">中文文字</span><span class="block text-xs text-gray-500">文字＋中文語音</span>
+        <!-- 五、家長協作正向語言 (取代原家長語言區功能) -->
+        <section class="p-5 md:p-6 rounded-2xl bg-white border border-[#d9d2c1] space-y-3">
+            <div>
+                <h3 class="text-xl md:text-2xl font-black text-[#314055]">五、家長協作正向語言</h3>
+                <p class="text-xs md:text-sm text-gray-600 mt-1 font-bold">視覺提示採用「✅ 可以這樣說」與「⏸️ 先不要這樣做」，避免紅色叉號帶來被糾正 感覺；情境圖示幫助快速掃讀。</p>
+            </div>
+            <div class="talk-table-wrap">
+                <table class="talk-table">
+                    <thead>
+                        <tr>
+                            <th>情境</th>
+                            <th>✅ 可以這樣說</th>
+                            <th>⏸️ 先不要這樣做</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🟡 孩子不說話</td>
+                            <td>「你可以指給我看，或做一個動作。」<br><small style="color:#475569; font-weight:700;">You can point to it or show me with an action.</small></td>
+                            <td>連續追問、催促「快說」。<br><small style="color:#8a3b3b; font-weight:700;">Do not keep questioning or rush the child.</small></td>
+                        </tr>
+                        <tr>
+                            <td>🧩 孩子只說單字</td>
+                            <td>「你說『樹』。對，樹在搖。」<br><small style="color:#475569; font-weight:700;">You said "tree." Yes, the tree is swaying.</small></td>
+                            <td>要求立刻說完整句。<br><small style="color:#8a3b3b; font-weight:700;">Do not require a full sentence right away.</small></td>
+                        </tr>
+                        <tr>
+                            <td>💭 孩子答想像答案</td>
+                            <td>「這是你的想像。故事裡我們再找一次。」<br><small style="color:#475569; font-weight:700;">That is your idea. Let us look in the story one more time.</small></td>
+                            <td>直接說「錯了」。<br><small style="color:#8a3b3b; font-weight:700;">Do not simply say "wrong."</small></td>
+                        </tr>
+                        <tr>
+                            <td>👃 孩子不喜歡味道</td>
+                            <td>「你不喜歡，也是一個感覺。」<br><small style="color:#475569; font-weight:700;">Not liking it is also a feeling.</small></td>
+                            <td>要求每個味道都說香。<br><small style="color:#8a3b3b; font-weight:700;">Do not require every smell to be called pleasant.</small></td>
+                        </tr>
+                        <tr>
+                            <td>🎤 孩子發表緊張</td>
+                            <td>「你可以先指一張卡，我幫你接第一句。」<br><small style="color:#475569; font-weight:700;">Point to one card first, and I will help you start.</small></td>
+                            <td>代替孩子說完整故事。<br><small style="color:#8a3b3b; font-weight:700;">Do not tell the whole story for the child.</small></td>
+                        </tr>
+                        <tr>
+                            <td>✋ 孩子做出決定</td>
+                            <td>「我聽到你決定問一個問題。」<br><small style="color:#475569; font-weight:700;">I heard that you decided to ask a question.</small></td>
+                            <td>評價哪個決定比較聰明。<br><small style="color:#8a3b3b; font-weight:700;">Do not rank one decision as smarter.</small></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="p-5 md:p-6 rounded-2xl bg-white border border-[#d9d2c1] space-y-3">
+            <h3 class="text-xl md:text-2xl font-black text-[#314055]">先選家長協助方式</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <button class="parent-mode-btn p-4 rounded-xl text-left parent-mode-active" data-parent-mode="chinese" onclick="setParentAssistMode('chinese')">
+                    <span class="text-3xl">📖</span><span class="block text-lg font-black text-[#314055] mt-1">中文文字</span><span class="block text-sm text-gray-500">文字＋中文語音</span>
                 </button>
-                <button class="parent-mode-btn p-3 rounded-xl text-left" data-parent-mode="audio" onclick="setParentAssistMode('audio')">
-                    <span class="text-2xl">🔊</span><span class="block text-base font-black text-[#314055] mt-1">只聽＋看圖</span><span class="block text-xs text-gray-500">純聽音不看字</span>
+                <button class="parent-mode-btn p-4 rounded-xl text-left" data-parent-mode="audio" onclick="setParentAssistMode('audio')">
+                    <span class="text-3xl">🔊</span><span class="block text-lg font-black text-[#314055] mt-1">只聽＋看圖</span><span class="block text-sm text-gray-500">純聽音不看字</span>
                 </button>
-                <button class="parent-mode-btn p-3 rounded-xl text-left" data-parent-mode="english" onclick="setParentAssistMode('english')">
-                    <span class="text-2xl">🌎</span><span class="block text-base font-black text-[#314055] mt-1">English Helper</span><span class="block text-xs text-gray-500">English prompt</span>
+                <button class="parent-mode-btn p-4 rounded-xl text-left" data-parent-mode="english" onclick="setParentAssistMode('english')">
+                    <span class="text-3xl">🌎</span><span class="block text-lg font-black text-[#314055] mt-1">English Helper</span><span class="block text-sm text-gray-500">English prompt</span>
                 </button>
             </div>
         </section>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3" id="parentLessonGrid"></div>
+        <!-- 八堂練習寬敞卡片網格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2" id="parentLessonGrid"></div>
     </section>
 
     <section class="hidden space-y-4" id="parentPracticeSection">
-        <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 p-4 rounded-2xl bg-white border border-[#d9d2c1]">
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 p-5 rounded-2xl bg-white border border-[#d9d2c1]">
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="text-xs font-black px-2.5 py-0.5 bg-[#596d43] text-white rounded-full" id="parentLessonTag">第 1 堂</span>
-                    <span class="text-xs font-bold text-[#79520c] bg-[#f4ead3] px-2 py-0.5 rounded-full" id="parentPracticePageTag">～讀繪本第 1 頁</span>
+                    <span class="text-xs font-black px-3 py-1 bg-[#596d43] text-white rounded-full" id="parentLessonTag">第 1 堂</span>
+                    <span class="text-xs font-bold text-[#79520c] bg-[#f4ead3] px-3 py-1 rounded-full" id="parentPracticePageTag">～讀繪本第 1 頁</span>
                 </div>
                 <h2 class="text-2xl md:text-3xl font-black text-[#314055] mt-1" id="parentLessonTitle">找到風</h2>
-                <p class="parent-en-guide text-sm font-bold text-[#596d43] mt-0.5 hidden" id="parentLessonTitleEn">Find the Wind</p>
-                <p class="text-sm md:text-base font-bold text-[#b98b3b] mt-1" id="parentLessonWords">語言積木：風／大／吹</p>
+                <p class="parent-en-guide text-base font-bold text-[#596d43] mt-1 hidden" id="parentLessonTitleEn">Find the Wind</p>
+                <p class="text-base md:text-lg font-bold text-[#b98b3b] mt-1" id="parentLessonWords">語言積木：風／大／吹</p>
             </div>
-            <button class="px-4 py-2 rounded-xl bg-[#4a5859] text-white font-bold text-sm" onclick="openParentHome()">返回八堂列表</button>
+            <button class="px-5 py-2.5 rounded-xl bg-[#4a5859] text-white font-bold text-base" onclick="openParentHome()">返回八堂列表</button>
         </div>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="parentPracticeSteps"></div>
         
-        <div class="p-4 md:p-6 rounded-2xl bg-white border border-[#d9d2c1] space-y-3">
-            <h3 class="text-base md:text-lg font-black text-[#314055]">家長簡短回報｜只告訴老師：孩子今天怎麼回應</h3>
+        <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#d9d2c1] space-y-3">
+            <h3 class="text-lg md:text-xl font-black text-[#314055]">家長簡短回報｜只告訴老師：孩子今天怎麼回應</h3>
             <div class="grid grid-cols-2 md:grid-cols-5 gap-2" id="parentHomeResponseButtons">
-                <button class="p-3 border rounded-xl text-sm font-bold" onclick="selectParentHomeResponse(this, '指圖')">指圖</button>
-                <button class="p-3 border rounded-xl text-sm font-bold" onclick="selectParentHomeResponse(this, '做動作')">做動作</button>
-                <button class="p-3 border rounded-xl text-sm font-bold" onclick="selectParentHomeResponse(this, '說中文單字')">中文單字</button>
-                <button class="p-3 border rounded-xl text-sm font-bold" onclick="selectParentHomeResponse(this, '說中文短句')">中文短句</button>
-                <button class="p-3 border rounded-xl text-sm font-bold" onclick="selectParentHomeResponse(this, '今天先休息')">今天先休息</button>
+                <button class="p-3 border rounded-xl text-base font-bold" onclick="selectParentHomeResponse(this, '指圖')">指圖</button>
+                <button class="p-3 border rounded-xl text-base font-bold" onclick="selectParentHomeResponse(this, '做動作')">做動作</button>
+                <button class="p-3 border rounded-xl text-base font-bold" onclick="selectParentHomeResponse(this, '說中文單字')">中文單字</button>
+                <button class="p-3 border rounded-xl text-base font-bold" onclick="selectParentHomeResponse(this, '說中文短句')">說中文短句</button>
+                <button class="p-3 border rounded-xl text-base font-bold" onclick="selectParentHomeResponse(this, '今天先休息')">今天先休息</button>
             </div>
-            <textarea class="w-full rounded-xl border p-3 text-sm" id="parentHomeNote" placeholder="想給老師的一句話..."></textarea>
+            <textarea class="w-full rounded-xl border p-3 text-base" id="parentHomeNote" placeholder="想給老師的一句話..."></textarea>
             <div class="flex gap-2">
-                <button class="px-4 py-2 bg-[#2f63a4] text-white font-bold rounded-lg text-sm" onclick="saveParentHomeObservation()">保存本機</button>
-                <button class="px-4 py-2 bg-[#39725e] text-white font-bold rounded-lg text-sm" onclick="copyParentHomeReport()">複製給老師</button>
+                <button class="px-5 py-2.5 bg-[#2f63a4] text-white font-bold rounded-lg text-base" onclick="saveParentHomeObservation()">保存本機</button>
+                <button class="px-5 py-2.5 bg-[#39725e] text-white font-bold rounded-lg text-base" onclick="copyParentHomeReport()">複製給老師</button>
             </div>
         </div>
     </section>
 </main>
 
 <main class="hidden space-y-3" id="view-support">
-    <section class="support-sheet rounded-2xl p-3.5 md:p-5 space-y-3">
+    <section class="support-sheet rounded-2xl p-4 md:p-6 space-y-3">
         <div>
-            <h2 class="text-xl font-black text-[#314055]">教師形成性評量｜課堂觀察與家長回饋</h2>
-            <p class="text-xs text-gray-500">0–1–2 是課堂觀察紀錄，由老師在有提問、鷹架與同儕互動的情境中判斷。</p>
+            <h2 class="text-2xl font-black text-[#314055]">教師形成性評量｜課堂觀察與家長回饋</h2>
+            <p class="text-sm text-gray-500 font-bold">0–1–2 是課堂觀察紀錄，由老師在有提問、鷹架與同儕互動的情境中判斷。</p>
         </div>
         <div class="overflow-x-auto">
-            <table class="assessment-table text-xs">
+            <table class="assessment-table text-sm">
                 <thead><tr><th>面向</th><th>0｜尚未出現</th><th>1｜提示後出現</th><th>2｜自行出現</th></tr></thead>
                 <tbody>
                     <tr><td>看見／事實</td><td>尚未找到畫面焦點。</td><td>二選一提示後能指認。</td><td>能自行指出角色物件。</td></tr>
@@ -669,11 +742,11 @@ body.theme-botanical .botanical-header {
                 </tbody>
             </table>
         </div>
-        <div class="p-3.5 rounded-xl bg-[#f8f9ff] border border-[#c6cdea] space-y-2">
-            <h3 class="text-sm font-bold">填寫觀察紀錄</h3>
+        <div class="p-4 rounded-xl bg-[#f8f9ff] border border-[#c6cdea] space-y-3">
+            <h3 class="text-base font-bold">填寫觀察紀錄</h3>
             <div class="grid md:grid-cols-3 gap-2">
-                <input class="p-1.5 border rounded-lg bg-white text-xs" id="teacherStudentName" placeholder="學生暱稱"/>
-                <select class="p-1.5 border rounded-lg bg-white text-xs" id="teacherLessonSelect">
+                <input class="p-2 border rounded-lg bg-white text-sm" id="teacherStudentName" placeholder="學生暱稱"/>
+                <select class="p-2 border rounded-lg bg-white text-sm" id="teacherLessonSelect">
                     <option value="1">第1堂 找到風 (讀繪本第1頁)</option>
                     <option value="2">第2堂 遇見樹 (讀繪本第2頁)</option>
                     <option value="3">第3堂 發現味道 (讀繪本第3頁)</option>
@@ -683,20 +756,20 @@ body.theme-botanical .botanical-header {
                     <option value="7">第7堂 家庭氣味博物館 (讀繪本第3頁)</option>
                     <option value="8">第8堂 故事劇場 (讀繪本第7頁)</option>
                 </select>
-                <input class="p-1.5 border rounded-lg bg-white text-xs" id="teacherAssessmentDate" type="date"/>
+                <input class="p-2 border rounded-lg bg-white text-sm" id="teacherAssessmentDate" type="date"/>
             </div>
-            <div class="space-y-1.5">
-                <div class="teacher-score-row text-xs"><div><strong>👀 看見／事實</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('fact',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('fact',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('fact',2,this)">2</button></div></div>
-                <div class="teacher-score-row text-xs"><div><strong>❤️ 感受／覺察</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('feeling',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('feeling',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('feeling',2,this)">2</button></div></div>
-                <div class="teacher-score-row text-xs"><div><strong>🔗 連結／經驗</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('connection',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('connection',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('connection',2,this)">2</button></div></div>
-                <div class="teacher-score-row text-xs"><div><strong>✋ 決定／行動</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('decision',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('decision',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('decision',2,this)">2</button></div></div>
-                <div class="teacher-score-row text-xs"><div><strong>🗣️ 中文輸出</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('language',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('language',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('language',2,this)">2</button></div></div>
+            <div class="space-y-2">
+                <div class="teacher-score-row text-sm"><div><strong>👀 看見／事實</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('fact',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('fact',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('fact',2,this)">2</button></div></div>
+                <div class="teacher-score-row text-sm"><div><strong>❤️ 感受／覺察</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('feeling',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('feeling',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('feeling',2,this)">2</button></div></div>
+                <div class="teacher-score-row text-sm"><div><strong>🔗 連結／經驗</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('connection',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('connection',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('connection',2,this)">2</button></div></div>
+                <div class="teacher-score-row text-sm"><div><strong>✋ 決定／行動</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('decision',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('decision',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('decision',2,this)">2</button></div></div>
+                <div class="teacher-score-row text-sm"><div><strong>🗣️ 中文輸出</strong></div><div class="teacher-score-options"><button data-score="0" onclick="selectTeacherScore('language',0,this)">0</button><button data-score="1" onclick="selectTeacherScore('language',1,this)">1</button><button data-score="2" onclick="selectTeacherScore('language',2,this)">2</button></div></div>
             </div>
             <div class="flex gap-2 pt-1">
-                <button class="px-3 py-1 bg-[#4f46a5] text-white font-bold rounded-lg text-xs" onclick="saveTeacherAssessment()">保存紀錄</button>
-                <button class="px-3 py-1 bg-[#39725e] text-white font-bold rounded-lg text-xs" onclick="generateTeacherParentFeedback()">產生回饋</button>
+                <button class="px-4 py-2 bg-[#4f46a5] text-white font-bold rounded-lg text-sm" onclick="saveTeacherAssessment()">保存紀錄</button>
+                <button class="px-4 py-2 bg-[#39725e] text-white font-bold rounded-lg text-sm" onclick="generateTeacherParentFeedback()">產生回饋</button>
             </div>
-            <textarea class="w-full rounded-lg border p-2 text-xs" id="teacherFeedbackPreview" rows="3"></textarea>
+            <textarea class="w-full rounded-lg border p-2 text-sm" id="teacherFeedbackPreview" rows="3"></textarea>
         </div>
     </section>
 </main>
@@ -845,7 +918,7 @@ body.theme-botanical .botanical-header {
         <h3 class="text-sm md:text-base font-bold text-[#314055]">第8堂專屬：故事劇場與探索家舞台</h3>
         <span class="text-xs text-[#79520c] font-bold">～讀繪本第 7 頁</span>
     </div>
-    <div class="text-xs md:text-sm font-bold text-[#314055]" id="lesson8DecisionSentence">我決定：停下來看一看，聞一聞，問一個問題。</div>
+    <div class="text-xs md:text-sm font-bold text-[#314055]" id="lesson8DecisionSentence">我決定:停下來看一看,聞一聞,問一個問題。</div>
 </div>
 </template>
 
@@ -855,55 +928,55 @@ const slides = [
         img: "slide1.jpg", 
         rawText: "那天風很大",
         htmlText: "那天<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"風\")' onclick='speakSlowWord(\"風\")'>風</span>很<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"大\")' onclick='speakSlowWord(\"大\")'>大</span>",
-        prompts: ["問事實／看見：畫面裡有什麼顏色和漩渦？", "問感覺／感受：風帶給你涼涼的還是溫暖的感覺？", "問經驗／連結：你有吹過很大的風嗎？", "問決定／創造：如果大風吹進來，你想做什麼動作？"] 
+        prompts: ["問事實／看見:畫面裡有什麼顏色和漩渦?", "問感覺／感受:風帶給你涼涼的還是溫暖的感覺?", "問經驗／連結:你有吹過很大的風嗎?", "問決定／創造:如果大風吹進來,你想做什麼動作?"] 
     },
     { 
         img: "slide2.jpg", 
-        rawText: "那天風很大。小明坐在樹下，什麼都沒有做。",
-        htmlText: "那天風很大。小明<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"坐\")' onclick='speakSlowWord(\"坐\")'>坐</span>在<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"樹\")' onclick='speakSlowWord(\"樹\")'>樹</span>下，什麼都沒有做。",
-        prompts: ["問事實／看見：小明坐在哪裡？他身上有什麼動作？", "問感覺／感受：小明看起來是舒服、安靜，還是無聊？", "問經驗／連結：你有沒有坐在樹下或地上發呆過？", "問決定／創造：如果現在換成你坐在樹下，你會想聽什麼聲音？"] 
+        rawText: "那天風很大。小明坐在樹下,什麼都沒有做。",
+        htmlText: "那天風很大。小明<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"坐\")' onclick='speakSlowWord(\"坐\")'>坐</span>在<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"樹\")' onclick='speakSlowWord(\"樹\")'>樹</span>下,什麼都沒有做。",
+        prompts: ["問事實／看見:小明坐在哪裡?他身上有什麼動作?", "問感覺／感受:小明看起來是舒服、安靜,還是無聊?", "問經驗／連結:你有沒有坐在樹下或地上發呆過?", "問決定／創造:如果現在換成你坐在樹下,你會想聽什麼聲音?"] 
     },
     { 
         img: "slide3.jpg", 
-        rawText: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？",
-        htmlText: "風一陣一陣地來，帶著一種他不認識的<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"味道\")' onclick='speakSlowWord(\"味道\")'>味道</span>。他<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"問\")' onclick='speakSlowWord(\"問\")'>問</span>：你從哪裡來？",
-        prompts: ["問事實／看見：小明做了什麼動作？（他用鼻子聞）", "問感覺／感受：聞到不認識的味道，會覺得好奇還是奇怪？", "問經驗／連結：你有聞過特別的味道，讓你停下來猜猜看嗎？", "問決定／創造：如果你遇到一陣風，你最想問它什麼？"] 
+        rawText: "風一陣一陣地來,帶著一種他不認識的味道。他問:你從哪裡來?",
+        htmlText: "風一陣一陣地來,帶著一種他不認識的<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"味道\")' onclick='speakSlowWord(\"味道\")'>味道</span>。他<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"問\")' onclick='speakSlowWord(\"問\")'>問</span>:你從哪裡來?",
+        prompts: ["問事實／看見:小明做了什麼動作?(他用鼻子聞)", "問感覺／感受:聞到不認識的味道,會覺得好奇還是奇怪?", "問經驗／連結:你有聞過特別的味道,讓你停下來猜猜看嗎?", "問決定／創造:如果你遇到一陣風,你最想問它什麼?"] 
     },
     { 
         img: "slide4.jpg", 
-        rawText: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。",
-        htmlText: "風沒有停，說：<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"大海\")' onclick='speakSlowWord(\"大海\")'>大海</span>。小明說：大海是什麼樣子？風說：<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"很大\")' onclick='speakSlowWord(\"很大\")'>很大</span>。然後就走了。",
-        prompts: ["問事實／看見：風說了哪兩個字就走了？（大海、很大）", "問感覺／感受：只聽到『很大』，你會不會更想親自去看看？", "問經驗／連結：你看過大海嗎？大海聽起來像什麼？", "問決定／創造：想像你心中的『很大』，你會用雙手比出多大？"] 
+        rawText: "風沒有停,說:大海。小明說:大海是什麼樣子?風說:很大。然後就走了。",
+        htmlText: "風沒有停,說:<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"大海\")' onclick='speakSlowWord(\"大海\")'>大海</span>。小明說:大海是什麼樣子?風說:<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"很大\")' onclick='speakSlowWord(\"很大\")'>很大</span>。然後就走了。",
+        prompts: ["問事實／看見:風說了哪兩個字就走了?(大海、很大)", "問感覺／感受:只聽到『很大』,你會不會更想親自去看看?", "問經驗／連結:你看過大海嗎?大海聽起來像什麼?", "問決定／創造:想像你心中的『很大』,你會用雙手比出多大?"] 
     },
     { 
         img: "slide5.jpg", 
-        rawText: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。",
-        htmlText: "小明坐在那裡，<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"聞\")' onclick='speakSlowWord(\"聞\")'>聞</span>了很久那個味道。他沒有去過大海。他也不知道很大是多大。",
-        prompts: ["問事實／看見：小明頭上的波浪是真實的，還是他的想像？", "問感覺／感受：閉上眼睛想像沒去過的地方，是什麼心情？", "問經驗／連結：你有沒有聽別人說過一個地方，然後自己在腦袋裡畫出來？", "問決定／創造：你現在最想閉上眼睛，想像哪裡的大冒險？"] 
+        rawText: "小明坐在那裡,聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。",
+        htmlText: "小明坐在那裡,<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"聞\")' onclick='speakSlowWord(\"聞\")'>聞</span>了很久那個味道。他沒有去過大海。他也不知道很大是多大。",
+        prompts: ["問事實／看見:小明頭上的波浪是真實的,還是他的想像?", "問感覺／感受:閉上眼睛想像沒去過的地方,是什麼心情?", "問經驗／連結:你有沒有聽別人說過一個地方,然後自己在腦袋裡畫出來?", "問決定／創造:你現在最想閉上眼睛,想像哪裡的大冒險?"] 
     },
     { 
         img: "slide6.jpg", 
-        rawText: "但我一直坐著，直到風停了，味道也散了。",
-        htmlText: "但我一直坐著，直到風停了，味道也散了。",
-        prompts: ["問事實／看見：天空的顏色發生了什麼變化？", "問感覺／感受：風停了、味道散了，感覺是平靜還是有點捨不得？", "問經驗／連結：玩了一整天，天色變暗時你有什麼感覺？", "問決定／創造：風停了之後，你決定站起來做下一件事嗎？"] 
+        rawText: "但我一直坐著,直到風停了,味道也散了。",
+        htmlText: "但我一直坐著,直到風停了,味道也散了。",
+        prompts: ["問事實／看見:天空的顏色發生了什麼變化?", "問感覺／感受:風停了、味道散了,感覺是平靜還是有點捨不得?", "問經驗／連結:玩了一整天,天色變暗時你有什麼感覺?", "問決定／創造:風停了之後,你決定站起來做下一件事嗎?"] 
     },
     { 
         img: "slide7.jpg", 
-        rawText: "他起身，拍拍褲子上的泥。回家了。",
-        htmlText: "他<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"起身\")' onclick='speakSlowWord(\"起身\")'>起身</span>，拍拍褲子上的泥。<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"回家\")' onclick='speakSlowWord(\"回家\")'>回家</span>了。",
-        prompts: ["問事實／看見：小明最後做了什麼動作？他往哪裡走？", "問感覺／感受：吹完大風回家，心情是輕鬆的還是滿足的？", "問經驗／連結：每次出門散步或冒險後，回到家第一件事做什麼？", "問決定／創造：今天讀完這個故事，你決定回家跟家人分享哪一段？"] 
+        rawText: "他起身,拍拍褲子上的泥。回家了。",
+        htmlText: "他<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"起身\")' onclick='speakSlowWord(\"起身\")'>起身</span>,拍拍褲子上的泥。<span class='vocab-focus-word' onmouseenter='speakSlowWord(\"回家\")' onclick='speakSlowWord(\"回家\")'>回家</span>了。",
+        prompts: ["問事實／看見:小明最後做了什麼動作?他往哪裡走?", "問感覺／感受:吹完大風回家,心情是輕鬆的還是滿足的?", "問經驗／連結:每次出門散步或冒險後,回到家第一件事做什麼?", "問決定／創造:今天讀完這個故事,你決定回家跟家人分享哪一段?"] 
     }
 ];
 
 const lessonsData = {
     1: {
         title: "找到風",
-        fullTitle: "找到風：「那天，風很大！」",
-        desc: "那天，風很大 透過風聲引導感受與動作模仿",
+        fullTitle: "找到風:「那天,風很大!」",
+        desc: "那天,風很大 透過風聲引導感受與動作模仿",
         langText: "風／大／吹",
-        sentenceText: "句型：風來了。風很大。",
+        sentenceText: "句型:風來了。風很大。",
         rawSentence: "風來了。風很大。",
-        stage: "四層提問：看見",
+        stage: "四層提問:看見",
         bookPageStr: "第 1 頁",
         slideIndex: 0,
         vocab: [
@@ -925,23 +998,23 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–5分鐘", title: "神秘聲音", tagColor: "bg-purple-100 text-purple-800", content: "老師：「你聽！什麼來了？」呼～讓孩子猜。最後：「風！」" },
-            { tag: "5–12分鐘", title: "小風／大風", tagColor: "bg-blue-100 text-blue-800", content: "小風：「呼～」、大風：「呼～～～」、風停：「不動！」" },
-            { tag: "12–20分鐘", title: "繪本探索 (讀繪本第1頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第1頁：看到小明、樹、風。啟動四層提問依序搭鷹架。" },
-            { tag: "20–40分鐘", title: "語言積木與收束", tagColor: "bg-amber-100 text-amber-800", content: "建立：風 ＋ 很大。一起說：風很大。" }
+            { tag: "0–5分鐘", title: "神秘聲音", tagColor: "bg-purple-100 text-purple-800", content: "老師:「你聽!什麼來了?」呼～讓孩子猜。最後:「風!」" },
+            { tag: "5–12分鐘", title: "小風／大風", tagColor: "bg-blue-100 text-blue-800", content: "小風:「呼～」、大風:「呼～～～」、風停:「不動!」" },
+            { tag: "12–20分鐘", title: "繪本探索 (讀繪本第1頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第1頁:看到小明、樹、風。啟動四層提問依序搭鷹架。" },
+            { tag: "20–40分鐘", title: "語言積木與收束", tagColor: "bg-amber-100 text-amber-800", content: "建立:風 ＋ 很大。一起說:風很大。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：誰？在哪裡？（讀繪本第1頁）",
-            "❤️ 第二層 問感覺｜感受：風大不大？（讀繪本第1頁）",
-            "🔗 第三層 問經驗｜連結：你有吹過風嗎？（讀繪本第1頁）",
-            "✋ 第四層 問決定｜創造：如果大風吹來，你決定做哪一個動作？（讀繪本第1頁）"
+            "👀 第一層 問事實｜看見:誰?在哪裡?(讀繪本第1頁)",
+            "❤️ 第二層 問感覺｜感受:風大不大?(讀繪本第1頁)",
+            "🔗 第三層 問經驗｜連結:你有吹過風嗎?(讀繪本第1頁)",
+            "✋ 第四層 問決定｜創造:如果大風吹來,你決定做哪一個動作?(讀繪本第1頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "故事裡，那天是什麼很大？", 
+                prompt: "故事裡,那天是什麼很大?", 
                 enPrompt: "In the story, what was very big that day?",
-                feedback: "對，是風。一起說：風很大。",
+                feedback: "對,是風。一起說:風很大。",
                 isFactQuestion: true,
                 choices: [
                     { emoji: "💨", zh: "風", en: "Wind", correct: true }, 
@@ -950,9 +1023,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "大風吹來，你的身體感覺怎麼樣？", 
+                prompt: "大風吹來,你的身體感覺怎麼樣?", 
                 enPrompt: "When the big wind blows, how does your body feel?",
-                feedback: "先讓孩子回答，再按他選的圖。",
+                feedback: "先讓孩子回答,再按他選的圖。",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "❄️", zh: "涼涼的", en: "Cool", correct: true }, 
@@ -962,7 +1035,7 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "你在哪裡吹過很大很大的風？", 
+                prompt: "你在哪裡吹過很大很大的風?", 
                 enPrompt: "Where have you felt a really big wind before?",
                 feedback: "問問孩子那時候在做什麼。",
                 isFactQuestion: false,
@@ -974,9 +1047,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "如果現在風很大，你決定做什麼？", 
+                prompt: "如果現在風很大,你決定做什麼?", 
                 enPrompt: "If the wind is strong now, what do you decide to do?",
-                feedback: "聽完孩子的決定，給予大大鼓勵！",
+                feedback: "聽完孩子的決定,給予大大鼓勵!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🏃", zh: "像風一樣跑", en: "Run like wind", correct: true }, 
@@ -988,12 +1061,12 @@ const lessonsData = {
     },
     2: {
         title: "遇見樹",
-        fullTitle: "遇見樹：「風來了，樹怎麼了？」",
-        desc: "風來了，樹怎麼了 化身為大樹進行肢體律動",
+        fullTitle: "遇見樹:「風來了,樹怎麼了?」",
+        desc: "風來了,樹怎麼了 化身為大樹進行肢體律動",
         langText: "樹／搖／動",
-        sentenceText: "句型：我是樹。樹搖一搖。",
+        sentenceText: "句型:我是樹。樹搖一搖。",
         rawSentence: "我是樹。樹搖一搖。",
-        stage: "四層提問：感受",
+        stage: "四層提問:感受",
         bookPageStr: "第 2 頁",
         slideIndex: 1,
         vocab: [
@@ -1016,21 +1089,21 @@ const lessonsData = {
         ],
         flowItems: [
             { tag: "0–10分鐘", title: "化身為樹", tagColor: "bg-purple-100 text-purple-800", content: "雙手擺動感受大樹律動。" },
-            { tag: "10–25分鐘", title: "繪本找線索 (讀繪本第2頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第2頁：小明坐在樹下，風來了，樹怎麼樣？你看過樹被風吹嗎？" },
+            { tag: "10–25分鐘", title: "繪本找線索 (讀繪本第2頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第2頁:小明坐在樹下,風來了,樹怎麼樣?你看過樹被風吹嗎?" },
             { tag: "25–40分鐘", title: "角色遊戲", tagColor: "bg-amber-100 text-amber-800", content: "小風吹～大風吹～風停了。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：樹在哪裡？（讀繪本第2頁）",
-            "❤️ 第二層 問感覺｜感受：風來了，樹怎麼樣？（讀繪本第2頁）",
-            "🔗 第三層 問經驗｜連結：你看過樹被風吹嗎？（讀繪本第2頁）",
-            "✋ 第四層 問決定｜創造：如果你是樹，遇到大風，你決定怎麼站穩？（讀繪本第2頁）"
+            "👀 第一層 問事實｜看見:樹在哪裡?(讀繪本第2頁)",
+            "❤️ 第二層 問感覺｜感受:風來了,樹怎麼樣?(讀繪本第2頁)",
+            "🔗 第三層 問經驗｜連結:你看過樹被風吹嗎?(讀繪本第2頁)",
+            "✋ 第四層 問決定｜創造:如果你是樹,遇到大風,你決定怎麼站穩?(讀繪本第2頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "故事裡，小明坐在哪裡？（讀繪本第2頁）", 
+                prompt: "故事裡,小明坐在哪裡?(讀繪本第2頁)", 
                 enPrompt: "Where is Xiao Ming sitting in the story?",
-                feedback: "太棒了，小明坐在大樹下休息。",
+                feedback: "太棒了,小明坐在大樹下休息。",
                 isFactQuestion: true,
                 choices: [
                     { emoji: "🌳", zh: "樹下", en: "Under tree", correct: true }, 
@@ -1039,9 +1112,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "風吹過來的時候，大樹看起來在做什麼？", 
+                prompt: "風吹過來的時候,大樹看起來在做什麼?", 
                 enPrompt: "What does the big tree look like when the wind blows?",
-                feedback: "請孩子用雙手比出樹搖動的動作！",
+                feedback: "請孩子用雙手比出樹搖動的動作!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🌿", zh: "搖一搖", en: "Swaying", correct: true }, 
@@ -1050,7 +1123,7 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "你有看過外面的大樹被風吹得搖來搖去嗎？", 
+                prompt: "你有看過外面的大樹被風吹得搖來搖去嗎?", 
                 enPrompt: "Have you seen trees outside swaying in the wind?",
                 feedback: "鼓勵孩子描述他看過的樹葉跳舞樣子。",
                 isFactQuestion: false,
@@ -1061,9 +1134,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "如果你是一棵大樹，大風來時你想怎麼站穩？", 
+                prompt: "如果你是一棵大樹,大風來時你想怎麼站穩?", 
                 enPrompt: "If you are a big tree, how will you stand strong in big wind?",
-                feedback: "雙腳踩穩地板，當一棵堅強勇敢的大樹！",
+                feedback: "雙腳踩穩地板,當一棵堅強勇敢的大樹!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🌲", zh: "腳踩穩用力站", en: "Stand firm", correct: true }, 
@@ -1074,12 +1147,12 @@ const lessonsData = {
     },
     3: {
         title: "發現味道",
-        fullTitle: "發現味道：「風裡面有什麼？」",
+        fullTitle: "發現味道:「風裡面有什麼?」",
         desc: "風裡面有什麼 嗅覺感知與不認識味道的探索",
         langText: "聞／味道／香",
-        sentenceText: "句型：我聞到了～。",
+        sentenceText: "句型:我聞到了～。",
         rawSentence: "我聞到了～。",
-        stage: "四層提問：嗅覺探索",
+        stage: "四層提問:嗅覺探索",
         bookPageStr: "第 3 頁",
         slideIndex: 2,
         customType: "lesson3",
@@ -1102,21 +1175,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–15分鐘", title: "神秘氣味感知 (讀繪本第3頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第3頁：引導孩子做『聞一聞』動作與生活氣味連結。" },
+            { tag: "0–15分鐘", title: "神秘氣味感知 (讀繪本第3頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第3頁:引導孩子做『聞一聞』動作與生活氣味連結。" },
             { tag: "15–40分鐘", title: "氣味對話", tagColor: "bg-emerald-100 text-emerald-800", content: "說出自己聞到了什麼。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：小明用什麼聞？（讀繪本第3頁）",
-            "❤️ 第二層 問感覺｜感受：這個味道你喜歡嗎？（讀繪本第3頁）",
-            "🔗 第三層 問經驗｜連結：你以前在哪裡聞過？（讀繪本第3頁）",
-            "✋ 第四層 問決定｜創造：你決定選哪一種味道送給風？（讀繪本第3頁）"
+            "👀 第一層 問事實｜看見:小明用什麼聞?(讀繪本第3頁)",
+            "❤️ 第二層 問感覺｜感受:這個味道你喜歡嗎?(讀繪本第3頁)",
+            "🔗 第三層 問經驗｜連結:你以前在哪裡聞過?(讀繪本第3頁)",
+            "✋ 第四層 問決定｜創造:你決定選哪一種味道送給風?(讀繪本第3頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "故事裡，小明用身體的哪裡聞味道？", 
+                prompt: "故事裡,小明用身體的哪裡聞味道?", 
                 enPrompt: "Which part of the body does Xiao Ming use to smell?",
-                feedback: "答對了！我們用小鼻子聞一聞。",
+                feedback: "答對了!我們用小鼻子聞一聞。",
                 isFactQuestion: true,
                 choices: [
                     { emoji: "👃", zh: "鼻子", en: "Nose", correct: true }, 
@@ -1125,9 +1198,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "當你聞到橘子皮或花朵的味道，感覺怎麼樣？", 
+                prompt: "當你聞到橘子皮或花朵的味道,感覺怎麼樣?", 
                 enPrompt: "How does it feel when you smell an orange or a flower?",
-                feedback: "每種感覺都很棒，聞一聞真舒服！",
+                feedback: "每種感覺都很棒,聞一聞真舒服!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🌸", zh: "香香甜甜的", en: "Sweet / Fragrant", correct: true }, 
@@ -1136,9 +1209,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "你在家裡最常聞到哪一種喜歡的味道？", 
+                prompt: "你在家裡最常聞到哪一種喜歡的味道?", 
                 enPrompt: "What favorite smell do you often smell at home?",
-                feedback: "那是專屬於我們家裡溫暖的味道呢！",
+                feedback: "那是專屬於我們家裡溫暖的味道呢!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🍞", zh: "烤麵包香", en: "Baked bread", correct: true }, 
@@ -1147,9 +1220,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "如果風要帶禮物出發，你想送什麼味道給風？", 
+                prompt: "如果風要帶禮物出發,你想送什麼味道給風?", 
                 enPrompt: "What smell would you like to give to the wind?",
-                feedback: "讓風帶著你的香味飛到很遠的大海！",
+                feedback: "讓風帶著你的香味飛到很遠的大海!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🍊", zh: "橘子的香氣", en: "Orange scent", correct: true }, 
@@ -1160,12 +1233,12 @@ const lessonsData = {
     },
     4: {
         title: "風的旅行",
-        fullTitle: "風的旅行：「風從哪裡來？」",
+        fullTitle: "風的旅行:「風從哪裡來?」",
         desc: "風從哪裡來 帶來什麼 內建大圖配對語音發音台",
         langText: "大海／來／很大",
-        sentenceText: "句型：風從大海來。大海很大。",
+        sentenceText: "句型:風從大海來。大海很大。",
         rawSentence: "風從大海來。大海很大。",
-        stage: "四層提問：文本事實",
+        stage: "四層提問:文本事實",
         bookPageStr: "第 4 頁",
         slideIndex: 3,
         customType: "lesson4",
@@ -1188,21 +1261,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–20分鐘", title: "故事事實 (讀繪本第4頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第4頁：風說了大海與很大。" },
+            { tag: "0–20分鐘", title: "故事事實 (讀繪本第4頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第4頁:風說了大海與很大。" },
             { tag: "20–40分鐘", title: "想像旅行", tagColor: "bg-amber-100 text-amber-800", content: "打開想像空間。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：風說了哪兩個字？（讀繪本第4頁）",
-            "❤️ 第二層 問感覺｜感受：你想去大海看嗎？（讀繪本第4頁）",
-            "🔗 第三層 問經驗｜連結：你看過大海嗎？（讀繪本第4頁）",
-            "✋ 第四層 問決定｜創造：你決定讓風帶來什麼？（讀繪本第4頁）"
+            "👀 第一層 問事實｜看見:風說了哪兩個字?(讀繪本第4頁)",
+            "❤️ 第二層 問感覺｜感受:你想去大海看嗎?(讀繪本第4頁)",
+            "🔗 第三層 問經驗｜連結:你看過大海嗎?(讀繪本第4頁)",
+            "✋ 第四層 問決定｜創造:你決定讓風帶來什麼?(讀繪本第4頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "故事裡，風回答小明它從哪裡來？", 
+                prompt: "故事裡,風回答小明它從哪裡來?", 
                 enPrompt: "In the story, where did the wind say it came from?",
-                feedback: "風說了：大海！然後說大海很大。",
+                feedback: "風說了:大海!然後說大海很大。",
                 isFactQuestion: true,
                 choices: [
                     { emoji: "🌊", zh: "大海", en: "Ocean", correct: true }, 
@@ -1211,9 +1284,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "聽風說大海『很大很大』，你心中感覺怎麼樣？", 
+                prompt: "聽風說大海『很大很大』,你心中感覺怎麼樣?", 
                 enPrompt: "When the wind says ocean is 'very big', how do you feel?",
-                feedback: "好想跟著風一起飛去海邊看看呢！",
+                feedback: "好想跟著風一起飛去海邊看看呢!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "✨", zh: "好想去看看", en: "Want to see it", correct: true }, 
@@ -1222,9 +1295,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "你有看過藍藍的大海、聽過海浪的聲音嗎？", 
+                prompt: "你有看過藍藍的大海、聽過海浪的聲音嗎?", 
                 enPrompt: "Have you seen the blue ocean or heard ocean waves?",
-                feedback: "海浪嘩啦嘩啦，真是太美妙的聲音了！",
+                feedback: "海浪嘩啦嘩啦,真是太美妙的聲音了!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🏖️", zh: "看過海邊沙灘", en: "Seen the beach", correct: true }, 
@@ -1233,9 +1306,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "如果你可以決定，你今天想讓風吹去哪裡？", 
+                prompt: "如果你可以決定,你今天想讓風吹去哪裡?", 
                 enPrompt: "If you can decide, where do you want wind to travel today?",
-                feedback: "乘著大風出發，展開精彩的大冒險！",
+                feedback: "乘著大風出發,展開精彩的大冒險!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🏰", zh: "神奇城堡", en: "Magic Castle", correct: true }, 
@@ -1246,12 +1319,12 @@ const lessonsData = {
     },
     5: {
         title: "吹亂故事",
-        fullTitle: "吹亂故事：「我們一起蓋故事！」",
+        fullTitle: "吹亂故事:「我們一起蓋故事!」",
         desc: "我們一起蓋故事 大風吹隨機抽卡與搞笑故事組裝",
         langText: "時間／主角／地點",
-        sentenceText: "句型：白天，小明在樹下睡覺。",
-        rawSentence: "白天，小明在樹下睡覺。",
-        stage: "四層提問：故事結構",
+        sentenceText: "句型:白天,小明在樹下睡覺。",
+        rawSentence: "白天,小明在樹下睡覺。",
+        stage: "四層提問:故事結構",
         isGame: true,
         bookPageStr: "第 5 頁",
         slideIndex: 4,
@@ -1275,21 +1348,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–20分鐘", title: "隨機抽卡 (讀繪本第5頁)", tagColor: "bg-purple-100 text-purple-800", content: "翻開繪本第5頁：時間、主角、地點重組。" },
+            { tag: "0–20分鐘", title: "隨機抽卡 (讀繪本第5頁)", tagColor: "bg-purple-100 text-purple-800", content: "翻開繪本第5頁:時間、主角、地點重組。" },
             { tag: "20–40分鐘", title: "保存故事", tagColor: "bg-emerald-100 text-emerald-800", content: "選出最喜歡的一組並儲存。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：抽到哪幾張卡？（讀繪本第5頁）",
-            "❤️ 第二層 問感覺｜感受：這個故事好笑嗎？（讀繪本第5頁）",
-            "🔗 第三層 問經驗｜連結：主角做的事你做過嗎？（讀繪本第5頁）",
-            "✋ 第四層 問決定｜創造：你決定怎麼改編結局？（讀繪本第5頁）"
+            "👀 第一層 問事實｜看見:抽到哪幾張卡?(讀繪本第5頁)",
+            "❤️ 第二層 問感覺｜感受:這個故事好笑嗎?(讀繪本第5頁)",
+            "🔗 第三層 問經驗｜連結:主角做的事你做過嗎?(讀繪本第5頁)",
+            "✋ 第四層 問決定｜創造:你決定怎麼改編結局?(讀繪本第5頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "剛剛抽出來的故事卡片裡，主角是誰呢？", 
+                prompt: "剛剛抽出來的故事卡片裡,主角是誰呢?", 
                 enPrompt: "Who is the main character in our drawn story card?",
-                feedback: "找到了！主角是可愛的小主角。",
+                feedback: "找到了!主角是可愛的小主角。",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "👦", zh: "小明", en: "Xiao Ming", correct: true }, 
@@ -1298,9 +1371,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "被大風吹亂的故事，你聽完覺得好玩嗎？", 
+                prompt: "被大風吹亂的故事,你聽完覺得好玩嗎?", 
                 enPrompt: "How do you feel about this mixed-up windy story?",
-                feedback: "哈哈！故事變得特別又好笑！",
+                feedback: "哈哈!故事變得特別又好笑!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "😂", zh: "太好笑了", en: "Super funny", correct: true }, 
@@ -1309,9 +1382,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "你平常喜歡跟爸爸媽媽一起編好笑的故事嗎？", 
+                prompt: "你平常喜歡跟爸爸媽媽一起編好笑的故事嗎?", 
                 enPrompt: "Do you like creating funny stories with mom and dad?",
-                feedback: "我們常常一起把天馬行空變成好聽的故事！",
+                feedback: "我們常常一起把天馬行空變成好聽的故事!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "📚", zh: "最喜歡編故事", en: "Love making stories", correct: true }, 
@@ -1320,9 +1393,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "你決定給今天的故事一個什麼樣的結尾？", 
+                prompt: "你決定給今天的故事一個什麼樣的結尾?", 
                 enPrompt: "What kind of ending do you decide to give this story?",
-                feedback: "太棒的結局！把這組故事好好保存下來吧！",
+                feedback: "太棒的結局!把這組故事好好保存下來吧!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🏠", zh: "開開心心回家", en: "Happily go home", correct: true }, 
@@ -1333,12 +1406,12 @@ const lessonsData = {
     },
     6: {
         title: "小故事家",
-        fullTitle: "小故事家：「現在換我蓋故事！」",
+        fullTitle: "小故事家:「現在換我蓋故事!」",
         desc: "現在換我蓋故事 繪本排序、成果發表與故事家認證",
         langText: "故事／作家／回家",
-        sentenceText: "句型：那天風很大，風從大海來。",
-        rawSentence: "那天風很大，風從大海來。",
-        stage: "四層提問：個人表達",
+        sentenceText: "句型:那天風很大,風從大海來。",
+        rawSentence: "那天風很大,風從大海來。",
+        stage: "四層提問:個人表達",
         bookPageStr: "第 6 頁",
         slideIndex: 5,
         customType: "lesson6",
@@ -1361,21 +1434,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–20分鐘", title: "看圖排序 (讀繪本第6頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第6頁：按照時間排好卡片。" },
+            { tag: "0–20分鐘", title: "看圖排序 (讀繪本第6頁)", tagColor: "bg-blue-100 text-blue-800", content: "翻開繪本第6頁:按照時間排好卡片。" },
             { tag: "20–40分鐘", title: "發表分享", tagColor: "bg-amber-100 text-amber-800", content: "說出自己的故事。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：選了哪五張圖卡？（讀繪本第6頁）",
-            "❤️ 第二層 問感覺｜感受：分享故事的心情如何？（讀繪本第6頁）",
-            "🔗 第三層 問經驗｜連結：哪件事你也做過？（讀繪本第6頁）",
-            "✋ 第四層 問決定｜創造：你決定用哪句當結尾？（讀繪本第6頁）"
+            "👀 第一層 問事實｜看見:選了哪五張圖卡?(讀繪本第6頁)",
+            "❤️ 第二層 問感覺｜感受:分享故事的心情如何?(讀繪本第6頁)",
+            "🔗 第三層 問經驗｜連結:哪件事你也做過?(讀繪本第6頁)",
+            "✋ 第四層 問決定｜創造:你決定用哪句當結尾?(讀繪本第6頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "故事的最後，小明拍拍褲子回到哪裡？（讀繪本第6頁）", 
+                prompt: "故事的最後,小明拍拍褲子回到哪裡?(讀繪本第6頁)", 
                 enPrompt: "At the end of the story, where did Xiao Ming go?",
-                feedback: "沒錯！天黑風停了，小明回家了。",
+                feedback: "沒錯!天黑風停了,小明回家了。",
                 isFactQuestion: true,
                 choices: [
                     { emoji: "🏠", zh: "回家了", en: "Went home", correct: true }, 
@@ -1384,9 +1457,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "今天自己當小小故事家講故事，心情怎麼樣？", 
+                prompt: "今天自己當小小故事家講故事,心情怎麼樣?", 
                 enPrompt: "How does it feel to be a little storyteller today?",
-                feedback: "你講得非常清楚、生動，真的好厲害！",
+                feedback: "你講得非常清楚、生動,真的好厲害!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🌟", zh: "超級有自信", en: "Very confident", correct: true }, 
@@ -1395,9 +1468,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "平常去公園玩好之後，回到家最想做什麼？", 
+                prompt: "平常去公園玩好之後,回到家最想做什麼?", 
                 enPrompt: "When you get home after playing, what do you want to do first?",
-                feedback: "洗洗手、喝喝水，跟家人分享今天的大發現！",
+                feedback: "洗洗手、喝喝水,跟家人分享今天的大發現!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🥛", zh: "喝杯水吃點心", en: "Drink water / snack", correct: true }, 
@@ -1406,9 +1479,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "你決定把今天的故事圖畫送給誰當禮物？", 
+                prompt: "你決定把今天的故事圖畫送給誰當禮物?", 
                 enPrompt: "Who do you decide to give your story drawing to as a gift?",
-                feedback: "這是一份最有愛、最獨一無二的禮物！",
+                feedback: "這是一份最有愛、最獨一無二的禮物!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🎁", zh: "送給爸爸媽媽", en: "Give to parents", correct: true }, 
@@ -1419,12 +1492,12 @@ const lessonsData = {
     },
     7: {
         title: "家庭氣味博物館",
-        fullTitle: "家庭氣味博物館：「這個味道讓我想到……」",
-        desc: "把家裡的一種味道帶進課堂，從物件、感受、回憶走到自己的收藏決定",
+        fullTitle: "家庭氣味博物館:「這個味道讓我想到……」",
+        desc: "把家裡的一種味道帶進課堂,從物件、感受、回憶走到自己的收藏決定",
         langText: "家／味道／想到",
-        sentenceText: "句型：這是家裡的味道。它讓我想到～。",
+        sentenceText: "句型:這是家裡的味道。它讓我想到～。",
         rawSentence: "這是家裡的味道。它讓我想到～。",
-        stage: "四層提問：家庭連結",
+        stage: "四層提問:家庭連結",
         bookPageStr: "第 3 頁",
         slideIndex: 2,
         customType: "lesson7",
@@ -1447,21 +1520,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–20分鐘", title: "展示生活物件 (讀繪本第3頁)", tagColor: "bg-cyan-100 text-cyan-800", content: "翻開繪本第3頁：聞一聞，說一說。" },
+            { tag: "0–20分鐘", title: "展示生活物件 (讀繪本第3頁)", tagColor: "bg-cyan-100 text-cyan-800", content: "翻開繪本第3頁:聞一聞,說一說。" },
             { tag: "20–40分鐘", title: "館藏登記", tagColor: "bg-emerald-100 text-emerald-800", content: "放進氣味博物館。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：這是什麼物品？（讀繪本第3頁）",
-            "❤️ 第二層 問感覺｜感受：聞起來怎麼樣？（讀繪本第3頁）",
-            "🔗 第三層 問經驗｜連結：它讓你想到誰？（讀繪本第3頁）",
-            "✋ 第四層 問決定｜創造：你要給它什麼名字？（讀繪本第3頁）"
+            "👀 第一層 問事實｜看見:這是什麼物品?(讀繪本第3頁)",
+            "❤️ 第二層 問感覺｜感受:聞起來怎麼樣?(讀繪本第3頁)",
+            "🔗 第三層 問經驗｜連結:它讓你想到誰?(讀繪本第3頁)",
+            "✋ 第四層 問決定｜創造:你要給它什麼名字?(讀繪本第3頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "今天我們在家庭氣味博物館裡找到什麼味道？", 
+                prompt: "今天我們在家庭氣味博物館裡找到什麼味道?", 
                 enPrompt: "What family scent did we discover in the museum today?",
-                feedback: "哇！這是我們家裡特別的氣味收藏。",
+                feedback: "哇!這是我們家裡特別的氣味收藏。",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🍵", zh: "溫暖的茶香", en: "Warm tea scent", correct: true }, 
@@ -1470,9 +1543,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "輕輕聞一聞這個味道，你的心裡覺得怎麼樣？", 
+                prompt: "輕輕聞一聞這個味道,你的心裡覺得怎麼樣?", 
                 enPrompt: "When you gently smell this scent, how does it feel inside?",
-                feedback: "聞起來放鬆又安心，這就是家的感覺！",
+                feedback: "聞起來放鬆又安心,這就是家的感覺!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "😌", zh: "很放鬆很安心", en: "Relaxed & safe", correct: true }, 
@@ -1481,9 +1554,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "這個味道會讓你想起家裡的哪一個角落或回憶？", 
+                prompt: "這個味道會讓你想起家裡的哪一個角落或回憶?", 
                 enPrompt: "Does this scent remind you of a cozy spot at home?",
-                feedback: "每個氣味背後都有我們在一起的美好時光！",
+                feedback: "每個氣味背後都有我們在一起的美好時光!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🛏️", zh: "軟軟溫暖的床", en: "Soft warm bed", correct: true }, 
@@ -1492,9 +1565,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "你決定給今天這件氣味收藏取一個什麼好聽的名字？", 
+                prompt: "你決定給今天這件氣味收藏取一個什麼好聽的名字?", 
                 enPrompt: "What special name do you decide to give this scent collection?",
-                feedback: "名字取好了！永遠留在我們家的氣味博物館裡！",
+                feedback: "名字取好了!永遠留在我們家的氣味博物館里!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🏺", zh: "「幸福的香氣」", en: "'Happy Aroma'", correct: true }, 
@@ -1505,12 +1578,12 @@ const lessonsData = {
     },
     8: {
         title: "故事劇場與家長發表",
-        fullTitle: "故事劇場與家長發表：「我是小小探索家！」",
-        desc: "演出風的故事、分享作品，最後說出「下次遇到未知，我決定怎麼探索」",
+        fullTitle: "故事劇場與家長發表:「我是小小探索家!」",
+        desc: "演出風的故事、分享作品,最後說出「下次遇到未知,我決定怎麼探索」",
         langText: "先／最後／我決定",
-        sentenceText: "句型：先看一看，然後問一問，最後說給家人聽。",
-        rawSentence: "先看一看，然後問一問，最後說給家人聽。",
-        stage: "四層提問：綜合實踐",
+        sentenceText: "句型:先看一看,然後問一問,最後說給家人聽。",
+        rawSentence: "先看一看,然後問一問,最後說給家人聽。",
+        stage: "四層提問:綜合實踐",
         bookPageStr: "第 7 頁",
         slideIndex: 6,
         customType: "lesson8",
@@ -1533,21 +1606,21 @@ const lessonsData = {
             }
         ],
         flowItems: [
-            { tag: "0–20分鐘", title: "角色彩排 (讀繪本第7頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第7頁：演繹故事劇場。" },
+            { tag: "0–20分鐘", title: "角色彩排 (讀繪本第7頁)", tagColor: "bg-emerald-100 text-emerald-800", content: "翻開繪本第7頁:演繹故事劇場。" },
             { tag: "20–40分鐘", title: "探索家約定", tagColor: "bg-yellow-100 text-yellow-800", content: "發表承諾與結業。" }
         ],
         questions: [
-            "👀 第一層 問事實｜看見：故事裡有誰？（讀繪本第7頁）",
-            "❤️ 第二層 問感覺｜感受：站上舞台的心情？（讀繪本第7頁）",
-            "🔗 第三層 問經驗｜連結：哪個畫面和生活最像？（讀繪本第7頁）",
-            "✋ 第四層 問決定｜創造：下次遇到未知你決定怎麼做？（讀繪本第7頁）"
+            "👀 第一層 問事實｜看見:故事裡有誰?(讀繪本第7頁)",
+            "❤️ 第二層 問感覺｜感受:站上舞台的心情?(讀繪本第7頁)",
+            "🔗 第三層 問經驗｜連結:哪個畫面和生活最像?(讀繪本第7頁)",
+            "✋ 第四層 問決定｜創造:下次遇到未知你決定怎麼做?(讀繪本第7頁)"
         ],
         parentSteps: [
             { 
                 layer: "👀 第一層 ｜ 問事實・看見",
-                prompt: "在今天的故事劇場舞台上，你扮演了哪個角色？", 
+                prompt: "在今天的故事劇場舞台上,你扮演了哪個角色?", 
                 enPrompt: "Which character did you play on the story stage today?",
-                feedback: "你的動作和聲音演得維妙維肖！",
+                feedback: "你的動作和聲音演得維妙維肖!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "💨", zh: "神奇大風", en: "Magic Wind", correct: true }, 
@@ -1556,9 +1629,9 @@ const lessonsData = {
             },
             { 
                 layer: "❤️ 第二層 ｜ 問感覺・感受",
-                prompt: "完成全部 8 堂線上繪本課，你覺得自己棒不棒？", 
+                prompt: "完成全部 8 堂線上繪本課,你覺得自己棒不棒?", 
                 enPrompt: "After finishing all 8 lessons, how proud do you feel?",
-                feedback: "超級棒！你是一位優秀的小小探索家！",
+                feedback: "超級棒!你是一位優秀的小小探索家!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🎉", zh: "超棒超有成就感", en: "Super proud!", correct: true }, 
@@ -1567,9 +1640,9 @@ const lessonsData = {
             },
             { 
                 layer: "🔗 第三層 ｜ 問經驗・連結",
-                prompt: "這 8 堂課裡面，你最喜歡哪一次的探索體驗？", 
+                prompt: "這 8 堂課裡面,你最喜歡哪一次的探索體驗?", 
                 enPrompt: "Among all 8 lessons, which adventure was your favorite?",
-                feedback: "每一次的看見、感受與決定，都讓你更長大囉！",
+                feedback: "每一次的看見、感受與決定,都讓你更長大囉!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🍃", zh: "找風與聞味道", en: "Finding wind & scents", correct: true }, 
@@ -1578,9 +1651,9 @@ const lessonsData = {
             },
             { 
                 layer: "✋ 第四層 ｜ 問決定・創造",
-                prompt: "未來在生活中遇到不認識的新事物，你決定怎麼做？", 
+                prompt: "未來在生活中遇到不認識的新事物,你決定怎麼做?", 
                 enPrompt: "In the future when you see new unknown things, what will you do?",
-                feedback: "太敗了！帶著好奇心與勇敢，繼續探索美麗的大世界！",
+                feedback: "太棒了!帶著好奇心與勇敢,繼續探索美麗的大世界!",
                 isFactQuestion: false,
                 choices: [
                     { emoji: "🔍", zh: "停下來看一看聞一聞", en: "Look, smell, explore", correct: true }, 
@@ -1618,10 +1691,13 @@ function initHome() {
     parentGrid.innerHTML = Object.keys(lessonsData).map(num => {
         const d = lessonsData[num];
         return `
-            <div onclick="openParentPractice(${num})" class="cursor-pointer p-4 rounded-xl border border-[#ded7c6] bg-white transition space-y-1">
-                <span class="text-xs font-bold px-2.5 py-0.5 bg-[#596d43] text-white rounded-full">第 ${num} 堂練習</span>
-                <h4 class="text-base font-black text-[#314055] mt-1">${d.title}</h4>
-                <p class="text-xs text-gray-500 font-bold">${d.sentenceText}</p>
+            <div onclick="openParentPractice(${num})" class="cursor-pointer parent-lesson-card space-y-2">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs md:text-sm font-black px-3 py-1 bg-[#596d43] text-white rounded-full">第 ${num} 堂練習</span>
+                    <span class="text-xs text-[#5e6c5c] font-bold">～讀繪本${d.bookPageStr}</span>
+                </div>
+                <h4 class="text-xl font-black text-[#314055] mt-1">${d.title}</h4>
+                <p class="text-sm md:text-base text-gray-600 font-bold">${d.sentenceText}</p>
             </div>
         `;
     }).join('');
@@ -1896,7 +1972,7 @@ function selectParentChoice(el, text, isCorrect, isFactQuestion) {
     if (isFactQuestion && !isCorrect) {
         parent.querySelectorAll('.parent-choice-card').forEach(c => c.classList.remove('is-selected'));
         setTimeout(() => {
-            speakText("再想一想喔，故事裡那天是什麼很大呢？");
+            speakText("再想一想喔,故事裡那天是什麼很大呢?");
         }, 600);
         return;
     }
@@ -1934,7 +2010,7 @@ function saveTeacherAssessment() {
 
 function generateTeacherParentFeedback() {
     const sName = document.getElementById('teacherStudentName').value || '孩子';
-    const f = `親愛的家長您好：\n今天 ${sName} 在課堂四層提問中表現優秀，對於看見與感受皆能主動透過動作或中文詞彙表達，展現出良好的參與度與專注力！建議離堂後可由家長陪伴進行 3 分鐘共讀練習。`;
+    const f = `親愛的家長您好:\n今天 ${sName} 在課堂四層提問中表現優秀,對於看見與感受皆能主動透過動作或中文詞彙表達,展現出良好的參與度與專注力!建議離堂後可由家長陪伴進行 3 分鐘共讀練習。`;
     document.getElementById('teacherFeedbackPreview').value = f;
 }
 
@@ -1958,7 +2034,7 @@ function renderMuseumGallery() {
     const container = document.getElementById('museumGallery');
     if (!container) return;
     if (list.length === 0) {
-        container.innerHTML = '<p class="text-gray-500 font-bold text-xs">目前尚無館藏，請在上方新增。</p>';
+        container.innerHTML = '<p class="text-gray-500 font-bold text-xs">目前尚無館藏,請在上方新增。</p>';
         return;
     }
     container.innerHTML = list.map(item => `
