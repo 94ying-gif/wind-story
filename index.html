@@ -101,85 +101,126 @@
 
 <style>
 :root {
-    --bot-paper: #f9f6ee;
-    --bot-ink: #2b3543;
-    --bot-muted: #647062;
-    --bot-line: #dfd8c7;
-    --bot-forest: #4d5f38;
-    --bot-olive: #6e7d4a;
-    --bot-gold: #b28330;
+    --bot-paper: #f8f6f0;
+    --bot-ink: #2d3748;
+    --bot-line: #e3ddec;
+    --bot-purple-bg: #f7f4fb;
 }
 
 body.theme-botanical {
     background-color: var(--bot-paper) !important;
     background-image:
-        radial-gradient(circle at 10% 8%, rgba(220, 230, 205, .5), transparent 28rem),
-        radial-gradient(circle at 90% 12%, rgba(245, 232, 195, .45), transparent 26rem),
-        linear-gradient(180deg, #faf7f0 0%, #f4eee2 100%) !important;
+        radial-gradient(circle at 10% 8%, rgba(220, 230, 205, .45), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(245, 232, 195, .4), transparent 26rem),
+        linear-gradient(180deg, #faf7f0 0%, #f3ede2 100%) !important;
     color: var(--bot-ink) !important;
     font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif !important;
 }
 
-/* 去除生硬陰影，改用溫暖自然邊框 */
 body.theme-botanical .botanical-header {
     background: rgba(255, 254, 250, .98) !important;
     border: 1px solid var(--bot-line) !important;
 }
 
+/* 全新截圖風格的教研核心理念區塊 */
 .botanical-hero {
     position: relative;
-    padding: clamp(1rem, 2vw, 1.5rem);
-    border: 1px solid var(--bot-line);
+    padding: clamp(1.1rem, 2vw, 1.6rem);
+    border: 1.5px solid var(--bot-line);
     border-radius: 1.25rem;
-    background: rgba(255, 254, 250, .98);
+    background: var(--bot-purple-bg);
 }
 
-.botanical-eyebrow { color: var(--bot-olive); font-size: .75rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
-.botanical-hero h2 { margin-top: .15rem; color: #314055; font-size: clamp(1.35rem, 2.5vw, 2rem); font-weight: 950; line-height: 1.2; }
-.botanical-subtitle { margin-top: .25rem; color: #465238; font-size: clamp(.85rem, 1.3vw, 1.1rem); font-weight: 850; }
-.botanical-intro { margin-top: .75rem; padding: .65rem .85rem; border-left: 4px solid #748055; background: #f4f2e8; color: #435045; font-size: .92rem; font-weight: 700; line-height: 1.55; }
-.botanical-hero-note { margin-top: .75rem; padding: .5rem .75rem; border: 1px solid #ded8c6; border-radius: .75rem; background: #fbf9f0; color: #4a5547; font-size: .85rem; font-weight: 800; }
-.botanical-hero-note span { margin-right: .5rem; color: #fff; background: #586844; padding: .15rem .45rem; border-radius: 999px; font-size: .7rem; }
+.core-badge {
+    background: #ffcc00;
+    color: #000;
+    font-weight: 900;
+    font-size: .8rem;
+    padding: .2rem .75rem;
+    border-radius: 999px;
+    display: inline-block;
+}
 
-.framework-pill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; margin-top: .85rem; }
-.framework-pill-card { border-radius: 1rem; padding: .65rem .8rem; border: 1.5px solid; }
-.framework-pill-head { display: flex; align-items: flex-start; gap: .5rem; }
-.framework-pill-emoji { width: 2rem; height: 2rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.8); font-size: 1.05rem; }
+.core-meta {
+    font-size: .85rem;
+    font-weight: 700;
+    color: #55505e;
+}
+
+.core-quote {
+    margin-top: .75rem;
+    color: #314055;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: 900;
+    line-height: 1.5;
+}
+
+.core-desc {
+    margin-top: .5rem;
+    color: #4a4052;
+    font-size: .9rem;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.framework-pill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; margin-top: 1rem; }
+.framework-pill-card { border-radius: 1rem; padding: .75rem .9rem; border: 1.5px solid; }
 .framework-pill-card.layer-fact { background: #eef6ff; border-color: #b8d3eb; color: #4a6988; }
 .framework-pill-card.layer-feeling { background: #faedf2; border-color: #e5c6d1; color: #8d5a68; }
 .framework-pill-card.layer-experience { background: #fbf4db; border-color: #e5cf92; color: #8c6a24; }
 .framework-pill-card.layer-decision { background: #edf7ef; border-color: #bfd6c5; color: #4f7b62; }
 
+/* 階段卡片風格 */
 .course-journey > div {
-    min-height: 125px;
-    padding: .85rem 1rem;
-    background: rgba(255, 254, 250, .98) !important;
-    border: 1px solid var(--bot-line) !important;
-    border-top: 4px solid var(--journey-accent, #6d5138) !important;
+    min-height: 140px;
+    padding: 1rem 1.15rem;
+    background: var(--bot-purple-bg) !important;
+    border: 1.5px solid var(--bot-line) !important;
+    border-radius: 1.1rem !important;
 }
 
 .lesson-quick-nav { background: rgba(255,254,250,.98) !important; border: 1px solid var(--bot-line) !important; padding: .65rem .9rem !important; }
 .lesson-quick-nav button { background: #e9eddf !important; color: #40503b !important; border: 1px solid #cdd5c3; font-weight: 900; padding: .35rem 0; font-size: .82rem; }
 .lesson-quick-nav button:hover { background: #586844 !important; color: #fff !important; }
 
-/* 1. 首頁課堂卡片：鋪淡淡多樣色彩，活潑溫暖，去除陰影 */
+/* 首頁課堂卡片：柔和紫色米底色 + 黃色標籤 */
 .lesson-card-grid > div {
-    min-height: 135px;
-    padding: 1rem !important;
-    border-radius: 1.1rem !important;
-    border: 1.5px solid;
+    min-height: 140px;
+    padding: 1rem 1.15rem !important;
+    border-radius: 1.25rem !important;
+    background: var(--bot-purple-bg) !important;
+    border: 1.5px solid var(--bot-line) !important;
     transition: transform 0.15s ease;
 }
 .lesson-card-grid > div:hover { transform: translateY(-2px); }
 
-.card-theme-1 { background: #f7f9f2 !important; border-color: #d6dec5 !important; }
-.card-theme-2 { background: #fcf6f0 !important; border-color: #ead6c5 !important; }
-.card-theme-3 { background: #fdf8eb !important; border-color: #ebdcb6 !important; }
-.card-theme-4 { background: #eef6f9 !important; border-color: #c7dfe8 !important; }
-.card-theme-5 { background: #fdf5f2 !important; border-color: #edd1c7 !important; }
-.card-theme-6 { background: #f5f3f9 !important; border-color: #d8d0e8 !important; }
-.card-theme-7 { background: #f0f7f5 !important; border-color: #c6e3db !important; }
-.card-theme-8 { background: #f7f9ee !important; border-color: #dae3be !important; }
+.lesson-card-tag {
+    background: #ffcc00 !important;
+    color: #000000 !important;
+    font-weight: 900;
+    padding: .2rem .75rem;
+    border-radius: 999px;
+    font-size: .8rem;
+}
+.lesson-card-title {
+    color: #4a3020 !important;
+    font-size: 1.35rem;
+    font-weight: 950;
+    line-height: 1.2;
+}
+.lesson-card-desc {
+    color: #55505e !important;
+    font-size: .85rem;
+    font-weight: 600;
+}
+.lesson-card-vocab-pill {
+    background: #fef0cd;
+    color: #5c3c12;
+    padding: .2rem .6rem;
+    border-radius: .5rem;
+    font-size: .85rem;
+    font-weight: 900;
+}
 
 .classic-question-card {
     padding: .75rem .9rem;
@@ -214,7 +255,7 @@ body.theme-botanical .botanical-header {
 .story-image { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: .5rem; }
 .story-caption { margin-top: 1rem; color: var(--bot-ink) !important; font-size: clamp(1.6rem, 2.4vw, 2.8rem); font-weight: 900; line-height: 1.55; }
 .hamburger-question-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; margin-top: .65rem; }
-.hamburger-question { padding: .75rem .9rem; border-radius: .85rem; border: 1px solid var(--bot-line); font-weight: 750; font-size: .92rem; }
+.hamburger-question { padding: .75rem .9rem; border-radius: .75rem; border: 1px solid var(--bot-line); font-weight: 750; font-size: .92rem; }
 .hamburger-question:nth-child(1) { background: #fff5cf; border-left: 5px solid #d7ad3d; }
 .hamburger-question:nth-child(2) { background: #f9e7eb; border-left: 5px solid #c98290; }
 .hamburger-question:nth-child(3) { background: #e9f1f8; border-left: 5px solid #7897b3; }
@@ -237,7 +278,6 @@ body.theme-botanical .botanical-header {
 }
 .teacher-entry-button:hover { background: #ded7cb !important; }
 
-/* 繪本生字純色高亮，無底線 */
 .vocab-focus-word {
     color: #9a6d1f !important;
     font-weight: 950;
@@ -278,7 +318,6 @@ body.theme-botanical .botanical-header {
 }
 .vocab-word-label { padding: .15rem .45rem; border-radius: .4rem; background: #d4e6d9; color: #315b47 !important; font-weight: 950; font-size: .75rem; }
 
-/* 3. 家長協助方式按鈕 */
 .parent-mode-btn {
     border: 1.5px solid #cdd5c3;
     background: #fcfbfa;
@@ -291,35 +330,49 @@ body.theme-botanical .botanical-header {
     box-shadow: 0 0 0 2px rgba(89, 109, 67, 0.2) !important;
 }
 
-/* 2. 家長離堂練習大字、大圖卡、點中藍色亮框 */
 .parent-choice-card {
-    min-height: 140px;
+    min-height: 155px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: .35rem;
     text-align: center;
-    padding: 1rem .65rem;
+    padding: 1.1rem .75rem;
     background: #ffffff;
-    border: 2px solid #e2dccf;
-    border-radius: 1.1rem;
-    transition: all 0.15s ease;
+    border: 2px solid #e4dec8;
+    border-radius: 1.25rem;
+    transition: all 0.18s ease;
 }
 .parent-choice-card:hover {
     border-color: #93c5fd;
     background: #f8fafc;
 }
-/* 2. 點擊選中的藍色發光亮框 */
 .parent-choice-card.is-selected {
     border-color: #2563eb !important;
     background-color: #eff6ff !important;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.18) !important;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.22) !important;
 }
-.choice-emoji { font-size: 3.2rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.06)); }
-.choice-title { font-size: 1.25rem; font-weight: 950; color: #1e293b; }
-.choice-english { font-size: .95rem; color: #475569; font-weight: 800; }
-.choice-audio-hint { font-size: .8rem; color: #059669; font-weight: 800; margin-top: .15rem; }
+.choice-emoji { font-size: 3.5rem; line-height: 1; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.06)); }
+.choice-title { font-size: 1.45rem; font-weight: 950; color: #1e293b; }
+.choice-english { font-size: 1rem; color: #475569; font-weight: 800; }
+.choice-audio-hint { font-size: .85rem; color: #059669; font-weight: 800; margin-top: .2rem; }
+
+.parent-play-audio-btn {
+    background: #5b507a !important;
+    color: #ffffff !important;
+    border: 0;
+    border-radius: 1rem;
+    padding: .65rem 1.25rem !important;
+    font-size: 1.05rem !important;
+    font-weight: 950 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    box-shadow: 0 3px 8px rgba(91, 80, 122, 0.2);
+    transition: background 0.15s ease;
+}
+.parent-play-audio-btn:hover { background: #4a4066 !important; }
 
 .support-sheet { background: #ffffff; color: #1f2937; border: 1px solid var(--bot-line); border-radius: 1rem; }
 .support-sheet table { width: 100%; border-collapse: collapse; }
@@ -388,7 +441,7 @@ body.theme-botanical .botanical-header {
         <button class="px-3 py-1.5 bg-[#517677] text-white font-extrabold rounded-xl text-xs md:text-sm" onclick="openScentMuseum()">
             氣味博物館
         </button>
-        <button class="px-3 py-1.5 bg-[#c08d46] text-white font-extrabold rounded-xl text-xs md:text-sm" onclick="openShareZone()">
+        <button class="px-3.5 py-1.5 bg-[#c08d46] text-white font-extrabold rounded-xl text-xs md:text-sm" onclick="openShareZone()">
             作品分享區
         </button>
         <button class="px-3.5 py-1.5 bg-[#4f603c] text-white font-bold rounded-xl text-xs md:text-sm" onclick="openGalleryDirect(0)">
@@ -401,65 +454,58 @@ body.theme-botanical .botanical-header {
     <section class="botanical-hero">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
             <div>
-                <p class="botanical-eyebrow">Professional Early Chinese Learning</p>
-                <h2><span>Four-Level Questioning</span> 四層次提問法</h2>
-                <p class="botanical-subtitle">From Questions to Deeper Thinking ｜ 從提問引導深度思考</p>
+                <span class="core-badge">教研核心理念</span>
+                <p class="core-quote">「我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。」</p>
             </div>
-            <div class="p-2 bg-[#586844] text-white rounded-xl text-right font-bold text-xs md:text-sm">
-                繪本實例：《那天風很大》
+            <div class="core-meta text-right">
+                適用：5歲上下 ｜ 中文一～二星 ｜ 每堂40分鐘
             </div>
         </div>
-        <p class="botanical-intro">我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。從看見、感受、連結到決定，每一堂都走一次短短的四層對話循環。</p>
+        <p class="core-desc">
+            教師專業層次：<strong>問事實 → 問感覺 → 問經驗 → 問決定</strong>；幼兒對話語言：<strong>看見 → 感受 → 連接 → 創造／我來決定</strong>。<br>
+            八堂課分為六堂故事核心與兩堂家庭實踐延伸；不是把四層拆成四堂，而是每一堂都走一次短短的四層對話循環。
+        </p>
         
         <div class="framework-pill-grid">
             <article class="framework-pill-card layer-fact">
-                <div class="framework-pill-head">
-                    <span class="framework-pill-emoji">👀</span>
-                    <div><h3 class="font-black text-sm md:text-base">問事實／看見</h3><p class="text-xs mt-0.5">我看見、聽見什麼？</p></div>
-                </div>
+                <div class="font-black text-sm md:text-base">👀 問事實／看見</div>
+                <div class="text-xs mt-1">我看見、聽見什麼？</div>
             </article>
             <article class="framework-pill-card layer-feeling">
-                <div class="framework-pill-head">
-                    <span class="framework-pill-emoji">❤️</span>
-                    <div><h3 class="font-black text-sm md:text-base">問感覺／感受</h3><p class="text-xs mt-0.5">我覺得怎麼樣？</p></div>
-                </div>
+                <div class="font-black text-sm md:text-base">❤️ 問感覺／感受</div>
+                <div class="text-xs mt-1">我覺得怎麼樣？</div>
             </article>
             <article class="framework-pill-card layer-experience">
-                <div class="framework-pill-head">
-                    <span class="framework-pill-emoji">🔗</span>
-                    <div><h3 class="font-black text-sm md:text-base">問經驗／連結</h3><p class="text-xs mt-0.5">我也有過嗎？</p></div>
-                </div>
+                <div class="font-black text-sm md:text-base">🔗 問經驗／連結</div>
+                <div class="text-xs mt-1">我也有過嗎？</div>
             </article>
             <article class="framework-pill-card layer-decision">
-                <div class="framework-pill-head">
-                    <span class="framework-pill-emoji">✋</span>
-                    <div><h3 class="font-black text-sm md:text-base">問決定／創造</h3><p class="text-xs mt-0.5">我想選什麼、怎麼做？</p></div>
-                </div>
+                <div class="font-black text-sm md:text-base">✋ 問決定／創造</div>
+                <div class="text-xs mt-1">我想選什麼、怎麼做？</div>
             </article>
         </div>
-        <div class="botanical-hero-note"><span>課程結構</span> 六堂故事核心＋兩堂家庭實踐；八堂課每一堂都走一次完整的四層短循環。</div>
     </section>
 
     <section class="course-journey grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5">
-        <div class="rounded-xl" style="--journey-accent: #6d5138;">
-            <span class="text-xs font-black text-[#6d5138]">第一階段｜第1～3堂</span>
+        <div>
+            <span class="text-xs font-black text-[#6d5138]">第一階段 ｜ 第1～3堂</span>
             <h3 class="text-base font-black text-[#314055] mt-1">感官進入</h3>
-            <p class="text-xs text-gray-600 mt-0.5">從風聲、樹的動作與真實氣味出發，先讓孩子看見、聽見、聞到，再轉成中文。</p>
+            <p class="text-xs text-gray-600 mt-1">從風聲、樹的動作與真實氣味出發，先讓孩子看見、聽見、聞到，再轉成中文。</p>
         </div>
-        <div class="rounded-xl" style="--journey-accent: #80523d;">
-            <span class="text-xs font-black text-[#80523d]">第二階段｜第4～5堂</span>
+        <div>
+            <span class="text-xs font-black text-[#80523d]">第二階段 ｜ 第4～5堂</span>
             <h3 class="text-base font-black text-[#314055] mt-1">文本與重組</h3>
-            <p class="text-xs text-gray-600 mt-0.5">先守住「大海、很大」的文本事實，再把地點、味道與故事結構積木重新組合。</p>
+            <p class="text-xs text-gray-600 mt-1">先守住「大海、很大」的文本事實，再把地點、味道與故事結構積木重新組合。</p>
         </div>
-        <div class="rounded-xl" style="--journey-accent: #79834d;">
-            <span class="text-xs font-black text-[#79834d]">第三階段｜第6堂</span>
+        <div>
+            <span class="text-xs font-black text-[#79834d]">第三階段 ｜ 第6堂</span>
             <h3 class="text-base font-black text-[#314055] mt-1">個人表達</h3>
-            <p class="text-xs text-gray-600 mt-0.5">沿用第五堂保存的同一組卡和回家畫作，看圖說出自己的故事。</p>
+            <p class="text-xs text-gray-600 mt-1">沿用第五堂保存的同一組卡和回家畫作，看圖說出自己的故事。</p>
         </div>
-        <div class="rounded-xl" style="--journey-accent: #596d43;">
-            <span class="text-xs font-black text-[#596d43]">第四階段｜第7～8堂</span>
+        <div>
+            <span class="text-xs font-black text-[#596d43]">第四階段 ｜ 第7～8堂</span>
             <h3 class="text-base font-black text-[#314055] mt-1">家庭實踐</h3>
-            <p class="text-xs text-gray-600 mt-0.5">建立家庭氣味博物館，最後用故事劇場、家長分享與探索家約定完成行動。</p>
+            <p class="text-xs text-gray-600 mt-1">建立家庭氣味博物館，最後用故事劇場、家長分享與探索家約定完成行動。</p>
         </div>
     </section>
 
@@ -480,8 +526,7 @@ body.theme-botanical .botanical-header {
         </div>
     </div>
 
-    <!-- 1. 首頁課堂卡片：淡淡色彩鋪底，活潑溫暖 -->
-    <div class="lesson-card-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5" id="homeLessonGrid"></div>
+    <div class="lesson-card-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3" id="homeLessonGrid"></div>
 </main>
 
 <main class="hidden space-y-3" id="view-lesson">
@@ -551,10 +596,9 @@ body.theme-botanical .botanical-header {
                 <span class="text-xs font-black px-2.5 py-0.5 bg-[#596d43] text-white rounded-full">家長專區</span>
                 <h2 class="text-xl md:text-2xl font-black text-[#314055]">離堂後 3～5 分鐘親子練習</h2>
             </div>
-            <p class="text-xs text-[#5f6a61]">八堂課均依照「問事實 → 問感覺 → 問經驗 → 問決定」走一個小循環。</p>
+            <p class="text-xs text-[#5f6a61]">八堂課均依照預設流程走一個小循環。</p>
         </div>
         
-        <!-- 3. 家長協助方式切換功能 -->
         <section class="p-4 rounded-2xl bg-white border border-[#d9d2c1] space-y-2">
             <h3 class="text-base font-black text-[#314055]">先選家長協助方式</h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
@@ -570,10 +614,9 @@ body.theme-botanical .botanical-header {
             </div>
         </section>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2.5" id="parentLessonGrid"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3" id="parentLessonGrid"></div>
     </section>
 
-    <!-- 2. 家長離堂練習大字體、大圖卡、點擊選中藍色高亮發光框 -->
     <section class="hidden space-y-4" id="parentPracticeSection">
         <div class="flex flex-col md:flex-row justify-between md:items-center gap-2 p-4 rounded-2xl bg-white border border-[#d9d2c1]">
             <div>
@@ -854,12 +897,13 @@ const slides = [
 
 const lessonsData = {
     1: {
-        title: "找到風：「那天，風很大！」",
+        title: "找到風",
+        fullTitle: "找到風：「那天，風很大！」",
+        desc: "那天，風很大 透過風聲引導感受與動作模仿",
         langText: "風／大／吹",
         sentenceText: "句型：風來了。風很大。",
         rawSentence: "風來了。風很大。",
         stage: "四層提問：看見",
-        themeClass: "card-theme-1",
         bookPageStr: "第 1 頁",
         slideIndex: 0,
         vocab: [
@@ -898,6 +942,7 @@ const lessonsData = {
                 prompt: "故事裡，那天是什麼很大？", 
                 enPrompt: "In the story, what was very big that day?",
                 feedback: "對，是風。一起說：風很大。",
+                isFactQuestion: true,
                 choices: [
                     { emoji: "💨", zh: "風", en: "Wind", correct: true }, 
                     { emoji: "🌧️", zh: "雨", en: "Rain", correct: false }
@@ -908,6 +953,7 @@ const lessonsData = {
                 prompt: "大風吹來，你的身體感覺怎麼樣？", 
                 enPrompt: "When the big wind blows, how does your body feel?",
                 feedback: "先讓孩子回答，再按他選的圖。",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "❄️", zh: "涼涼的", en: "Cool", correct: true }, 
                     { emoji: "😟", zh: "有一點怕", en: "Scared", correct: true },
@@ -919,6 +965,7 @@ const lessonsData = {
                 prompt: "你在哪裡吹過很大很大的風？", 
                 enPrompt: "Where have you felt a really big wind before?",
                 feedback: "問問孩子那時候在做什麼。",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏞️", zh: "公園", en: "Park", correct: true }, 
                     { emoji: "🏖️", zh: "海邊", en: "Beach", correct: true },
@@ -930,6 +977,7 @@ const lessonsData = {
                 prompt: "如果現在風很大，你決定做什麼？", 
                 enPrompt: "If the wind is strong now, what do you decide to do?",
                 feedback: "聽完孩子的決定，給予大大鼓勵！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏃", zh: "像風一樣跑", en: "Run like wind", correct: true }, 
                     { emoji: "🪁", zh: "想去放風箏", en: "Fly a kite", correct: true },
@@ -939,12 +987,13 @@ const lessonsData = {
         ]
     },
     2: {
-        title: "遇見樹：「風來了，樹怎麼了？」",
+        title: "遇見樹",
+        fullTitle: "遇見樹：「風來了，樹怎麼了？」",
+        desc: "風來了，樹怎麼了 化身為大樹進行肢體律動",
         langText: "樹／搖／動",
         sentenceText: "句型：我是樹。樹搖一搖。",
         rawSentence: "我是樹。樹搖一搖。",
         stage: "四層提問：感受",
-        themeClass: "card-theme-2",
         bookPageStr: "第 2 頁",
         slideIndex: 1,
         vocab: [
@@ -982,6 +1031,7 @@ const lessonsData = {
                 prompt: "故事裡，小明坐在哪裡？（讀繪本第2頁）", 
                 enPrompt: "Where is Xiao Ming sitting in the story?",
                 feedback: "太棒了，小明坐在大樹下休息。",
+                isFactQuestion: true,
                 choices: [
                     { emoji: "🌳", zh: "樹下", en: "Under tree", correct: true }, 
                     { emoji: "🚗", zh: "車子裡", en: "In the car", correct: false }
@@ -992,6 +1042,7 @@ const lessonsData = {
                 prompt: "風吹過來的時候，大樹看起來在做什麼？", 
                 enPrompt: "What does the big tree look like when the wind blows?",
                 feedback: "請孩子用雙手比出樹搖動的動作！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🌿", zh: "搖一搖", en: "Swaying", correct: true }, 
                     { emoji: "🗿", zh: "完全不動", en: "Still", correct: true }
@@ -1002,6 +1053,7 @@ const lessonsData = {
                 prompt: "你有看過外面的大樹被風吹得搖來搖去嗎？", 
                 enPrompt: "Have you seen trees outside swaying in the wind?",
                 feedback: "鼓勵孩子描述他看過的樹葉跳舞樣子。",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "👀", zh: "看過很多次", en: "Yes, often", correct: true }, 
                     { emoji: "🙈", zh: "好像沒注意", en: "Not really", correct: true }
@@ -1012,6 +1064,7 @@ const lessonsData = {
                 prompt: "如果你是一棵大樹，大風來時你想怎麼站穩？", 
                 enPrompt: "If you are a big tree, how will you stand strong in big wind?",
                 feedback: "雙腳踩穩地板，當一棵堅強勇敢的大樹！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🌲", zh: "腳踩穩用力站", en: "Stand firm", correct: true }, 
                     { emoji: "🍃", zh: "跟著風一起跳舞", en: "Dance along", correct: true }
@@ -1020,12 +1073,13 @@ const lessonsData = {
         ]
     },
     3: {
-        title: "發現味道：「風裡面有什麼？」",
+        title: "發現味道",
+        fullTitle: "發現味道：「風裡面有什麼？」",
+        desc: "風裡面有什麼 嗅覺感知與不認識味道的探索",
         langText: "聞／味道／香",
         sentenceText: "句型：我聞到了～。",
         rawSentence: "我聞到了～。",
         stage: "四層提問：嗅覺探索",
-        themeClass: "card-theme-3",
         bookPageStr: "第 3 頁",
         slideIndex: 2,
         customType: "lesson3",
@@ -1063,6 +1117,7 @@ const lessonsData = {
                 prompt: "故事裡，小明用身體的哪裡聞味道？", 
                 enPrompt: "Which part of the body does Xiao Ming use to smell?",
                 feedback: "答對了！我們用小鼻子聞一聞。",
+                isFactQuestion: true,
                 choices: [
                     { emoji: "👃", zh: "鼻子", en: "Nose", correct: true }, 
                     { emoji: "👂", zh: "耳朵", en: "Ears", correct: false }
@@ -1073,6 +1128,7 @@ const lessonsData = {
                 prompt: "當你聞到橘子皮或花朵的味道，感覺怎麼樣？", 
                 enPrompt: "How does it feel when you smell an orange or a flower?",
                 feedback: "每種感覺都很棒，聞一聞真舒服！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🌸", zh: "香香甜甜的", en: "Sweet / Fragrant", correct: true }, 
                     { emoji: "🍋", zh: "酸酸清爽的", en: "Sour / Fresh", correct: true }
@@ -1083,6 +1139,7 @@ const lessonsData = {
                 prompt: "你在家裡最常聞到哪一種喜歡的味道？", 
                 enPrompt: "What favorite smell do you often smell at home?",
                 feedback: "那是專屬於我們家裡溫暖的味道呢！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🍞", zh: "烤麵包香", en: "Baked bread", correct: true }, 
                     { emoji: "🍲", zh: "煮湯的香味", en: "Cooking soup", correct: true }
@@ -1093,6 +1150,7 @@ const lessonsData = {
                 prompt: "如果風要帶禮物出發，你想送什麼味道給風？", 
                 enPrompt: "What smell would you like to give to the wind?",
                 feedback: "讓風帶著你的香味飛到很遠的大海！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🍊", zh: "橘子的香氣", en: "Orange scent", correct: true }, 
                     { emoji: "🌹", zh: "美麗的花香", en: "Flower scent", correct: true }
@@ -1101,12 +1159,13 @@ const lessonsData = {
         ]
     },
     4: {
-        title: "風的旅行：「風從哪裡來？」",
+        title: "風的旅行",
+        fullTitle: "風的旅行：「風從哪裡來？」",
+        desc: "風從哪裡來 帶來什麼 內建大圖配對語音發音台",
         langText: "大海／來／很大",
         sentenceText: "句型：風從大海來。大海很大。",
         rawSentence: "風從大海來。大海很大。",
         stage: "四層提問：文本事實",
-        themeClass: "card-theme-4",
         bookPageStr: "第 4 頁",
         slideIndex: 3,
         customType: "lesson4",
@@ -1144,6 +1203,7 @@ const lessonsData = {
                 prompt: "故事裡，風回答小明它從哪裡來？", 
                 enPrompt: "In the story, where did the wind say it came from?",
                 feedback: "風說了：大海！然後說大海很大。",
+                isFactQuestion: true,
                 choices: [
                     { emoji: "🌊", zh: "大海", en: "Ocean", correct: true }, 
                     { emoji: "🏔️", zh: "雪山", en: "Snow mountain", correct: false }
@@ -1154,6 +1214,7 @@ const lessonsData = {
                 prompt: "聽風說大海『很大很大』，你心中感覺怎麼樣？", 
                 enPrompt: "When the wind says ocean is 'very big', how do you feel?",
                 feedback: "好想跟著風一起飛去海邊看看呢！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "✨", zh: "好想去看看", en: "Want to see it", correct: true }, 
                     { emoji: "🤩", zh: "覺得很神奇", en: "Feels magical", correct: true }
@@ -1164,6 +1225,7 @@ const lessonsData = {
                 prompt: "你有看過藍藍的大海、聽過海浪的聲音嗎？", 
                 enPrompt: "Have you seen the blue ocean or heard ocean waves?",
                 feedback: "海浪嘩啦嘩啦，真是太美妙的聲音了！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏖️", zh: "看過海邊沙灘", en: "Seen the beach", correct: true }, 
                     { emoji: "📺", zh: "在電視書上看過", en: "Seen in books/TV", correct: true }
@@ -1174,6 +1236,7 @@ const lessonsData = {
                 prompt: "如果你可以決定，你今天想讓風吹去哪裡？", 
                 enPrompt: "If you can decide, where do you want wind to travel today?",
                 feedback: "乘著大風出發，展開精彩的大冒險！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏰", zh: "神奇城堡", en: "Magic Castle", correct: true }, 
                     { emoji: "🌌", zh: "美麗星空", en: "Starry Sky", correct: true }
@@ -1182,12 +1245,14 @@ const lessonsData = {
         ]
     },
     5: {
-        title: "吹亂故事：「我們一起蓋故事！」",
+        title: "吹亂故事",
+        fullTitle: "吹亂故事：「我們一起蓋故事！」",
+        desc: "我們一起蓋故事 大風吹隨機抽卡與搞笑故事組裝",
         langText: "時間／主角／地點",
         sentenceText: "句型：白天，小明在樹下睡覺。",
         rawSentence: "白天，小明在樹下睡覺。",
         stage: "四層提問：故事結構",
-        themeClass: "card-theme-5",
+        isGame: true,
         bookPageStr: "第 5 頁",
         slideIndex: 4,
         customType: "lesson5",
@@ -1225,6 +1290,7 @@ const lessonsData = {
                 prompt: "剛剛抽出來的故事卡片裡，主角是誰呢？", 
                 enPrompt: "Who is the main character in our drawn story card?",
                 feedback: "找到了！主角是可愛的小主角。",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "👦", zh: "小明", en: "Xiao Ming", correct: true }, 
                     { emoji: "🐱", zh: "小貓咪", en: "Little Cat", correct: true }
@@ -1235,6 +1301,7 @@ const lessonsData = {
                 prompt: "被大風吹亂的故事，你聽完覺得好玩嗎？", 
                 enPrompt: "How do you feel about this mixed-up windy story?",
                 feedback: "哈哈！故事變得特別又好笑！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "😂", zh: "太好笑了", en: "Super funny", correct: true }, 
                     { emoji: "💡", zh: "很有創意", en: "Creative", correct: true }
@@ -1245,6 +1312,7 @@ const lessonsData = {
                 prompt: "你平常喜歡跟爸爸媽媽一起編好笑的故事嗎？", 
                 enPrompt: "Do you like creating funny stories with mom and dad?",
                 feedback: "我們常常一起把天馬行空變成好聽的故事！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "📚", zh: "最喜歡編故事", en: "Love making stories", correct: true }, 
                     { emoji: "🎨", zh: "喜歡用畫圖說", en: "Like drawing stories", correct: true }
@@ -1255,6 +1323,7 @@ const lessonsData = {
                 prompt: "你決定給今天的故事一個什麼樣的結尾？", 
                 enPrompt: "What kind of ending do you decide to give this story?",
                 feedback: "太棒的結局！把這組故事好好保存下來吧！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏠", zh: "開開心心回家", en: "Happily go home", correct: true }, 
                     { emoji: "🎉", zh: "大家一起開派對", en: "Party together", correct: true }
@@ -1263,12 +1332,13 @@ const lessonsData = {
         ]
     },
     6: {
-        title: "小故事家：「現在換我蓋故事！」",
+        title: "小故事家",
+        fullTitle: "小故事家：「現在換我蓋故事！」",
+        desc: "現在換我蓋故事 繪本排序、成果發表與故事家認證",
         langText: "故事／作家／回家",
         sentenceText: "句型：那天風很大，風從大海來。",
         rawSentence: "那天風很大，風從大海來。",
         stage: "四層提問：個人表達",
-        themeClass: "card-theme-6",
         bookPageStr: "第 6 頁",
         slideIndex: 5,
         customType: "lesson6",
@@ -1306,6 +1376,7 @@ const lessonsData = {
                 prompt: "故事的最後，小明拍拍褲子回到哪裡？（讀繪本第6頁）", 
                 enPrompt: "At the end of the story, where did Xiao Ming go?",
                 feedback: "沒錯！天黑風停了，小明回家了。",
+                isFactQuestion: true,
                 choices: [
                     { emoji: "🏠", zh: "回家了", en: "Went home", correct: true }, 
                     { emoji: "🏫", zh: "去學校", en: "Went to school", correct: false }
@@ -1316,6 +1387,7 @@ const lessonsData = {
                 prompt: "今天自己當小小故事家講故事，心情怎麼樣？", 
                 enPrompt: "How does it feel to be a little storyteller today?",
                 feedback: "你講得非常清楚、生動，真的好厲害！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🌟", zh: "超級有自信", en: "Very confident", correct: true }, 
                     { emoji: "🥰", zh: "很開心溫暖", en: "Happy & warm", correct: true }
@@ -1326,6 +1398,7 @@ const lessonsData = {
                 prompt: "平常去公園玩好之後，回到家最想做什麼？", 
                 enPrompt: "When you get home after playing, what do you want to do first?",
                 feedback: "洗洗手、喝喝水，跟家人分享今天的大發現！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🥛", zh: "喝杯水吃點心", en: "Drink water / snack", correct: true }, 
                     { emoji: "🛋️", zh: "抱抱爸爸媽媽", en: "Hug parents", correct: true }
@@ -1336,6 +1409,7 @@ const lessonsData = {
                 prompt: "你決定把今天的故事圖畫送給誰當禮物？", 
                 enPrompt: "Who do you decide to give your story drawing to as a gift?",
                 feedback: "這是一份最有愛、最獨一無二的禮物！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🎁", zh: "送給爸爸媽媽", en: "Give to parents", correct: true }, 
                     { emoji: "🖼️", zh: "貼在牆上展示", en: "Hang on the wall", correct: true }
@@ -1344,12 +1418,13 @@ const lessonsData = {
         ]
     },
     7: {
-        title: "家庭氣味博物館：「這個味道讓我想到……」",
+        title: "家庭氣味博物館",
+        fullTitle: "家庭氣味博物館：「這個味道讓我想到……」",
+        desc: "把家裡的一種味道帶進課堂，從物件、感受、回憶走到自己的收藏決定",
         langText: "家／味道／想到",
         sentenceText: "句型：這是家裡的味道。它讓我想到～。",
         rawSentence: "這是家裡的味道。它讓我想到～。",
         stage: "四層提問：家庭連結",
-        themeClass: "card-theme-7",
         bookPageStr: "第 3 頁",
         slideIndex: 2,
         customType: "lesson7",
@@ -1387,6 +1462,7 @@ const lessonsData = {
                 prompt: "今天我們在家庭氣味博物館裡找到什麼味道？", 
                 enPrompt: "What family scent did we discover in the museum today?",
                 feedback: "哇！這是我們家裡特別的氣味收藏。",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🍵", zh: "溫暖的茶香", en: "Warm tea scent", correct: true }, 
                     { emoji: "🧼", zh: "乾淨的肥皂香", en: "Fresh soap scent", correct: true }
@@ -1397,6 +1473,7 @@ const lessonsData = {
                 prompt: "輕輕聞一聞這個味道，你的心裡覺得怎麼樣？", 
                 enPrompt: "When you gently smell this scent, how does it feel inside?",
                 feedback: "聞起來放鬆又安心，這就是家的感覺！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "😌", zh: "很放鬆很安心", en: "Relaxed & safe", correct: true }, 
                     { emoji: "☀️", zh: "暖洋洋的很舒服", en: "Warm & cozy", correct: true }
@@ -1407,6 +1484,7 @@ const lessonsData = {
                 prompt: "這個味道會讓你想起家裡的哪一個角落或回憶？", 
                 enPrompt: "Does this scent remind you of a cozy spot at home?",
                 feedback: "每個氣味背後都有我們在一起的美好時光！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🛏️", zh: "軟軟溫暖的床", en: "Soft warm bed", correct: true }, 
                     { emoji: "🍳", zh: "熱鬧飄香的廚房", en: "Delicious kitchen", correct: true }
@@ -1417,6 +1495,7 @@ const lessonsData = {
                 prompt: "你決定給今天這件氣味收藏取一個什麼好聽的名字？", 
                 enPrompt: "What special name do you decide to give this scent collection?",
                 feedback: "名字取好了！永遠留在我們家的氣味博物館裡！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🏺", zh: "「幸福的香氣」", en: "'Happy Aroma'", correct: true }, 
                     { emoji: "✨", zh: "「溫暖的回憶」", en: "'Warm Memory'", correct: true }
@@ -1425,12 +1504,13 @@ const lessonsData = {
         ]
     },
     8: {
-        title: "故事劇場與家長發表：「我是小小探索家！」",
+        title: "故事劇場與家長發表",
+        fullTitle: "故事劇場與家長發表：「我是小小探索家！」",
+        desc: "演出風的故事、分享作品，最後說出「下次遇到未知，我決定怎麼探索」",
         langText: "先／最後／我決定",
         sentenceText: "句型：先看一看，然後問一問，最後說給家人聽。",
         rawSentence: "先看一看，然後問一問，最後說給家人聽。",
         stage: "四層提問：綜合實踐",
-        themeClass: "card-theme-8",
         bookPageStr: "第 7 頁",
         slideIndex: 6,
         customType: "lesson8",
@@ -1468,6 +1548,7 @@ const lessonsData = {
                 prompt: "在今天的故事劇場舞台上，你扮演了哪個角色？", 
                 enPrompt: "Which character did you play on the story stage today?",
                 feedback: "你的動作和聲音演得維妙維肖！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "💨", zh: "神奇大風", en: "Magic Wind", correct: true }, 
                     { emoji: "👦", zh: "勇敢的小明", en: "Brave Xiao Ming", correct: true }
@@ -1478,6 +1559,7 @@ const lessonsData = {
                 prompt: "完成全部 8 堂線上繪本課，你覺得自己棒不棒？", 
                 enPrompt: "After finishing all 8 lessons, how proud do you feel?",
                 feedback: "超級棒！你是一位優秀的小小探索家！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🎉", zh: "超棒超有成就感", en: "Super proud!", correct: true }, 
                     { emoji: "🥳", zh: "很開心學會好多", en: "Learned so much", correct: true }
@@ -1488,6 +1570,7 @@ const lessonsData = {
                 prompt: "這 8 堂課裡面，你最喜歡哪一次的探索體驗？", 
                 enPrompt: "Among all 8 lessons, which adventure was your favorite?",
                 feedback: "每一次的看見、感受與決定，都讓你更長大囉！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🍃", zh: "找風與聞味道", en: "Finding wind & scents", correct: true }, 
                     { emoji: "🎭", zh: "編故事與上台演", en: "Story making & stage", correct: true }
@@ -1497,7 +1580,8 @@ const lessonsData = {
                 layer: "✋ 第四層 ｜ 問決定・創造",
                 prompt: "未來在生活中遇到不認識的新事物，你決定怎麼做？", 
                 enPrompt: "In the future when you see new unknown things, what will you do?",
-                feedback: "太棒了！帶著好奇心與勇敢，繼續探索美麗的大世界！",
+                feedback: "太敗了！帶著好奇心與勇敢，繼續探索美麗的大世界！",
+                isFactQuestion: false,
                 choices: [
                     { emoji: "🔍", zh: "停下來看一看聞一聞", en: "Look, smell, explore", correct: true }, 
                     { emoji: "❓", zh: "勇敢發問並跟家人分享", en: "Ask questions & share", correct: true }
@@ -1513,19 +1597,18 @@ let teacherScores = { fact: 'na', feeling: 'na', connection: 'na', decision: 'na
 
 function initHome() {
     const grid = document.getElementById('homeLessonGrid');
-    // 1. 首頁課堂卡片：淡淡色彩鋪底，活潑溫暖
     grid.innerHTML = Object.keys(lessonsData).map(num => {
         const d = lessonsData[num];
         return `
-            <div onclick="openLesson(${num})" class="cursor-pointer ${d.themeClass} transition space-y-1">
+            <div onclick="openLesson(${num})" class="cursor-pointer space-y-1.5">
                 <div class="flex justify-between items-center">
-                    <span class="text-[11px] font-bold px-2 py-0.5 bg-[#f59e0b] text-black rounded-full">第 ${num} 堂</span>
-                    <span class="text-[11px] text-gray-500 font-bold">每堂四層</span>
+                    <span class="lesson-card-tag">第 ${num} 堂${d.isGame ? ' 遊戲' : ''}</span>
+                    <span class="text-[11px] text-[#5e6c5c] font-bold">每堂四層</span>
                 </div>
-                <h3 class="text-base font-black text-[#314055] leading-tight">${d.title.split('：')[0]}</h3>
-                <p class="text-xs text-gray-600 line-clamp-1">${d.title.split('：')[1] || ''}</p>
-                <div class="flex gap-1 pt-0.5">
-                    ${d.vocab.map(v => `<span class="px-2 py-0.5 bg-white/80 border border-black/5 text-[#92400e] text-[11px] font-bold rounded">${v.char}</span>`).join('')}
+                <h3 class="lesson-card-title">${d.title}</h3>
+                <p class="lesson-card-desc line-clamp-1">${d.desc}</p>
+                <div class="flex gap-1.5 pt-1">
+                    ${d.vocab.map(v => `<span class="lesson-card-vocab-pill">${v.char}</span>`).join('')}
                 </div>
             </div>
         `;
@@ -1535,10 +1618,10 @@ function initHome() {
     parentGrid.innerHTML = Object.keys(lessonsData).map(num => {
         const d = lessonsData[num];
         return `
-            <div onclick="openParentPractice(${num})" class="cursor-pointer p-3.5 rounded-xl ${d.themeClass} transition space-y-1">
-                <span class="text-[11px] font-bold px-2 py-0.5 bg-[#596d43] text-white rounded-full">第 ${num} 堂練習</span>
-                <h4 class="text-sm font-black text-[#314055] mt-1">${d.title.split('：')[0]}</h4>
-                <p class="text-xs text-gray-500">${d.sentenceText}</p>
+            <div onclick="openParentPractice(${num})" class="cursor-pointer p-4 rounded-xl border border-[#ded7c6] bg-white transition space-y-1">
+                <span class="text-xs font-bold px-2.5 py-0.5 bg-[#596d43] text-white rounded-full">第 ${num} 堂練習</span>
+                <h4 class="text-base font-black text-[#314055] mt-1">${d.title}</h4>
+                <p class="text-xs text-gray-500 font-bold">${d.sentenceText}</p>
             </div>
         `;
     }).join('');
@@ -1569,7 +1652,7 @@ function openLesson(num) {
     document.getElementById('lessonTag').innerText = `第 ${num} 堂`;
     document.getElementById('lessonFrameworkTag').innerText = d.stage.split('：')[1] || d.stage;
     document.getElementById('lessonSlidePageTag').innerText = `～讀繪本${d.bookPageStr}`;
-    document.getElementById('lessonTitle').innerText = d.title;
+    document.getElementById('lessonTitle').innerText = d.fullTitle;
     document.getElementById('lessonLang').innerText = `核心：${d.langText}`;
     document.getElementById('lessonSentence').innerText = d.sentenceText;
 
@@ -1641,25 +1724,24 @@ function openParentPractice(num) {
 
     document.getElementById('parentLessonTag').innerText = `第 ${num} 堂`;
     document.getElementById('parentPracticePageTag').innerText = `～讀繪本${d.bookPageStr}`;
-    document.getElementById('parentLessonTitle').innerText = d.title.split('：')[0];
+    document.getElementById('parentLessonTitle').innerText = d.title;
     document.getElementById('parentLessonWords').innerText = `語言積木：${d.langText}`;
 
-    // 2. 渲染放大的題目、圖卡與反饋
     document.getElementById('parentPracticeSteps').innerHTML = d.parentSteps.map((s, i) => `
-        <div class="p-4 md:p-5 rounded-2xl bg-white border border-[#ded8c6] space-y-3">
+        <div class="p-5 md:p-6 rounded-2xl bg-white border border-[#ded8c6] space-y-4">
             <div class="flex justify-between items-center">
-                <span class="text-xs md:text-sm font-bold text-[#596d43]">${s.layer}</span>
-                <button class="px-3.5 py-1.5 bg-[#5b5275] text-white text-xs md:text-sm font-bold rounded-xl flex items-center gap-1 shadow-sm" onclick="speakText('${s.prompt}')">
+                <span class="text-sm md:text-base font-bold text-[#596d43]">${s.layer}</span>
+                <button class="parent-play-audio-btn" onclick="speakText('${s.prompt}')">
                     <span>🔊</span> 播放中文問題
                 </button>
             </div>
             
-            <h3 class="parent-readable-question font-black text-lg md:text-xl text-[#1e293b] leading-snug">${s.prompt}</h3>
-            <p class="parent-en-text text-xs md:text-sm text-[#475569] font-bold hidden">${s.enPrompt}</p>
+            <h3 class="parent-readable-question font-black text-xl md:text-2xl text-[#1e293b] leading-snug">${s.prompt}</h3>
+            <p class="parent-en-text text-sm md:text-base text-[#475569] font-bold hidden">${s.enPrompt}</p>
             
-            <div class="grid grid-cols-2 sm:grid-cols-${s.choices.length > 2 ? '3' : '2'} gap-2.5 pt-1">
+            <div class="grid grid-cols-2 sm:grid-cols-${s.choices.length > 2 ? '3' : '2'} gap-3.5 pt-1">
                 ${s.choices.map(c => `
-                    <button class="parent-choice-card" onclick="selectParentChoice(this, '${c.zh}', ${c.correct})">
+                    <button class="parent-choice-card" onclick="selectParentChoice(this, '${c.zh}', ${c.correct}, ${s.isFactQuestion})">
                         <span class="choice-emoji">${c.emoji}</span>
                         <strong class="choice-title">${c.zh}</strong>
                         <span class="choice-english parent-en-text hidden">${c.en}</span>
@@ -1668,13 +1750,12 @@ function openParentPractice(num) {
                 `).join('')}
             </div>
             
-            <div class="pt-2 text-xs md:text-sm font-bold text-[#64748b] bg-[#f8fafc] p-2.5 rounded-xl border border-[#e2e8f0]">
+            <div class="pt-2.5 text-xs md:text-sm font-bold text-[#64748b] bg-[#f8fafc] p-3 rounded-xl border border-[#e2e8f0]">
                 💡 輔導建議：${s.feedback}
             </div>
         </div>
     `).join('');
 
-    // 應用當前語言模式設定
     applyCurrentParentMode();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1778,7 +1859,6 @@ function stopSpeech() {
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
 }
 
-// 3. 切換家長語言協助模式
 let currentParentMode = 'chinese';
 function setParentAssistMode(mode) {
     currentParentMode = mode;
@@ -1809,10 +1889,18 @@ function applyCurrentParentMode() {
     });
 }
 
-// 2. 點中時發光藍色亮框
-function selectParentChoice(el, text, isCorrect) {
+function selectParentChoice(el, text, isCorrect, isFactQuestion) {
     speakText(text);
     const parent = el.closest('.grid');
+    
+    if (isFactQuestion && !isCorrect) {
+        parent.querySelectorAll('.parent-choice-card').forEach(c => c.classList.remove('is-selected'));
+        setTimeout(() => {
+            speakText("再想一想喔，故事裡那天是什麼很大呢？");
+        }, 600);
+        return;
+    }
+
     parent.querySelectorAll('.parent-choice-card').forEach(c => c.classList.remove('is-selected'));
     el.classList.add('is-selected');
 }
