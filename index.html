@@ -3,142 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>《那天風很大》線上繪本教室</title>
+    <title>《那天風很大》線上繪本教室｜Four-Level Questioning</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #f5f2eb;
-            --text-main: #2d3748;
+            --bg-canvas: #f4f1ea;
+            --card-bg: #ffffff;
+            --text-dark: #232f3e;
+            --text-muted: #5e6d7e;
+            --brand-green: #3b503f;
+            --pill-gray: #eceae3;
         }
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+            background-color: var(--bg-canvas);
+            color: var(--text-dark);
+            font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
         }
-        .card-shadow {
-            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        .font-en {
+            font-family: 'Outfit', sans-serif;
+        }
+        .banner-hero {
+            background: #ffffff;
+            border: 1px solid #dfdad0;
+            box-shadow: 0 4px 20px -2px rgba(45, 38, 25, 0.05);
+        }
+        .btn-glass {
+            transition: all 0.2s ease;
+        }
+        .btn-glass:hover {
+            transform: translateY(-1px);
+        }
+        .tag-pill {
+            background: #eef2ed;
+            color: #3b503f;
+            border: 1px solid #d4ded0;
         }
     </style>
 </head>
-<body class="min-h-screen p-3 md:p-6 flex flex-col justify-between">
-    <div class="max-w-7xl w-full mx-auto space-y-6">
+<body class="min-h-screen p-3 md:p-6 flex flex-col justify-between selection:bg-[#e2ecc8]">
+    <div class="max-w-7xl w-full mx-auto space-y-5">
         
-        <!-- 頂部導覽列 -->
-        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center p-4 md:p-5 rounded-3xl bg-white border border-[#e2ded4] card-shadow gap-4">
+        <!-- 頂部導覽列 (與圖片一完全一致) -->
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center p-3.5 md:p-4 rounded-3xl bg-white border border-[#dfdad0] shadow-sm gap-4">
             <div class="flex items-center gap-3.5 cursor-pointer" onclick="showHome()">
-                <div class="w-12 h-12 bg-[#4a5859] rounded-2xl flex items-center justify-center font-bold text-2xl text-white shadow-sm">風</div>
+                <div class="w-12 h-12 bg-[#3f5242] rounded-2xl flex items-center justify-center font-bold text-2xl text-white shadow-inner">風</div>
                 <div>
-                    <h1 class="text-xl md:text-2xl font-black tracking-tight text-[#2d3748]">《那天風很大》線上繪本教室</h1>
-                    <p class="text-xs text-gray-500 font-medium">5歲幼兒中文 ｜ 完整8堂 ｜ 清晰對比 ｜ 字、詞、句分開朗讀 ｜ 家長多語・圖像答案</p>
+                    <h1 class="text-xl md:text-2xl font-black text-[#232f3e] tracking-tight">《那天風很大》線上繪本教室</h1>
+                    <p class="text-xs text-[#6e7d8d] font-bold">Picture Book Learning Studio ｜ 5歲幼兒中文・完整8堂・四層提問・家園合作</p>
                 </div>
             </div>
             
             <div class="flex flex-wrap items-center gap-2">
-                <button onclick="openModal('家長區', '提供多語對照指南與家庭引導提示，幫助家長在家中與幼兒進行對話互動。')" class="px-3.5 py-2 bg-[#4d6a6d] hover:bg-[#3d5557] text-white font-bold rounded-xl text-xs md:text-sm transition flex items-center gap-1 shadow-sm">
-                    家長區
+                <button onclick="toggleMode('parent')" class="px-4 py-2 bg-[#d7e5d8] hover:bg-[#c9dacb] text-[#2d4d36] font-black rounded-2xl text-xs md:text-sm transition flex items-center gap-1.5 shadow-sm">
+                    <span class="text-base">👨‍👩‍👧</span> 家長練習區 <span class="text-[10px] opacity-70 font-normal">Parent Practice</span>
                 </button>
-                <button onclick="openModal('協作／評量', '包含課堂觀察檢核表、課堂即時記錄與幼兒語言表達評量指標。')" class="px-3.5 py-2 bg-[#8c5e58] hover:bg-[#734c47] text-white font-bold rounded-xl text-xs md:text-sm transition flex items-center gap-1 shadow-sm">
-                    協作／評量
+                <button onclick="toggleMode('teacher')" class="px-4 py-2 bg-[#e8e6d9] hover:bg-[#dedbc9] text-[#4d4833] font-black rounded-2xl text-xs md:text-sm transition flex items-center gap-1.5 shadow-sm">
+                    <span class="text-base">👩‍🏫</span> 教師專區 <span class="text-[10px] opacity-70 font-normal">Teacher Only</span>
                 </button>
-                <button onclick="copyCurrentUrl()" class="px-3.5 py-2 bg-[#e2ded4] hover:bg-[#d5d0c4] text-[#4a5859] font-bold rounded-xl text-xs md:text-sm transition flex items-center gap-1">
-                    分享
+                <button onclick="copyCurrentUrl()" class="px-3.5 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-2xl text-xs md:text-sm transition flex items-center gap-1">
+                    🔗 分享
                 </button>
-                <button onclick="openModal('氣味博物館', '第7堂課專屬展區，展示幼兒與家庭共同記錄的各種氣味探索卡片。')" class="px-3.5 py-2 bg-[#4a6b6c] hover:bg-[#3b5758] text-white font-bold rounded-xl text-xs md:text-sm transition shadow-sm">
+                <button onclick="openModal('氣味博物館', '第7堂課專屬家庭氣味策展區：記錄孩子與家長共同發掘的每種生活氣味與背後故事。')" class="px-3.5 py-2 bg-[#517677] hover:bg-[#436263] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow-sm">
                     氣味博物館
                 </button>
-                <button onclick="openModal('作品分享區', '幼兒故事重組卡片、繪畫創作與小小故事劇場成果展。')" class="px-3.5 py-2 bg-[#b07d38] hover:bg-[#96692e] text-white font-bold rounded-xl text-xs md:text-sm transition shadow-sm">
+                <button onclick="openModal('作品分享區', '幼兒故事積木抽卡組合成果、天馬行空改編創作與課堂劇場照片展覽。')" class="px-3.5 py-2 bg-[#c08d46] hover:bg-[#aa7b3a] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow-sm">
                     作品分享區
                 </button>
-                <button onclick="openGalleryDirect(0)" class="px-4 py-2 bg-[#d8dcd6] hover:bg-[#c9cec6] text-[#2d3748] font-bold rounded-xl text-xs md:text-sm transition">
+                <button onclick="openGalleryDirect(0)" class="px-4 py-2 bg-[#3f5242] hover:bg-[#324235] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow">
                     全螢幕繪本
                 </button>
-                <button id="btnBackHome" onclick="showHome()" class="hidden px-4 py-2 bg-[#4a5859] text-white font-bold rounded-xl text-xs md:text-sm transition shadow">
+                <button id="btnBackHome" onclick="showHome()" class="hidden px-4 py-2 bg-[#8c5e58] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow">
                     回課程首頁
                 </button>
             </div>
         </header>
 
-        <!-- 首頁畫面 -->
+        <!-- 首頁主視覺 -->
         <main id="view-home" class="space-y-6">
             
-            <!-- 教研核心理念大卡片 -->
-            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#e2ded4] card-shadow space-y-6">
-                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-gray-100 pb-4">
-                    <span class="text-xs font-bold px-3.5 py-1.5 bg-[#e5a93c] text-white rounded-full self-start shadow-sm">教研核心理念</span>
-                    <span class="text-xs text-gray-500 font-medium">適用：5歲上下 ｜ 中文一～二星 ｜ 每堂40分鐘</span>
+            <!-- 核心 Banner (大標題與四層提問法) -->
+            <div class="p-6 md:p-9 rounded-3xl banner-hero space-y-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-gray-100 pb-5">
+                    <div class="space-y-1">
+                        <span class="text-xs font-black text-[#586b43] tracking-widest uppercase font-en">PROFESSIONAL EARLY CHINESE LEARNING</span>
+                        <div class="flex flex-wrap items-baseline gap-3">
+                            <h2 class="text-2xl md:text-4xl font-black text-[#232f3e] tracking-tight font-en">Four-Level Questioning</h2>
+                            <h2 class="text-2xl md:text-4xl font-black text-[#232f3e]">四層次提問法</h2>
+                        </div>
+                        <p class="text-base md:text-lg font-bold text-[#455848]">
+                            <span class="font-en font-black text-[#2d3a30]">From Questions to Deeper Thinking</span> ｜ 從提問引導深度思考
+                        </p>
+                    </div>
+                    <div class="bg-[#4d6342] text-white p-3 md:p-4 rounded-2xl text-center shrink-0 shadow-md">
+                        <p class="text-xs font-bold text-white/90">繪本實例：《那天風很大》</p>
+                        <p class="text-[11px] font-en opacity-80 mt-0.5">Picture Book Learning Studio</p>
+                    </div>
                 </div>
 
-                <div class="space-y-2">
-                    <h2 class="text-lg md:text-xl font-bold text-[#2d3748]">
-                        「我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。」
-                    </h2>
-                    <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-                        教師專業層次：<strong class="text-gray-800">問事實 ➔ 問感覺 ➔ 問經驗 ➔ 問決定</strong>；幼兒對話語言：<strong class="text-gray-800">看見 ➔ 感受 ➔ 連結 ➔ 創造／我來決定</strong>。
-                    </p>
-                    <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
-                        八堂課分為六堂故事核心與兩堂家庭實踐延伸；不是把四層拆成四堂，而是每一堂都走一次短短的四層對話循環。
+                <!-- 引言區塊 (淺綠色背景) -->
+                <div class="p-4 md:p-5 bg-[#f6f8f4] border-l-4 border-[#4d6342] rounded-r-2xl space-y-1.5">
+                    <p class="text-sm md:text-base font-bold text-[#293627] leading-relaxed">
+                        「我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。從看見、感受、連結到決定，每一堂都走一次短短的四層對話循環。」
                     </p>
                 </div>
 
                 <!-- 四色提問小卡 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-                    <div class="p-4 bg-[#edf4f9] border border-[#cfe0ee] rounded-2xl space-y-1">
-                        <div class="font-bold text-sm text-[#2b4c6f] flex items-center gap-1.5">
-                            <span class="text-xs bg-[#2b4c6f] text-white rounded px-1">1</span>
-                            問事實／看見
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                    <div class="p-4 bg-[#edf5fc] border border-[#cde2f5] rounded-2xl space-y-1 shadow-sm">
+                        <div class="font-black text-sm text-[#274b6e] flex items-center gap-1.5">
+                            <span class="text-sm">👀</span> 問事實／看見
                         </div>
-                        <p class="text-xs text-gray-600">我看見、聽見什麼？</p>
+                        <p class="text-xs text-[#52667a]">我看見、聽見什麼？</p>
                     </div>
-                    <div class="p-4 bg-[#fcedee] border border-[#f5cbcf] rounded-2xl space-y-1">
-                        <div class="font-bold text-sm text-[#8c3b47] flex items-center gap-1.5">
-                            <span class="text-xs bg-[#8c3b47] text-white rounded px-1">2</span>
-                            問感覺／感受
+                    <div class="p-4 bg-[#fdf0f2] border border-[#f7cbcf] rounded-2xl space-y-1 shadow-sm">
+                        <div class="font-black text-sm text-[#8c3545] flex items-center gap-1.5">
+                            <span class="text-sm">❤️</span> 問感覺／感受
                         </div>
-                        <p class="text-xs text-gray-600">我覺得怎麼樣？</p>
+                        <p class="text-xs text-[#7b5157]">我覺得怎麼樣？</p>
                     </div>
-                    <div class="p-4 bg-[#fdf8e2] border border-[#fae8a4] rounded-2xl space-y-1">
-                        <div class="font-bold text-sm text-[#7a641d] flex items-center gap-1.5">
-                            <span class="text-xs bg-[#7a641d] text-white rounded px-1">3</span>
-                            問經驗／連結
+                    <div class="p-4 bg-[#fdf9e6] border border-[#f8e79e] rounded-2xl space-y-1 shadow-sm">
+                        <div class="font-black text-sm text-[#796015] flex items-center gap-1.5">
+                            <span class="text-sm">🔗</span> 問經驗／連結
                         </div>
-                        <p class="text-xs text-gray-600">我也有過嗎？</p>
+                        <p class="text-xs text-[#73663a]">我也有過嗎？</p>
                     </div>
-                    <div class="p-4 bg-[#eef7ee] border border-[#cde8cf] rounded-2xl space-y-1">
-                        <div class="font-bold text-sm text-[#2e6238] flex items-center gap-1.5">
-                            <span class="text-xs bg-[#2e6238] text-white rounded px-1">4</span>
-                            問決定／創造
+                    <div class="p-4 bg-[#eef7ee] border border-[#cce8cf] rounded-2xl space-y-1 shadow-sm">
+                        <div class="font-black text-sm text-[#255f30] flex items-center gap-1.5">
+                            <span class="text-sm">✋</span> 問決定／創造
                         </div>
-                        <p class="text-xs text-gray-600">我想選什麼、怎麼做？</p>
+                        <p class="text-xs text-[#4b6a52]">我想選什麼、怎麼做？</p>
                     </div>
+                </div>
+
+                <!-- 課程結構細項條 -->
+                <div class="p-3 bg-[#faf9f5] border border-[#e5e1d5] rounded-2xl flex items-center gap-3 text-xs md:text-sm text-gray-700">
+                    <span class="px-2.5 py-1 bg-[#475749] text-white font-bold rounded-lg text-xs shrink-0">課程結構</span>
+                    <span>六堂故事核心＋兩堂家庭實踐；八堂課每一堂都走一次完整的四層短循環。</span>
                 </div>
             </div>
 
             <!-- 四階段說明卡片 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="p-5 rounded-3xl bg-[#f0f4f8] border border-[#d6e2ed] space-y-2 card-shadow">
-                    <span class="text-[11px] font-bold text-[#486581]">第一階段 ｜ 第1～3堂</span>
-                    <h3 class="text-base font-black text-[#102a43]">感官進入</h3>
+                <div class="p-5 rounded-3xl bg-[#eef4f9] border border-[#d3e3f0] space-y-2 shadow-sm">
+                    <span class="text-[11px] font-black text-[#375e84]">第一階段 ｜ 第1～3堂</span>
+                    <h3 class="text-base font-black text-[#1b354d]">感官進入</h3>
                     <p class="text-xs text-gray-600 leading-relaxed">
                         從風聲、樹的動作與真實氣味出發，先讓孩子看見、聽見、聞到，再轉成中文。
                     </p>
                 </div>
-                <div class="p-5 rounded-3xl bg-[#fbf0ea] border border-[#edd7cb] space-y-2 card-shadow">
-                    <span class="text-[11px] font-bold text-[#8c4b2d]">第二階段 ｜ 第4～5堂</span>
-                    <h3 class="text-base font-black text-[#431407]">文本與重組</h3>
+                <div class="p-5 rounded-3xl bg-[#fcf0ea] border border-[#edd7cc] space-y-2 shadow-sm">
+                    <span class="text-[11px] font-black text-[#8c4625]">第二階段 ｜ 第4～5堂</span>
+                    <h3 class="text-base font-black text-[#4d200c]">文本與重組</h3>
                     <p class="text-xs text-gray-600 leading-relaxed">
                         先守住「大海、很大」的文本事實，再把地點、味道與故事結構重新組合。
                     </p>
                 </div>
-                <div class="p-5 rounded-3xl bg-[#fdf7e7] border border-[#faeec7] space-y-2 card-shadow">
-                    <span class="text-[11px] font-bold text-[#7a641d]">第三階段 ｜ 第6堂</span>
-                    <h3 class="text-base font-black text-[#453608]">個人表達</h3>
+                <div class="p-5 rounded-3xl bg-[#fdf8e8] border border-[#f7e9be] space-y-2 shadow-sm">
+                    <span class="text-[11px] font-black text-[#7a6214]">第三階段 ｜ 第6堂</span>
+                    <h3 class="text-base font-black text-[#473604]">個人表達</h3>
                     <p class="text-xs text-gray-600 leading-relaxed">
                         沿用第五堂保存的同一組卡和回家畫作，看圖說出自己的故事。
                     </p>
                 </div>
-                <div class="p-5 rounded-3xl bg-[#eef7f2] border border-[#cde7d6] space-y-2 card-shadow">
-                    <span class="text-[11px] font-bold text-[#2e6238]">第四階段 ｜ 第7～8堂</span>
-                    <h3 class="text-base font-black text-[#0f381e]">家庭實踐</h3>
+                <div class="p-5 rounded-3xl bg-[#edf6f0] border border-[#cde8d4] space-y-2 shadow-sm">
+                    <span class="text-[11px] font-black text-[#265e33]">第四階段 ｜ 第7～8堂</span>
+                    <h3 class="text-base font-black text-[#0f381b]">家庭實踐</h3>
                     <p class="text-xs text-gray-600 leading-relaxed">
                         建立家庭氣味博物館，最後用故事劇場、家長分享與探索家約定完成行動。
                     </p>
@@ -146,81 +176,84 @@
             </div>
 
             <!-- 單元選擇標題 -->
-            <div class="text-center space-y-1 pt-2">
-                <h2 class="text-2xl md:text-3xl font-black text-[#2d3748]">請選擇今日上課單元</h2>
-                <p class="text-gray-500 text-sm">點選進入專屬單堂全螢幕教學模式，字體更大、畫面更專注</p>
+            <div class="text-center space-y-1 pt-3">
+                <h2 class="text-2xl md:text-3xl font-black text-[#232f3e]">請選擇今日上課單元</h2>
+                <p class="text-gray-500 text-sm">完整 8 堂課架構，點選進入專屬單堂全螢幕教學模式</p>
             </div>
 
             <!-- 8堂課卡片網格 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="homeLessonGrid"></div>
         </main>
 
-        <!-- 單堂教學模式 -->
+        <!-- 單堂教學互動頁面 -->
         <main id="view-lesson" class="hidden space-y-6">
-            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#e2ded4] flex flex-col md:flex-row justify-between md:items-center gap-4 card-shadow">
+            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
                 <div class="space-y-2">
                     <div class="flex items-center gap-2">
-                        <span id="lessonTag" class="text-sm font-bold bg-[#4a5859] text-white px-3.5 py-1 rounded-full">第 1 堂</span>
-                        <span id="lessonFrameworkTag" class="text-xs bg-[#eef2f2] text-[#334647] px-3 py-1 rounded-full border border-[#ccd8d8]">鷹架目標：看見</span>
+                        <span id="lessonTag" class="text-sm font-black bg-[#3f5242] text-white px-3.5 py-1 rounded-full">第 1 堂</span>
+                        <span id="lessonFrameworkTag" class="text-xs bg-[#eef2ed] text-[#334636] px-3 py-1 rounded-full font-bold border border-[#ccd8cc]">鷹架目標：看見</span>
                     </div>
-                    <h2 id="lessonTitle" class="text-2xl md:text-3xl font-black text-[#2d3748]">找到風：「那天，風很大！」</h2>
+                    <h2 id="lessonTitle" class="text-2xl md:text-3xl font-black text-[#232f3e]">找到風：「那天，風很大！」</h2>
                     <div class="flex flex-wrap items-center gap-3 pt-1">
-                        <span id="lessonLang" class="text-sm md:text-base font-bold text-[#6a4d2f] bg-[#fdf7e7] px-3.5 py-1.5 rounded-xl border border-[#fae8a4]">核心：風／大／吹</span>
-                        <button onclick="speakCurrentSentence()" class="text-sm md:text-base font-bold text-[#2e6238] bg-[#eef7ee] px-3.5 py-1.5 rounded-xl border border-[#cde8cf] hover:bg-[#deeedf] transition flex items-center gap-2">
+                        <span id="lessonLang" class="text-sm md:text-base font-bold text-[#6a4d2f] bg-[#fdf8e8] px-3.5 py-1.5 rounded-xl border border-[#fae8a4]">核心：風／大／吹</span>
+                        <button onclick="speakCurrentSentence()" class="text-sm md:text-base font-bold text-[#235e2f] bg-[#edf6f0] px-3.5 py-1.5 rounded-xl border border-[#cde8d4] hover:bg-[#deeedf] transition flex items-center gap-2">
                             <span id="lessonSentence">句型：風來了。風很大。</span>
-                            <span class="text-xs px-2 py-0.5 bg-[#2e6238] text-white rounded-full">點擊朗讀</span>
+                            <span class="text-xs px-2 py-0.5 bg-[#235e2f] text-white rounded-full">點擊朗讀</span>
                         </button>
                     </div>
                 </div>
-                <button onclick="openLessonSlide()" class="px-6 py-3.5 rounded-2xl bg-[#4a5859] hover:bg-[#384344] text-white font-black text-base md:text-lg transition shadow-md">
-                    開啟全滿版繪本投影
+                <button onclick="openLessonSlide()" class="px-6 py-4 rounded-2xl bg-[#3f5242] hover:bg-[#314134] text-white font-black text-base md:text-lg transition shadow-lg flex items-center gap-2">
+                    <span>📺</span> 開啟全滿版繪本投影
                 </button>
             </div>
 
-            <!-- 生字卡 -->
-            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#e2ded4] space-y-4 card-shadow">
-                <h3 class="text-xl md:text-2xl font-black text-[#2d3748]">本堂重點生字卡</h3>
+            <!-- 生字卡區塊 (分開朗讀) -->
+            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl md:text-2xl font-black text-[#232f3e]">本堂重點生字卡（點擊單獨發音）</h3>
+                    <span class="text-xs text-gray-500">字詞分離・標準台灣女聲發音</span>
+                </div>
                 <div id="lessonVocabList" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
             </div>
 
             <!-- 流程與四層提問 -->
             <div class="grid lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#e2ded4] space-y-4 card-shadow">
-                    <h3 class="text-xl font-black text-[#2d3748]">40分鐘黃金流程</h3>
+                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
+                    <h3 class="text-xl font-black text-[#232f3e]">40分鐘黃金流程</h3>
                     <div id="lessonFlow" class="space-y-3 text-sm md:text-base leading-relaxed"></div>
                 </div>
-                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#e2ded4] space-y-4 card-shadow">
-                    <h3 class="text-xl font-black text-[#2d3748]">四層提問引導</h3>
+                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
+                    <h3 class="text-xl font-black text-[#232f3e]">漢堡王四層次提問引導</h3>
                     <div id="lessonQuestions" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
                 </div>
             </div>
         </main>
 
-        <!-- 全螢幕繪本模式 -->
+        <!-- 全螢幕繪本投影片 -->
         <main id="view-gallery" class="hidden space-y-4">
-            <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border border-[#e2ded4] card-shadow">
+            <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border border-[#dfdad0] shadow-sm">
                 <div class="flex items-center gap-2">
-                    <button onclick="returnToLesson()" class="px-3.5 py-1.5 bg-[#4a5859] text-white font-bold rounded-xl text-xs md:text-sm shadow-sm">
+                    <button onclick="returnToLesson()" class="px-4 py-1.5 bg-[#3f5242] text-white font-bold rounded-xl text-xs md:text-sm shadow-sm">
                         返回課堂
                     </button>
-                    <span id="pageIndicator" class="font-black text-[#4a5859] text-base md:text-lg px-2">1 / 7</span>
+                    <span id="pageIndicator" class="font-black text-[#3f5242] text-base md:text-lg px-2">1 / 7</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 font-bold text-xs md:text-sm">上一頁</button>
-                    <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 font-bold text-xs md:text-sm">下一頁</button>
-                    <button onclick="readCurrentSlide()" class="px-3.5 py-1.5 bg-[#b07d38] text-white font-bold rounded-xl text-xs md:text-sm">朗讀</button>
-                    <button onclick="stopSpeech()" class="px-2.5 py-1.5 bg-gray-200 text-gray-700 font-bold rounded-xl text-xs">停止</button>
+                    <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 font-bold text-xs md:text-sm">上一頁</button>
+                    <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 font-bold text-xs md:text-sm">下一頁</button>
+                    <button onclick="readCurrentSlide()" class="px-4 py-1.5 bg-[#c08d46] hover:bg-[#a97a38] text-white font-bold rounded-xl text-xs md:text-sm shadow-sm">朗讀整段</button>
+                    <button onclick="stopSpeech()" class="px-3 py-1.5 bg-gray-200 text-gray-700 font-bold rounded-xl text-xs">停止</button>
                 </div>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-5 items-stretch">
-                <div class="lg:col-span-7 bg-white p-4 rounded-3xl border border-[#e2ded4] flex items-center justify-center min-h-[420px] card-shadow">
+                <div class="lg:col-span-7 bg-white p-4 rounded-3xl border border-[#dfdad0] flex items-center justify-center min-h-[440px] shadow-sm">
                     <img id="slideImage" src="slide1.jpg" alt="繪本畫面" class="max-h-[68vh] object-contain rounded-2xl shadow">
                 </div>
-                <div class="lg:col-span-5 bg-white p-6 md:p-8 rounded-3xl border border-[#e2ded4] flex flex-col justify-between card-shadow space-y-4">
+                <div class="lg:col-span-5 bg-white p-6 md:p-8 rounded-3xl border border-[#dfdad0] flex flex-col justify-between shadow-sm space-y-4">
                     <div>
                         <span class="text-xs text-gray-400 font-black tracking-wider uppercase">故事內文</span>
-                        <p id="slideCaption" class="text-2xl md:text-3xl font-black text-[#2d3748] leading-relaxed mt-3"></p>
+                        <p id="slideCaption" class="text-2xl md:text-3xl font-black text-[#232f3e] leading-relaxed mt-3"></p>
                     </div>
                     <div class="border-t border-gray-100 pt-4">
                         <h4 class="text-sm font-bold text-gray-500 mb-2">課堂提問引導</h4>
@@ -231,17 +264,17 @@
         </main>
 
         <footer class="text-center text-xs text-gray-400 py-3">
-            《那天風很大》線上繪本教室
+            《那天風很大》線上繪本教室 ｜ 設計於 5 歲幼兒雙語沉浸課堂
         </footer>
     </div>
 
-    <!-- 彈出提示視窗 -->
+    <!-- 彈出視窗 -->
     <div id="infoModal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full border border-[#e2ded4] card-shadow space-y-4">
-            <h3 id="modalTitle" class="text-xl font-black text-[#2d3748]"></h3>
+        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full border border-[#dfdad0] shadow-xl space-y-4">
+            <h3 id="modalTitle" class="text-xl font-black text-[#232f3e]"></h3>
             <p id="modalDesc" class="text-sm text-gray-600 leading-relaxed"></p>
             <div class="text-right pt-2">
-                <button onclick="closeModal()" class="px-5 py-2 bg-[#4a5859] text-white font-bold rounded-xl text-sm">關閉</button>
+                <button onclick="closeModal()" class="px-5 py-2 bg-[#3f5242] text-white font-bold rounded-xl text-sm">關閉</button>
             </div>
         </div>
     </div>
@@ -276,14 +309,14 @@
             grid.innerHTML = Object.keys(lessonsData).map(num => {
                 const d = lessonsData[num];
                 return `
-                    <div onclick="openLesson(${num})" class="cursor-pointer p-5 rounded-3xl bg-white border border-[#e2ded4] hover:border-[#4a5859] transition card-shadow space-y-2.5 hover:-translate-y-0.5">
+                    <div onclick="openLesson(${num})" class="cursor-pointer p-5 rounded-3xl bg-white border border-[#dfdad0] hover:border-[#3f5242] transition shadow-sm space-y-2.5 hover:-translate-y-1">
                         <div class="flex justify-between items-center">
-                            <span class="text-xs font-bold px-2.5 py-1 bg-[#4a5859] text-white rounded-full">第 ${num} 堂</span>
-                            <span class="text-xs text-gray-500 font-medium">${d.stage.replace('鷹架目標：', '')}</span>
+                            <span class="text-xs font-black px-2.5 py-1 bg-[#3f5242] text-white rounded-full">第 ${num} 堂</span>
+                            <span class="text-xs text-gray-500 font-bold">${d.stage.replace('鷹架目標：', '')}</span>
                         </div>
-                        <h3 class="text-base font-black text-[#2d3748]">${d.title.split('：')[0]}</h3>
+                        <h3 class="text-base font-black text-[#232f3e]">${d.title.split('：')[0]}</h3>
                         <p class="text-xs text-gray-500 line-clamp-1">${d.title.split('：')[1] || ''}</p>
-                        <div class="text-xs text-[#6a4d2f] font-bold bg-[#fdf7e7] px-2.5 py-1.5 rounded-xl border border-[#fae8a4]">${d.langText}</div>
+                        <div class="text-xs text-[#6a4d2f] font-bold bg-[#fdf8e8] px-2.5 py-1.5 rounded-xl border border-[#fae8a4]">${d.langText}</div>
                     </div>
                 `;
             }).join('');
@@ -313,21 +346,21 @@
             document.getElementById('lessonSentence').innerText = d.sentenceText;
 
             document.getElementById('lessonVocabList').innerHTML = d.vocab.map(v => `
-                <div onclick="speakText('${v.c}。${v.w}。')" class="cursor-pointer p-4 bg-[#fbfaf8] border border-[#e2ded4] hover:border-[#b07d38] rounded-2xl text-center space-y-1 transition">
-                    <span class="text-xs text-gray-400">${v.p}</span>
-                    <div class="text-3xl font-black text-[#b07d38]">${v.c}</div>
-                    <div class="text-xs font-bold text-[#2e6238] bg-[#eef7ee] py-1 rounded-lg">${v.w}</div>
+                <div onclick="speakText('${v.c}。${v.w}。')" class="cursor-pointer p-4 bg-[#faf9f5] border border-[#dfdad0] hover:border-[#c08d46] rounded-2xl text-center space-y-1 transition hover:scale-105">
+                    <span class="text-xs text-gray-400 font-bold">${v.p}</span>
+                    <div class="text-3xl font-black text-[#c08d46]">${v.c}</div>
+                    <div class="text-xs font-bold text-[#235e2f] bg-[#edf6f0] py-1 rounded-lg">${v.w}</div>
                 </div>
             `).join('');
 
             document.getElementById('lessonFlow').innerHTML = d.flow.map(f => `
-                <div class="p-3.5 bg-[#fbfaf8] border border-[#e2ded4] rounded-2xl text-gray-700">📍 ${f}</div>
+                <div class="p-3.5 bg-[#faf9f5] border border-[#dfdad0] rounded-2xl font-bold text-gray-700">📍 ${f}</div>
             `).join('');
 
-            const qStyles = ['bg-[#edf4f9] border-[#cfe0ee]', 'bg-[#fcedee] border-[#f5cbcf]', 'bg-[#fdf8e2] border-[#fae8a4]', 'bg-[#eef7ee] border-[#cde8cf]'];
+            const qStyles = ['bg-[#edf5fc] border-[#cde2f5]', 'bg-[#fdf0f2] border-[#f7cbcf]', 'bg-[#fdf9e6] border-[#f8e79e]', 'bg-[#eef7ee] border-[#cce8cf]'];
             document.getElementById('lessonQuestions').innerHTML = d.q.map((qText, i) => `
-                <div class="p-4 rounded-2xl border ${qStyles[i]} min-h-[90px] flex items-center">
-                    <p class="font-bold text-sm text-[#2d3748]">${qText}</p>
+                <div class="p-4 rounded-2xl border ${qStyles[i]} min-h-[90px] flex items-center shadow-sm">
+                    <p class="font-bold text-sm text-[#232f3e]">${qText}</p>
                 </div>
             `).join('');
 
@@ -360,7 +393,7 @@
             document.getElementById('slideCaption').innerText = s.text;
             document.getElementById('pageIndicator').innerText = `${currentSlideIdx + 1} / ${slides.length}`;
             document.getElementById('slidePrompts').innerHTML = s.prompts.map(p => `
-                <div class="p-3 bg-[#fbfaf8] border border-[#e2ded4] rounded-xl font-bold text-gray-700">${p}</div>
+                <div class="p-3 bg-[#faf9f5] border border-[#dfdad0] rounded-xl font-bold text-gray-700">${p}</div>
             `).join('');
         }
 
@@ -393,6 +426,14 @@
 
         function stopSpeech() {
             if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+        }
+
+        function toggleMode(type) {
+            if(type === 'parent') {
+                openModal('家長練習區指南', '為 5 歲幼兒家長設計的共讀陪伴指南：建議家長利用「你看見了什麼？這讓你想起什麼？」等自然提問，避免直接考問字詞。');
+            } else {
+                openModal('教師專區指引', '包含完整教案鷹架進程、課堂即時觀察檢核表，以及四層提問層次記錄表。');
+            }
         }
 
         function openModal(title, desc) {
