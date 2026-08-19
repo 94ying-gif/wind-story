@@ -1,457 +1,822 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>《那天風很大》線上繪本教室｜Four-Level Questioning</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Outfit:wght@500;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-canvas: #f4f1ea;
-            --card-bg: #ffffff;
-            --text-dark: #232f3e;
-            --text-muted: #5e6d7e;
-            --brand-green: #3b503f;
-            --pill-gray: #eceae3;
-        }
-        body {
-            background-color: var(--bg-canvas);
-            color: var(--text-dark);
-            font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
-        }
-        .font-en {
-            font-family: 'Outfit', sans-serif;
-        }
-        .banner-hero {
-            background: #ffffff;
-            border: 1px solid #dfdad0;
-            box-shadow: 0 4px 20px -2px rgba(45, 38, 25, 0.05);
-        }
-        .btn-glass {
-            transition: all 0.2s ease;
-        }
-        .btn-glass:hover {
-            transform: translateY(-1px);
-        }
-        .tag-pill {
-            background: #eef2ed;
-            color: #3b503f;
-            border: 1px solid #d4ded0;
-        }
-    </style>
+<!-- Standalone edition: Optimized for GitHub Pages by linking repository images -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>《那天風很大》8堂線上繪本課｜自然風格・四層提問原樣・家長按鍵清楚版</title>
+<style id="tailwind-standalone">
+/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --color-red-100: oklch(93.6% 0.032 17.717);
+    --color-red-200: oklch(88.5% 0.062 18.334);
+    --color-red-300: oklch(80.8% 0.114 19.571);
+    --color-red-800: oklch(44.4% 0.177 26.899);
+    --color-red-900: oklch(39.6% 0.141 25.723);
+    --color-orange-300: oklch(83.7% 0.128 66.29);
+    --color-orange-400: oklch(75% 0.183 55.934);
+    --color-orange-500: oklch(70.5% 0.213 47.604);
+    --color-amber-100: oklch(96.2% 0.059 95.617);
+    --color-amber-200: oklch(92.4% 0.12 95.746);
+    --color-amber-300: oklch(87.9% 0.169 91.605);
+    --color-amber-400: oklch(82.8% 0.189 84.429);
+    --color-amber-500: oklch(76.9% 0.188 70.08);
+    --color-amber-600: oklch(66.6% 0.179 58.318);
+    --color-amber-700: oklch(55.5% 0.163 48.998);
+    --color-amber-800: oklch(47.3% 0.137 46.201);
+    --color-amber-950: oklch(27.9% 0.077 45.635);
+    --color-yellow-100: oklch(97.3% 0.071 103.193);
+    --color-yellow-200: oklch(94.5% 0.129 101.54);
+    --color-yellow-300: oklch(90.5% 0.182 98.111);
+    --color-yellow-400: oklch(85.2% 0.199 91.936);
+    --color-yellow-500: oklch(79.5% 0.184 86.047);
+    --color-yellow-700: oklch(55.4% 0.135 66.442);
+    --color-yellow-950: oklch(28.6% 0.066 53.813);
+    --color-green-400: oklch(79.2% 0.209 151.711);
+    --color-green-500: oklch(72.3% 0.219 149.579);
+    --color-green-600: oklch(62.7% 0.194 149.214);
+    --color-emerald-100: oklch(95% 0.052 163.051);
+    --color-emerald-200: oklch(90.5% 0.093 164.15);
+    --color-emerald-300: oklch(84.5% 0.143 164.978);
+    --color-emerald-400: oklch(76.5% 0.177 163.223);
+    --color-emerald-500: oklch(69.6% 0.17 162.48);
+    --color-emerald-600: oklch(59.6% 0.145 163.225);
+    --color-emerald-700: oklch(50.8% 0.118 165.612);
+    --color-emerald-800: oklch(43.2% 0.095 166.913);
+    --color-emerald-950: oklch(26.2% 0.051 172.552);
+    --color-cyan-50: oklch(98.4% 0.019 200.873);
+    --color-cyan-100: oklch(95.6% 0.045 203.388);
+    --color-cyan-200: oklch(91.7% 0.08 205.041);
+    --color-cyan-300: oklch(86.5% 0.127 207.078);
+    --color-cyan-400: oklch(78.9% 0.154 211.53);
+    --color-cyan-500: oklch(71.5% 0.143 215.221);
+    --color-cyan-600: oklch(60.9% 0.126 221.723);
+    --color-cyan-700: oklch(52% 0.105 223.128);
+    --color-cyan-800: oklch(45% 0.085 224.283);
+    --color-cyan-950: oklch(30.2% 0.056 229.695);
+    --color-blue-100: oklch(93.2% 0.032 255.585);
+    --color-blue-200: oklch(88.2% 0.059 254.128);
+    --color-blue-300: oklch(80.9% 0.105 251.813);
+    --color-blue-400: oklch(70.7% 0.165 254.624);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-blue-800: oklch(42.4% 0.199 265.638);
+    --color-blue-950: oklch(28.2% 0.091 267.935);
+    --color-indigo-100: oklch(93% 0.034 272.788);
+    --color-indigo-200: oklch(87% 0.065 274.039);
+    --color-indigo-300: oklch(78.5% 0.115 274.713);
+    --color-indigo-400: oklch(67.3% 0.182 276.935);
+    --color-indigo-500: oklch(58.5% 0.233 277.117);
+    --color-indigo-800: oklch(39.8% 0.195 277.366);
+    --color-indigo-950: oklch(25.7% 0.09 281.288);
+    --color-purple-100: oklch(94.6% 0.033 307.174);
+    --color-purple-200: oklch(90.2% 0.063 306.703);
+    --color-purple-300: oklch(82.7% 0.119 306.383);
+    --color-purple-400: oklch(71.4% 0.203 305.504);
+    --color-purple-500: oklch(62.7% 0.265 303.9);
+    --color-purple-600: oklch(55.8% 0.288 302.321);
+    --color-purple-700: oklch(49.6% 0.265 301.924);
+    --color-purple-800: oklch(43.8% 0.218 303.724);
+    --color-purple-900: oklch(38.1% 0.176 304.987);
+    --color-purple-950: oklch(29.1% 0.149 302.717);
+    --color-fuchsia-400: oklch(74% 0.238 322.16);
+    --color-fuchsia-600: oklch(59.1% 0.293 322.896);
+    --color-fuchsia-700: oklch(51.8% 0.253 323.949);
+    --color-fuchsia-950: oklch(29.3% 0.136 325.661);
+    --color-pink-300: oklch(82.3% 0.12 346.018);
+    --color-pink-400: oklch(71.8% 0.202 349.761);
+    --color-pink-500: oklch(65.6% 0.241 354.308);
+    --color-rose-100: oklch(94.1% 0.03 12.58);
+    --color-rose-200: oklch(89.2% 0.058 10.001);
+    --color-rose-400: oklch(71.2% 0.194 13.428);
+    --color-rose-800: oklch(45.5% 0.188 13.697);
+    --color-rose-950: oklch(27.1% 0.105 12.094);
+    --color-slate-800: oklch(27.9% 0.041 260.031);
+    --color-gray-200: oklch(92.8% 0.006 264.531);
+    --color-gray-600: oklch(44.6% 0.03 256.802);
+    --color-gray-700: oklch(37.3% 0.034 259.733);
+    --color-black: #000;
+    --color-white: #fff;
+    --spacing: 0.25rem;
+    --container-md: 28rem;
+    --container-6xl: 72rem;
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --blur-md: 12px;
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif);
+  }
+  img, svg {
+    display: block;
+    vertical-align: middle;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+@layer utilities {
+  .absolute { position: absolute; }
+  .fixed { position: fixed; }
+  .relative { position: relative; }
+  .sticky { position: sticky; }
+  .inset-0 { inset: 0; }
+  .top-2 { top: 0.5rem; }
+  .z-40 { z-index: 40; }
+  .z-50 { z-index: 50; }
+  .col-span-2 { grid-column: span 2 / span 2; }
+  .col-span-full { grid-column: 1 / -1; }
+  .mx-auto { margin-inline: auto; }
+  .mt-1 { margin-top: 0.25rem; }
+  .mt-2 { margin-top: 0.5rem; }
+  .mt-3 { margin-top: 0.75rem; }
+  .mt-4 { margin-top: 1rem; }
+  .mr-auto { margin-right: auto; }
+  .mb-1 { margin-bottom: 0.25rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .block { display: block; }
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .hidden { display: none !important; }
+  .h-12 { height: 3rem; }
+  .h-20 { height: 5rem; }
+  .min-h-screen { min-height: 100vh; }
+  .w-12 { width: 3rem; }
+  .w-full { width: 100%; }
+  .max-w-6xl { max-width: 72rem; }
+  .max-w-md { max-width: 28rem; }
+  .max-w-\[1480px\] { max-width: 1480px; }
+  .cursor-pointer { cursor: pointer; }
+  .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .flex-col { flex-direction: column; }
+  .flex-wrap { flex-wrap: wrap; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .justify-between { justify-content: space-between; }
+  .justify-center { justify-content: center; }
+  .gap-1 { gap: 0.25rem; }
+  .gap-2 { gap: 0.5rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-5 { gap: 1.25rem; }
+  .gap-6 { gap: 1.5rem; }
+  .space-y-1 > :not(:last-child) { margin-bottom: 0.25rem; }
+  .space-y-2 > :not(:last-child) { margin-bottom: 0.5rem; }
+  .space-y-3 > :not(:last-child) { margin-bottom: 0.75rem; }
+  .space-y-4 > :not(:last-child) { margin-bottom: 1rem; }
+  .space-y-5 > :not(:last-child) { margin-bottom: 1.25rem; }
+  .space-y-6 > :not(:last-child) { margin-bottom: 1.5rem; }
+  .overflow-hidden { overflow: hidden; }
+  .overflow-x-auto { overflow-x: auto; }
+  .overflow-y-auto { overflow-y: auto; }
+  .rounded { border-radius: 0.25rem; }
+  .rounded-lg { border-radius: 0.5rem; }
+  .rounded-xl { border-radius: 0.75rem; }
+  .rounded-2xl { border-radius: 1rem; }
+  .rounded-3xl { border-radius: 1.5rem; }
+  .rounded-full { border-radius: 9999px; }
+  .border { border-width: 1px; }
+  .border-2 { border-width: 2px; }
+  .text-center { text-align: center; }
+  .text-left { text-align: left; }
+  .text-xs { font-size: 0.75rem; }
+  .text-sm { font-size: 0.875rem; }
+  .text-base { font-size: 1rem; }
+  .text-lg { font-size: 1.125rem; }
+  .text-xl { font-size: 1.25rem; }
+  .text-2xl { font-size: 1.5rem; }
+  .text-3xl { font-size: 1.875rem; }
+  .text-4xl { font-size: 2.25rem; }
+  .text-5xl { font-size: 3rem; }
+  .font-medium { font-weight: 500; }
+  .font-bold { font-weight: 700; }
+  .font-extrabold { font-weight: 800; }
+  .font-black { font-weight: 900; }
+  .p-2 { padding: 0.5rem; }
+  .p-3 { padding: 0.75rem; }
+  .p-4 { padding: 1rem; }
+  .p-5 { padding: 1.25rem; }
+  .p-6 { padding: 1.5rem; }
+  .p-8 { padding: 2rem; }
+  .px-3 { padding-inline: 0.75rem; }
+  .px-4 { padding-inline: 1rem; }
+  .px-5 { padding-inline: 1.25rem; }
+  .px-6 { padding-inline: 1.5rem; }
+  .py-1 { padding-block: 0.25rem; }
+  .py-2 { padding-block: 0.5rem; }
+  .py-3 { padding-block: 0.75rem; }
+  .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+  .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); }
+  .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); }
+  .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+  .transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+}
+</style>
+
+<style>
+/* Botanical & Soft Classroom System */
+:root {
+    --bot-paper: #f7f4eb;
+    --bot-paper-2: #fffdf7;
+    --bot-ink: #2f3a49;
+    --bot-muted: #687266;
+    --bot-line: #d9d2c1;
+    --bot-forest: #4d5f38;
+    --bot-forest-dark: #35452c;
+    --bot-olive: #73804c;
+    --bot-gold: #b98b3b;
+    --bot-shadow: 0 14px 34px rgba(55, 66, 48, .10);
+}
+
+body.theme-botanical {
+    background-color: var(--bot-paper) !important;
+    background-image:
+        radial-gradient(circle at 8% 6%, rgba(208, 218, 192, .42), transparent 27rem),
+        radial-gradient(circle at 92% 10%, rgba(234, 220, 178, .38), transparent 25rem),
+        linear-gradient(180deg, #faf8f2 0%, #f4f0e6 100%) !important;
+    color: var(--bot-ink) !important;
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif !important;
+}
+
+body.theme-botanical .botanical-header {
+    background: rgba(255, 253, 247, .96) !important;
+    border: 1px solid var(--bot-line) !important;
+    box-shadow: 0 8px 24px rgba(55, 66, 48, .09) !important;
+}
+
+.botanical-hero {
+    position: relative;
+    padding: clamp(1.35rem, 2.5vw, 2.4rem);
+    border: 1px solid var(--bot-line);
+    border-radius: 1.55rem;
+    background: rgba(255, 253, 247, .96);
+    box-shadow: var(--bot-shadow);
+}
+
+.botanical-eyebrow { color: var(--bot-olive); font-size: .78rem; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+.botanical-hero h2 { margin-top: .2rem; color: #314055; font-size: clamp(1.85rem, 4vw, 3.25rem); font-weight: 950; line-height: 1.12; }
+.botanical-subtitle { margin-top: .45rem; color: #465238; font-size: clamp(1rem, 2vw, 1.45rem); font-weight: 900; }
+.botanical-intro { margin-top: 1.25rem; padding: .9rem 1rem; border-left: 4px solid #748055; background: #f3f1e7; color: #435045; font-size: 1rem; font-weight: 700; line-height: 1.7; }
+.botanical-hero-note { margin-top: 1rem; padding: .75rem 1rem; border: 1px solid #d6d1bd; border-radius: .85rem; background: #fbf8ed; color: #4a5547; font-size: .9rem; font-weight: 800; }
+.botanical-hero-note span { margin-right: .55rem; color: #fff; background: #586844; padding: .28rem .55rem; border-radius: 999px; font-size: .72rem; }
+
+.framework-pill-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .9rem; margin-top: 1.25rem; }
+.framework-pill-card { border-radius: 1.35rem; padding: 1rem 1.15rem; border: 1.5px solid; }
+.framework-pill-head { display: flex; align-items: flex-start; gap: .65rem; }
+.framework-pill-emoji { width: 2.35rem; height: 2.35rem; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; background: rgba(255,255,255,.72); font-size: 1.2rem; }
+.framework-pill-card.layer-fact { background: #eef6ff; border-color: #b8d3eb; color: #4a6988; }
+.framework-pill-card.layer-feeling { background: #faedf2; border-color: #e5c6d1; color: #8d5a68; }
+.framework-pill-card.layer-experience { background: #fbf4db; border-color: #e5cf92; color: #8c6a24; }
+.framework-pill-card.layer-decision { background: #edf7ef; border-color: #bfd6c5; color: #4f7b62; }
+
+.course-journey > div {
+    min-height: 170px;
+    background: rgba(255, 253, 247, .95) !important;
+    border: 1px solid var(--bot-line) !important;
+    border-top: 5px solid var(--journey-accent, #6d5138) !important;
+    box-shadow: 0 7px 20px rgba(55,66,48,.06) !important;
+}
+
+.lesson-quick-nav { background: rgba(255,253,247,.96) !important; border: 1px solid var(--bot-line) !important; }
+.lesson-quick-nav button { background: #e9eddf !important; color: #40503b !important; border: 1px solid #cdd5c3; font-weight: 900; }
+.lesson-quick-nav button:hover { background: #586844 !important; color: #fff !important; }
+
+.lesson-card-grid > div {
+    min-height: 215px;
+    background: rgba(255,253,247,.97) !important;
+    border: 1px solid var(--bot-line) !important;
+    border-left: 6px solid var(--lesson-accent, #6d5138) !important;
+    box-shadow: 0 8px 22px rgba(55,66,48,.07) !important;
+}
+.lesson-card-grid > div:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(55,66,48,.12) !important; }
+
+.classic-question-card {
+    min-height: 118px;
+    padding: 1rem 1.05rem;
+    border-radius: 1.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem;
+}
+.classic-question-fact { background: #eaf4fb; border: 1.5px solid #bdd7e8; }
+.classic-question-feeling { background: #fbecef; border: 1.5px solid #e7c3ca; }
+.classic-question-experience { background: #fff7da; border: 1.5px solid #e6cf89; }
+.classic-question-decision { background: #eaf5ed; border: 1.5px solid #bfd9c7; }
+.classic-question-title { display: flex; align-items: center; gap: .35rem; font-size: 1rem; }
+
+.reader-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(330px, .85fr); gap: 1.1rem; }
+.story-image-panel, .story-text-panel, .hamburger-panel {
+    border: 1px solid var(--bot-line);
+    border-radius: 1.5rem;
+    background: rgba(255, 253, 248, .96);
+    box-shadow: var(--bot-shadow);
+}
+.story-image-frame {
+    min-height: 420px;
+    height: min(68vh, 700px);
+    border-radius: 1.1rem;
+    background: #ebe6df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: .75rem;
+}
+.story-image { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: .55rem; }
+.story-caption { margin-top: 1.5rem; color: var(--bot-ink) !important; font-size: clamp(1.75rem, 2.65vw, 3.1rem); font-weight: 900; line-height: 1.55; }
+.hamburger-question-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; margin-top: 1rem; }
+.hamburger-question { padding: 1rem; border-radius: 1rem; border: 1px solid var(--bot-line); font-weight: 750; }
+.hamburger-question:nth-child(1) { background: #fff5cf; border-left: 6px solid #d7ad3d; }
+.hamburger-question:nth-child(2) { background: #f9e7eb; border-left: 6px solid #c98290; }
+.hamburger-question:nth-child(3) { background: #e9f1f8; border-left: 6px solid #7897b3; }
+.hamburger-question:nth-child(4) { background: #e7f2e9; border-left: 6px solid #6f9a7e; }
+
+/* Vocal & Button overrides */
+.parent-entry-button {
+    background: #274b36 !important;
+    color: #fffdf7 !important;
+    border: 2px solid #173724 !important;
+    border-radius: 1rem !important;
+    padding: .55rem .9rem !important;
+    font-weight: 900 !important;
+}
+.teacher-entry-button {
+    background: #35594a !important;
+    color: #fff !important;
+    border: 2px solid #29463b !important;
+    border-radius: 1rem !important;
+    padding: .62rem .9rem !important;
+    font-weight: 900 !important;
+}
+.vocab-card-soft {
+    padding: 1rem;
+    border: 2px solid #d6c9dc;
+    border-radius: 1.35rem;
+    background: #fffdf8;
+}
+.vocab-big-char { color: #79520c !important; font-size: clamp(2.7rem, 5vw, 4.2rem); font-weight: 950; }
+.vocab-word-label { padding: .25rem .5rem; border-radius: .55rem; background: #d4e6d9; color: #315b47 !important; font-weight: 950; }
+
+@media (max-width: 1024px) {
+    .reader-layout { grid-template-columns: 1fr; }
+    .framework-pill-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+    .framework-pill-grid, .hamburger-question-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
-<body class="min-h-screen p-3 md:p-6 flex flex-col justify-between selection:bg-[#e2ecc8]">
-    <div class="max-w-7xl w-full mx-auto space-y-5">
+
+<body class="theme-botanical min-h-screen p-2 md:p-5 flex flex-col justify-between">
+<div class="max-w-[1480px] w-full mx-auto space-y-4">
+
+<header class="botanical-header sticky top-2 z-40 flex justify-between items-center p-4 rounded-2xl shadow-lg flex-wrap gap-4">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
+        <div class="w-12 h-12 bg-[#4a5859] rounded-2xl flex items-center justify-center font-bold text-2xl text-white shadow">風</div>
+        <div>
+            <h1 class="text-xl md:text-2xl font-black text-[#314055]">《那天風很大》線上繪本教室</h1>
+            <p class="text-xs text-[#6d776d] font-bold">Picture Book Learning Studio｜5歲幼兒中文・完整8堂・四層提問・家園合作</p>
+        </div>
+    </div>
+    <div class="flex items-center gap-2 flex-wrap justify-end">
+        <button class="hidden px-4 py-2 bg-[#4a5859] text-white font-bold rounded-xl text-sm transition shadow" id="btnBackHome" onclick="showHome()">
+            回課程首頁
+        </button>
+        <button class="parent-entry-button flex items-center gap-2 transition" onclick="openParentHome()">
+            <span>👪</span>
+            <div class="flex flex-col text-left leading-none">
+                <strong class="text-sm">家長練習區</strong>
+                <small class="text-[10px] text-[#dcebdc]">Parent Practice</small>
+            </div>
+        </button>
+        <button class="teacher-entry-button flex items-center gap-2 transition" onclick="openTeacherHub()">
+            <span>👩‍🏫</span>
+            <div class="flex flex-col text-left leading-none">
+                <strong class="text-sm">教師專區</strong>
+                <small class="text-[10px] text-[#e4efe9]">Teacher Only</small>
+            </div>
+        </button>
+        <button class="px-3.5 py-2 rounded-xl text-xs md:text-sm font-extrabold bg-[#ece6f0] text-[#4c3e59] border border-[#cfc1d6]" onclick="copyCurrentUrl()">
+            🔗 分享
+        </button>
+        <button class="px-3.5 py-2 bg-[#517677] text-white font-extrabold rounded-xl text-xs md:text-sm shadow" onclick="openScentMuseum()">
+            氣味博物館
+        </button>
+        <button class="px-3.5 py-2 bg-[#c08d46] text-white font-extrabold rounded-xl text-xs md:text-sm shadow" onclick="openShareZone()">
+            作品分享區
+        </button>
+        <button class="px-4 py-2 bg-[#4f603c] text-white font-bold rounded-xl text-xs md:text-sm shadow" onclick="openGalleryDirect(0)">
+            全螢幕繪本
+        </button>
+    </div>
+</header>
+
+<main class="space-y-6" id="view-home">
+    <section class="botanical-hero">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+            <div>
+                <p class="botanical-eyebrow">Professional Early Chinese Learning</p>
+                <h2><span>Four-Level Questioning</span> 四層次提問法</h2>
+                <p class="botanical-subtitle">From Questions to Deeper Thinking ｜ 從提問引導深度思考</p>
+            </div>
+            <div class="p-3 bg-[#586844] text-white rounded-2xl text-right font-bold text-sm">
+                繪本實例：《那天風很大》<br><span class="text-xs opacity-80">Picture Book Learning Studio</span>
+            </div>
+        </div>
+        <p class="botanical-intro">我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。從看見、感受、連結到決定，每一堂都走一次短短的四層對話循環。</p>
         
-        <!-- 頂部導覽列 (與圖片一完全一致) -->
-        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center p-3.5 md:p-4 rounded-3xl bg-white border border-[#dfdad0] shadow-sm gap-4">
-            <div class="flex items-center gap-3.5 cursor-pointer" onclick="showHome()">
-                <div class="w-12 h-12 bg-[#3f5242] rounded-2xl flex items-center justify-center font-bold text-2xl text-white shadow-inner">風</div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-black text-[#232f3e] tracking-tight">《那天風很大》線上繪本教室</h1>
-                    <p class="text-xs text-[#6e7d8d] font-bold">Picture Book Learning Studio ｜ 5歲幼兒中文・完整8堂・四層提問・家園合作</p>
+        <div class="framework-pill-grid">
+            <article class="framework-pill-card layer-fact">
+                <div class="framework-pill-head">
+                    <span class="framework-pill-emoji">👀</span>
+                    <div><h3 class="font-black">問事實／看見</h3><p class="text-xs mt-1">我看見、聽見什麼？</p></div>
                 </div>
-            </div>
-            
-            <div class="flex flex-wrap items-center gap-2">
-                <button onclick="toggleMode('parent')" class="px-4 py-2 bg-[#d7e5d8] hover:bg-[#c9dacb] text-[#2d4d36] font-black rounded-2xl text-xs md:text-sm transition flex items-center gap-1.5 shadow-sm">
-                    <span class="text-base">👨‍👩‍👧</span> 家長練習區 <span class="text-[10px] opacity-70 font-normal">Parent Practice</span>
-                </button>
-                <button onclick="toggleMode('teacher')" class="px-4 py-2 bg-[#e8e6d9] hover:bg-[#dedbc9] text-[#4d4833] font-black rounded-2xl text-xs md:text-sm transition flex items-center gap-1.5 shadow-sm">
-                    <span class="text-base">👩‍🏫</span> 教師專區 <span class="text-[10px] opacity-70 font-normal">Teacher Only</span>
-                </button>
-                <button onclick="copyCurrentUrl()" class="px-3.5 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-2xl text-xs md:text-sm transition flex items-center gap-1">
-                    🔗 分享
-                </button>
-                <button onclick="openModal('氣味博物館', '第7堂課專屬家庭氣味策展區：記錄孩子與家長共同發掘的每種生活氣味與背後故事。')" class="px-3.5 py-2 bg-[#517677] hover:bg-[#436263] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow-sm">
-                    氣味博物館
-                </button>
-                <button onclick="openModal('作品分享區', '幼兒故事積木抽卡組合成果、天馬行空改編創作與課堂劇場照片展覽。')" class="px-3.5 py-2 bg-[#c08d46] hover:bg-[#aa7b3a] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow-sm">
-                    作品分享區
-                </button>
-                <button onclick="openGalleryDirect(0)" class="px-4 py-2 bg-[#3f5242] hover:bg-[#324235] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow">
-                    全螢幕繪本
-                </button>
-                <button id="btnBackHome" onclick="showHome()" class="hidden px-4 py-2 bg-[#8c5e58] text-white font-bold rounded-2xl text-xs md:text-sm transition shadow">
-                    回課程首頁
-                </button>
-            </div>
-        </header>
+            </article>
+            <article class="framework-pill-card layer-feeling">
+                <div class="framework-pill-head">
+                    <span class="framework-pill-emoji">❤️</span>
+                    <div><h3 class="font-black">問感覺／感受</h3><p class="text-xs mt-1">我覺得怎麼樣？</p></div>
+                </div>
+            </article>
+            <article class="framework-pill-card layer-experience">
+                <div class="framework-pill-head">
+                    <span class="framework-pill-emoji">🔗</span>
+                    <div><h3 class="font-black">問經驗／連結</h3><p class="text-xs mt-1">我也有過嗎？</p></div>
+                </div>
+            </article>
+            <article class="framework-pill-card layer-decision">
+                <div class="framework-pill-head">
+                    <span class="framework-pill-emoji">✋</span>
+                    <div><h3 class="font-black">問決定／創造</h3><p class="text-xs mt-1">我想選什麼、怎麼做？</p></div>
+                </div>
+            </article>
+        </div>
+        <div class="botanical-hero-note"><span>課程結構</span> 六堂故事核心＋兩堂家庭實踐；八堂課每一堂都走一次完整的四層短循環。</div>
+    </section>
 
-        <!-- 首頁主視覺 -->
-        <main id="view-home" class="space-y-6">
-            
-            <!-- 核心 Banner (大標題與四層提問法) -->
-            <div class="p-6 md:p-9 rounded-3xl banner-hero space-y-6">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 border-b border-gray-100 pb-5">
-                    <div class="space-y-1">
-                        <span class="text-xs font-black text-[#586b43] tracking-widest uppercase font-en">PROFESSIONAL EARLY CHINESE LEARNING</span>
-                        <div class="flex flex-wrap items-baseline gap-3">
-                            <h2 class="text-2xl md:text-4xl font-black text-[#232f3e] tracking-tight font-en">Four-Level Questioning</h2>
-                            <h2 class="text-2xl md:text-4xl font-black text-[#232f3e]">四層次提問法</h2>
-                        </div>
-                        <p class="text-base md:text-lg font-bold text-[#455848]">
-                            <span class="font-en font-black text-[#2d3a30]">From Questions to Deeper Thinking</span> ｜ 從提問引導深度思考
-                        </p>
-                    </div>
-                    <div class="bg-[#4d6342] text-white p-3 md:p-4 rounded-2xl text-center shrink-0 shadow-md">
-                        <p class="text-xs font-bold text-white/90">繪本實例：《那天風很大》</p>
-                        <p class="text-[11px] font-en opacity-80 mt-0.5">Picture Book Learning Studio</p>
-                    </div>
-                </div>
+    <section class="course-journey grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-5 rounded-3xl" style="--journey-accent: #6d5138;">
+            <span class="text-xs font-black text-[#6d5138]">第一階段｜第1～3堂</span>
+            <h3 class="text-xl font-black text-[#314055] mt-2">感官進入</h3>
+            <p class="text-sm text-gray-600 mt-2">從風聲、樹的動作與真實氣味出發，先讓孩子看見、聽見、聞到，再轉成中文。</p>
+        </div>
+        <div class="p-5 rounded-3xl" style="--journey-accent: #80523d;">
+            <span class="text-xs font-black text-[#80523d]">第二階段｜第4～5堂</span>
+            <h3 class="text-xl font-black text-[#314055] mt-2">文本與重組</h3>
+            <p class="text-sm text-gray-600 mt-2">先守住「大海、很大」的文本事實，再把地點、味道與故事結構積木重新組合。</p>
+        </div>
+        <div class="p-5 rounded-3xl" style="--journey-accent: #79834d;">
+            <span class="text-xs font-black text-[#79834d]">第三階段｜第6堂</span>
+            <h3 class="text-xl font-black text-[#314055] mt-2">個人表達</h3>
+            <p class="text-sm text-gray-600 mt-2">沿用第五堂保存的同一組卡和回家畫作，看圖說出自己的故事。</p>
+        </div>
+        <div class="p-5 rounded-3xl" style="--journey-accent: #596d43;">
+            <span class="text-xs font-black text-[#596d43]">第四階段｜第7～8堂</span>
+            <h3 class="text-xl font-black text-[#314055] mt-2">家庭實踐</h3>
+            <p class="text-sm text-gray-600 mt-2">建立家庭氣味博物館，最後用故事劇場、家長分享與探索家約定完成行動。</p>
+        </div>
+    </section>
 
-                <!-- 引言區塊 (淺綠色背景) -->
-                <div class="p-4 md:p-5 bg-[#f6f8f4] border-l-4 border-[#4d6342] rounded-r-2xl space-y-1.5">
-                    <p class="text-sm md:text-base font-bold text-[#293627] leading-relaxed">
-                        「我們不是用問題考孩子，而是用一層一層的提問，幫孩子把故事蓋起來。從看見、感受、連結到決定，每一堂都走一次短短的四層對話循環。」
-                    </p>
-                </div>
-
-                <!-- 四色提問小卡 -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-                    <div class="p-4 bg-[#edf5fc] border border-[#cde2f5] rounded-2xl space-y-1 shadow-sm">
-                        <div class="font-black text-sm text-[#274b6e] flex items-center gap-1.5">
-                            <span class="text-sm">👀</span> 問事實／看見
-                        </div>
-                        <p class="text-xs text-[#52667a]">我看見、聽見什麼？</p>
-                    </div>
-                    <div class="p-4 bg-[#fdf0f2] border border-[#f7cbcf] rounded-2xl space-y-1 shadow-sm">
-                        <div class="font-black text-sm text-[#8c3545] flex items-center gap-1.5">
-                            <span class="text-sm">❤️</span> 問感覺／感受
-                        </div>
-                        <p class="text-xs text-[#7b5157]">我覺得怎麼樣？</p>
-                    </div>
-                    <div class="p-4 bg-[#fdf9e6] border border-[#f8e79e] rounded-2xl space-y-1 shadow-sm">
-                        <div class="font-black text-sm text-[#796015] flex items-center gap-1.5">
-                            <span class="text-sm">🔗</span> 問經驗／連結
-                        </div>
-                        <p class="text-xs text-[#73663a]">我也有過嗎？</p>
-                    </div>
-                    <div class="p-4 bg-[#eef7ee] border border-[#cce8cf] rounded-2xl space-y-1 shadow-sm">
-                        <div class="font-black text-sm text-[#255f30] flex items-center gap-1.5">
-                            <span class="text-sm">✋</span> 問決定／創造
-                        </div>
-                        <p class="text-xs text-[#4b6a52]">我想選什麼、怎麼做？</p>
-                    </div>
-                </div>
-
-                <!-- 課程結構細項條 -->
-                <div class="p-3 bg-[#faf9f5] border border-[#e5e1d5] rounded-2xl flex items-center gap-3 text-xs md:text-sm text-gray-700">
-                    <span class="px-2.5 py-1 bg-[#475749] text-white font-bold rounded-lg text-xs shrink-0">課程結構</span>
-                    <span>六堂故事核心＋兩堂家庭實踐；八堂課每一堂都走一次完整的四層短循環。</span>
-                </div>
-            </div>
-
-            <!-- 四階段說明卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="p-5 rounded-3xl bg-[#eef4f9] border border-[#d3e3f0] space-y-2 shadow-sm">
-                    <span class="text-[11px] font-black text-[#375e84]">第一階段 ｜ 第1～3堂</span>
-                    <h3 class="text-base font-black text-[#1b354d]">感官進入</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        從風聲、樹的動作與真實氣味出發，先讓孩子看見、聽見、聞到，再轉成中文。
-                    </p>
-                </div>
-                <div class="p-5 rounded-3xl bg-[#fcf0ea] border border-[#edd7cc] space-y-2 shadow-sm">
-                    <span class="text-[11px] font-black text-[#8c4625]">第二階段 ｜ 第4～5堂</span>
-                    <h3 class="text-base font-black text-[#4d200c]">文本與重組</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        先守住「大海、很大」的文本事實，再把地點、味道與故事結構重新組合。
-                    </p>
-                </div>
-                <div class="p-5 rounded-3xl bg-[#fdf8e8] border border-[#f7e9be] space-y-2 shadow-sm">
-                    <span class="text-[11px] font-black text-[#7a6214]">第三階段 ｜ 第6堂</span>
-                    <h3 class="text-base font-black text-[#473604]">個人表達</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        沿用第五堂保存的同一組卡和回家畫作，看圖說出自己的故事。
-                    </p>
-                </div>
-                <div class="p-5 rounded-3xl bg-[#edf6f0] border border-[#cde8d4] space-y-2 shadow-sm">
-                    <span class="text-[11px] font-black text-[#265e33]">第四階段 ｜ 第7～8堂</span>
-                    <h3 class="text-base font-black text-[#0f381b]">家庭實踐</h3>
-                    <p class="text-xs text-gray-600 leading-relaxed">
-                        建立家庭氣味博物館，最後用故事劇場、家長分享與探索家約定完成行動。
-                    </p>
-                </div>
-            </div>
-
-            <!-- 單元選擇標題 -->
-            <div class="text-center space-y-1 pt-3">
-                <h2 class="text-2xl md:text-3xl font-black text-[#232f3e]">請選擇今日上課單元</h2>
-                <p class="text-gray-500 text-sm">完整 8 堂課架構，點選進入專屬單堂全螢幕教學模式</p>
-            </div>
-
-            <!-- 8堂課卡片網格 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="homeLessonGrid"></div>
-        </main>
-
-        <!-- 單堂教學互動頁面 -->
-        <main id="view-lesson" class="hidden space-y-6">
-            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
-                <div class="space-y-2">
-                    <div class="flex items-center gap-2">
-                        <span id="lessonTag" class="text-sm font-black bg-[#3f5242] text-white px-3.5 py-1 rounded-full">第 1 堂</span>
-                        <span id="lessonFrameworkTag" class="text-xs bg-[#eef2ed] text-[#334636] px-3 py-1 rounded-full font-bold border border-[#ccd8cc]">鷹架目標：看見</span>
-                    </div>
-                    <h2 id="lessonTitle" class="text-2xl md:text-3xl font-black text-[#232f3e]">找到風：「那天，風很大！」</h2>
-                    <div class="flex flex-wrap items-center gap-3 pt-1">
-                        <span id="lessonLang" class="text-sm md:text-base font-bold text-[#6a4d2f] bg-[#fdf8e8] px-3.5 py-1.5 rounded-xl border border-[#fae8a4]">核心：風／大／吹</span>
-                        <button onclick="speakCurrentSentence()" class="text-sm md:text-base font-bold text-[#235e2f] bg-[#edf6f0] px-3.5 py-1.5 rounded-xl border border-[#cde8d4] hover:bg-[#deeedf] transition flex items-center gap-2">
-                            <span id="lessonSentence">句型：風來了。風很大。</span>
-                            <span class="text-xs px-2 py-0.5 bg-[#235e2f] text-white rounded-full">點擊朗讀</span>
-                        </button>
-                    </div>
-                </div>
-                <button onclick="openLessonSlide()" class="px-6 py-4 rounded-2xl bg-[#3f5242] hover:bg-[#314134] text-white font-black text-base md:text-lg transition shadow-lg flex items-center gap-2">
-                    <span>📺</span> 開啟全滿版繪本投影
-                </button>
-            </div>
-
-            <!-- 生字卡區塊 (分開朗讀) -->
-            <div class="p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl md:text-2xl font-black text-[#232f3e]">本堂重點生字卡（點擊單獨發音）</h3>
-                    <span class="text-xs text-gray-500">字詞分離・標準台灣女聲發音</span>
-                </div>
-                <div id="lessonVocabList" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
-            </div>
-
-            <!-- 流程與四層提問 -->
-            <div class="grid lg:grid-cols-12 gap-6">
-                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
-                    <h3 class="text-xl font-black text-[#232f3e]">40分鐘黃金流程</h3>
-                    <div id="lessonFlow" class="space-y-3 text-sm md:text-base leading-relaxed"></div>
-                </div>
-                <div class="lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#dfdad0] space-y-4 shadow-sm">
-                    <h3 class="text-xl font-black text-[#232f3e]">漢堡王四層次提問引導</h3>
-                    <div id="lessonQuestions" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
-                </div>
-            </div>
-        </main>
-
-        <!-- 全螢幕繪本投影片 -->
-        <main id="view-gallery" class="hidden space-y-4">
-            <div class="flex justify-between items-center bg-white p-3.5 rounded-2xl border border-[#dfdad0] shadow-sm">
-                <div class="flex items-center gap-2">
-                    <button onclick="returnToLesson()" class="px-4 py-1.5 bg-[#3f5242] text-white font-bold rounded-xl text-xs md:text-sm shadow-sm">
-                        返回課堂
-                    </button>
-                    <span id="pageIndicator" class="font-black text-[#3f5242] text-base md:text-lg px-2">1 / 7</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button onclick="prevSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 font-bold text-xs md:text-sm">上一頁</button>
-                    <button onclick="nextSlide()" class="px-3 py-1.5 rounded-xl bg-gray-100 hover:bg-gray-200 font-bold text-xs md:text-sm">下一頁</button>
-                    <button onclick="readCurrentSlide()" class="px-4 py-1.5 bg-[#c08d46] hover:bg-[#a97a38] text-white font-bold rounded-xl text-xs md:text-sm shadow-sm">朗讀整段</button>
-                    <button onclick="stopSpeech()" class="px-3 py-1.5 bg-gray-200 text-gray-700 font-bold rounded-xl text-xs">停止</button>
-                </div>
-            </div>
-
-            <div class="grid lg:grid-cols-12 gap-5 items-stretch">
-                <div class="lg:col-span-7 bg-white p-4 rounded-3xl border border-[#dfdad0] flex items-center justify-center min-h-[440px] shadow-sm">
-                    <img id="slideImage" src="slide1.jpg" alt="繪本畫面" class="max-h-[68vh] object-contain rounded-2xl shadow">
-                </div>
-                <div class="lg:col-span-5 bg-white p-6 md:p-8 rounded-3xl border border-[#dfdad0] flex flex-col justify-between shadow-sm space-y-4">
-                    <div>
-                        <span class="text-xs text-gray-400 font-black tracking-wider uppercase">故事內文</span>
-                        <p id="slideCaption" class="text-2xl md:text-3xl font-black text-[#232f3e] leading-relaxed mt-3"></p>
-                    </div>
-                    <div class="border-t border-gray-100 pt-4">
-                        <h4 class="text-sm font-bold text-gray-500 mb-2">課堂提問引導</h4>
-                        <div id="slidePrompts" class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs md:text-sm"></div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <footer class="text-center text-xs text-gray-400 py-3">
-            《那天風很大》線上繪本教室 ｜ 設計於 5 歲幼兒雙語沉浸課堂
-        </footer>
+    <div class="text-center space-y-2 py-2">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-[#314055]">請選擇今日上課單元</h2>
+        <p class="text-gray-500 text-base md:text-lg">點選進入專屬單堂全螢幕教學模式，字體更大、畫面更專注</p>
     </div>
 
-    <!-- 彈出視窗 -->
-    <div id="infoModal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full border border-[#dfdad0] shadow-xl space-y-4">
-            <h3 id="modalTitle" class="text-xl font-black text-[#232f3e]"></h3>
-            <p id="modalDesc" class="text-sm text-gray-600 leading-relaxed"></p>
-            <div class="text-right pt-2">
-                <button onclick="closeModal()" class="px-5 py-2 bg-[#3f5242] text-white font-bold rounded-xl text-sm">關閉</button>
-            </div>
+    <div class="lesson-quick-nav p-4 rounded-3xl space-y-3 shadow-sm">
+        <div class="flex flex-col md:flex-row justify-between md:items-center gap-2">
+            <p class="font-black text-[#4e5b4e]">完整 8 堂課快捷列</p>
+            <p class="text-xs text-gray-500">可直接點數字進入單堂</p>
+        </div>
+        <div class="grid grid-cols-4 md:grid-cols-8 gap-2">
+            <button class="py-2 rounded-xl" onclick="openLesson(1)">1 找風</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(2)">2 遇樹</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(3)">3 味道</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(4)">4 旅行</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(5)">5 故事</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(6)">6 發表</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(7)">7 家味</button>
+            <button class="py-2 rounded-xl" onclick="openLesson(8)">8 舞台</button>
         </div>
     </div>
 
-    <script>
-        const lessonsData = {
-            1: { title: "找到風：「那天，風很大！」", langText: "風／大／吹", sentenceText: "句型：風來了。風很大。", stage: "鷹架目標：看見", slideIndex: 0, vocab: [{c:"風",p:"fēng",w:"大風"},{c:"大",p:"dà",w:"很大"},{c:"吹",p:"chuī",w:"吹風"},{c:"來",p:"lái",w:"風來了"}], flow: ["0–5分：神秘聲音聽風聲","5–12分：小風大風動作律動","12–20分：繪本四層提問","20–32分：風來了遊戲","32–37分：語言積木組裝","37–40分：留下問題引導下堂"], q: ["👀 看見：誰？在哪裡？","❤️ 感受：風大不大？身體覺得冷嗎？","🔗 經驗：你有吹過很大的風嗎？","✋ 決定：如果你遇到大風會怎麼做？"] },
-            2: { title: "遇見樹：「風來了，樹怎麼了？」", langText: "樹／搖／動", sentenceText: "句型：我是樹。樹搖一搖。", stage: "鷹架目標：感受", slideIndex: 1, vocab: [{c:"樹",p:"shù",w:"大樹"},{c:"搖",p:"yáo",w:"搖一搖"},{c:"動",p:"dòng",w:"吹動"},{c:"坐",p:"zuò",w:"坐下"}], flow: ["0–5分：回到第一塊積木","5–12分：化身為大樹律動","12–20分：繪本找線索","20–32分：樹與風角色扮演","32–37分：語言積木","37–40分：留下氣味伏筆"], q: ["👀 看見：樹在哪裡？長得直還是彎？","❤️ 感受：風來了，樹的心情怎麼樣？","🔗 經驗：你看過路邊的樹被風吹嗎？","✋ 決定：如果你是樹，遇到大風會怎麼做？"] },
-            3: { title: "發現味道：「風裡面有什麼？」", langText: "聞／味道／香", sentenceText: "句型：我聞到了～。", stage: "鷹架目標：連結", slideIndex: 2, vocab: [{c:"聞",p:"wén",w:"聞一聞"},{c:"味",p:"wèi",w:"氣味"},{c:"道",p:"dào",w:"味道"},{c:"香",p:"xiāng",w:"好香"}], flow: ["0–5分：故事回顧","5–12分：神秘氣味聞一聞","12–20分：回到繪本四層提問","20–32分：味道偵探遊戲","32–37分：語言積木累積","37–40分：留下問題：風從哪裡來？"], q: ["👀 看見：小明聞到了什麼？","❤️ 感受：他喜歡這個味道嗎？","🔗 經驗：你有聞過很香的味道嗎？","✋ 決定：你想知道風把味道從哪裡帶來嗎？"] },
-            4: { title: "風的旅行：「風從哪裡來？」", langText: "大海／來／很大", sentenceText: "句型：風從大海來，帶來海的味道。", stage: "鷹架目標：轉化", slideIndex: 3, vocab: [{c:"海",p:"hǎi",w:"大海"},{c:"從",p:"cóng",w:"從哪來"},{c:"帶",p:"dài",w:"帶來"},{c:"大",p:"dà",w:"很大"}], flow: ["0–5分：繪本回扣大海","5–12分：肢體感受大海很大","12–20分：風還可以從哪裡來？","20–28分：地點與氣味配對","28–35分：語言組合機","35–40分：預告故事積木抽卡"], q: ["👀 看見：風回答了哪兩個字就走了？","❤️ 感受：只聽到很大，你會想去看看嗎？","🔗 經驗：你看過大海嗎？大海聽起來像什麼？","✋ 決定：如果風從你最喜歡的地方來，會帶來什麼？"] },
-            5: { title: "吹亂故事：「我們一起蓋故事！」", langText: "時間／主角／地點／結局", sentenceText: "句型：白天，小明在樹下睡覺，最後回家。", stage: "鷹架目標：重組", slideIndex: 4, vocab: [{c:"時",p:"shí",w:"時間"},{c:"人",p:"rén",w:"主角"},{c:"地",p:"dì",w:"地方"},{c:"事",p:"shì",w:"故事"}], flow: ["0–5分：積木回顧","5–10分：老師示範抽卡","10–20分：故事抽卡組裝","20–30分：大風吹搞笑故事組裝","30–35分：換卡重組","35–40分：故事感受分享"], q: ["👀 看見：我們抽到了哪幾張卡片？","❤️ 感受：這個被吹亂的故事好笑嗎？","🔗 經驗：主角做的事情你平常也會做嗎？","✋ 決定：你想把結局改成什麼？"] },
-            6: { title: "我是小故事家：「換我蓋故事！」", langText: "全課字詞總整合", sentenceText: "句型：那天風很大，風從大海來。", stage: "鷹架目標：創造", slideIndex: 5, vocab: [{c:"故",p:"gù",w:"故事"},{c:"事",p:"shì",w:"故事家"},{c:"家",p:"jiā",w:"回家"},{c:"起",p:"qǐ",w:"起身"}], flow: ["0–8分：六堂故事地圖回顧","8–15分：繪本五張畫面排序","15–22分：四層提問總複習","22–32分：發表自己的風之故事","32–37分：小小故事劇場","37–40分：故事家畢業頒獎"], q: ["👀 看見：小明一開始在哪裡？最後呢？","❤️ 感受：讀完繪本你最喜歡哪一張圖？","🔗 經驗：你最想把這個故事講給誰聽？","✋ 決定：今天回家後你想做什麼小嘗試？"] },
-            7: { title: "家庭氣味博物館：「家的味道」", langText: "家／想到／分享", sentenceText: "句型：這是我家的味道，讓我想到媽媽。", stage: "鷹架目標：家庭延伸", slideIndex: 6, vocab: [{c:"家",p:"jiā",w:"家人"},{c:"想",p:"xiǎng",w:"想到"},{c:"分",p:"fēn",w:"分享"},{c:"愛",p:"ài",w:"喜愛"}], flow: ["0–8分：氣味博物館介紹","8–20分：展示一件家中氣味物品","20–30分：四層提問口述引導","30–38分：記錄我的氣味卡片","38–40分：家庭氣味收藏約定"], q: ["👀 看見：你帶來的是什麼物品？","❤️ 感受：聞起來感覺怎麼樣？","🔗 經驗：它讓你想到家裡的誰或哪件事？","✋ 決定：你決定把它放在家裡的哪裡收藏？"] },
-            8: { title: "故事劇場與家長發表：「成果舞台」", langText: "先／最後／我決定", sentenceText: "句型：我演的是風，我決定勇敢探索。", stage: "鷹架目標：舞台展現", slideIndex: 6, vocab: [{c:"先",p:"xiān",w:"首先"},{c:"後",p:"hòu",w:"最後"},{c:"演",p:"yǎn",w:"演出"},{c:"約",p:"yuē",w:"約定"}], flow: ["0–10分：劇場角色分工","10–25分：故事劇場演出與台詞","25–35分：家長觀摩與作品發表","35–40分：頒發探索家證書與約定"], q: ["👀 看見：大家今天演出了哪些角色？","❤️ 感受：站在台上分享心情怎麼樣？","🔗 經驗：這八堂課你學到最棒的一件事是什麼？","✋ 決定：下次遇到不認識的事物，你決定怎麼做？"] }
-        };
+    <div class="lesson-card-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="homeLessonGrid"></div>
+</main>
 
-        const slides = [
-            { img: "slide1.jpg", text: "那天風很大", prompts: ["👀 看見：畫面裡有什麼顏色？", "❤️ 感受：風感覺很涼嗎？", "🔗 經驗：你有吹過大風嗎？", "✋ 決定：大風來你想做什麼？"] },
-            { img: "slide2.jpg", text: "那天風很大。小明坐在樹下，什麼都沒有做。", prompts: ["👀 看見：小明坐在哪裡？", "❤️ 感受：小明看起來舒服嗎？", "🔗 經驗：你喜歡在樹下休息嗎？", "✋ 決定：想像你在樹下聽風聲！"] },
-            { img: "slide3.jpg", text: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？", prompts: ["👀 看見：小明的鼻子在做什麼？", "❤️ 感受：聞到新味道會好奇嗎？", "🔗 經驗：你有聞過特別的味道嗎？", "✋ 決定：你想問風什麼問題？"] },
-            { img: "slide4.jpg", text: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。", prompts: ["👀 看見：風說了哪兩個字？", "❤️ 感受：聽完你想去大海看嗎？", "🔗 經驗：你看過大海嗎？", "✋ 決定：比出你心中的很大有多大！"] },
-            { img: "slide5.jpg", text: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。", prompts: ["👀 看見：頭頂上的海浪是真實的嗎？", "❤️ 感受：小明在享受想像嗎？", "🔗 經驗：你有閉上眼睛想像過嗎？", "✋ 決定：你想去哪裡冒險？"] },
-            { img: "slide6.jpg", text: "但我一直坐著，直到風停了，味道也散了。", prompts: ["👀 看見：天空變成什麼顏色？", "❤️ 感受：感覺放鬆平靜嗎？", "🔗 經驗：天黑時你會想回家嗎？", "✋ 決定：風停了接下來要做什麼？"] },
-            { img: "slide7.jpg", text: "他起身，拍拍褲子上的泥。回家了。", prompts: ["👀 看見：小明最後做了什麼動作？", "❤️ 感受：他看起來有精神嗎？", "🔗 經驗：你今天最喜歡哪一張圖？", "✋ 決定：回家第一句話想跟媽媽說什麼？"] }
-        ];
+<main class="hidden space-y-6" id="view-lesson">
+    <div class="lesson-hero p-6 md:p-8 rounded-3xl bg-white border border-[#d9d2c1] shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-4">
+        <div class="space-y-3">
+            <div class="flex items-center gap-2">
+                <span class="text-sm font-bold bg-[#596d43] text-white px-3.5 py-1.5 rounded-full" id="lessonTag">第 1 堂</span>
+                <span class="text-xs bg-[#e9eddf] text-[#4a593e] px-3 py-1 rounded-full border border-[#cbd4c1]" id="lessonFrameworkTag">鷹架目標：看見</span>
+            </div>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-[#314055] tracking-wide" id="lessonTitle">找到風：「那天，風很大！」</h2>
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+                <span class="text-lg md:text-xl font-black text-[#6a4d2f] bg-[#f4ead3] px-4 py-2 rounded-2xl border border-[#ddc797]" id="lessonLang">核心：風／大／吹</span>
+                <button class="text-lg md:text-xl font-black text-[#43523d] bg-[#edf1e4] px-4 py-2 rounded-2xl border border-[#c8d1be] transition flex items-center gap-2 shadow" onclick="speakCurrentSentence()">
+                    <span id="lessonSentence">句型：風來了。風很大。</span>
+                    <span class="text-xs px-2 py-0.5 bg-[#4d5f38] text-white rounded-full">🔊 念句子</span>
+                </button>
+            </div>
+        </div>
+        <button class="px-6 py-3.5 rounded-2xl bg-[#4f603c] text-white font-extrabold text-lg shadow transition" onclick="openLessonSlide()">
+            開啟全滿版繪本投影
+        </button>
+    </div>
 
-        let currentLessonNum = 1;
-        let currentSlideIdx = 0;
+    <div class="vocab-section p-6 md:p-8 rounded-3xl bg-white border border-[#d9d2c1] shadow-sm space-y-4">
+        <div>
+            <h3 class="text-2xl md:text-3xl font-black text-[#314055]">本堂重點生字與動態圖解卡</h3>
+            <p class="text-sm md:text-base text-[#687266] mt-1 font-bold">分開點讀：點大字只念「字」；點造詞區只念「詞」；上方可單獨朗讀「完整句子」。</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="lessonVocabList"></div>
+    </div>
 
-        function initHome() {
-            const grid = document.getElementById('homeLessonGrid');
-            grid.innerHTML = Object.keys(lessonsData).map(num => {
-                const d = lessonsData[num];
-                return `
-                    <div onclick="openLesson(${num})" class="cursor-pointer p-5 rounded-3xl bg-white border border-[#dfdad0] hover:border-[#3f5242] transition shadow-sm space-y-2.5 hover:-translate-y-1">
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs font-black px-2.5 py-1 bg-[#3f5242] text-white rounded-full">第 ${num} 堂</span>
-                            <span class="text-xs text-gray-500 font-bold">${d.stage.replace('鷹架目標：', '')}</span>
-                        </div>
-                        <h3 class="text-base font-black text-[#232f3e]">${d.title.split('：')[0]}</h3>
-                        <p class="text-xs text-gray-500 line-clamp-1">${d.title.split('：')[1] || ''}</p>
-                        <div class="text-xs text-[#6a4d2f] font-bold bg-[#fdf8e8] px-2.5 py-1.5 rounded-xl border border-[#fae8a4]">${d.langText}</div>
-                    </div>
-                `;
-            }).join('');
-        }
+    <div class="hidden" id="lessonCustomEmbed"></div>
 
-        function showHome() {
-            stopSpeech();
-            document.getElementById('view-home').classList.remove('hidden');
-            document.getElementById('view-lesson').classList.add('hidden');
-            document.getElementById('view-gallery').classList.add('hidden');
-            document.getElementById('btnBackHome').classList.add('hidden');
-        }
+    <div class="lesson-content-stack grid lg:grid-cols-12 gap-6">
+        <div class="flow-panel lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#d9d2c1] shadow-sm space-y-4">
+            <h3 class="text-2xl font-bold text-[#314055]">40分鐘黃金流程</h3>
+            <div class="space-y-4 text-base md:text-lg leading-relaxed" id="lessonFlow"></div>
+        </div>
+        <div class="questions-panel lg:col-span-6 p-6 md:p-8 rounded-3xl bg-white border border-[#d9d2c1] shadow-sm space-y-4">
+            <h3 class="text-2xl font-bold text-[#314055]">Four-Level Questioning｜漢堡王四層提問</h3>
+            <div class="space-y-4 text-base md:text-lg leading-relaxed" id="lessonQuestions"></div>
+        </div>
+    </div>
+</main>
 
-        function openLesson(num) {
-            stopSpeech();
-            currentLessonNum = num;
-            const d = lessonsData[num];
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-gallery').classList.add('hidden');
-            document.getElementById('view-lesson').classList.remove('hidden');
-            document.getElementById('btnBackHome').classList.remove('hidden');
+<main class="botanical-reader hidden space-y-3" id="view-gallery">
+    <div class="reader-toolbar flex justify-between items-center bg-white p-3.5 rounded-2xl border border-[#d9d2c1] shadow-sm">
+        <div class="flex items-center gap-2">
+            <button class="px-3.5 py-1.5 bg-[#596d43] text-white font-bold rounded-xl text-xs md:text-sm shadow" onclick="returnToLesson()">
+                返回課堂
+            </button>
+            <span class="font-black text-[#4d5f38] text-base md:text-lg px-2" id="pageIndicator">1 / 7</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <button class="px-3 py-1.5 rounded-xl bg-gray-100 font-bold text-xs md:text-sm" onclick="prevSlide()">上一頁</button>
+            <button class="px-3 py-1.5 rounded-xl bg-gray-100 font-bold text-xs md:text-sm" onclick="nextSlide()">下一頁</button>
+            <button class="px-3.5 py-1.5 bg-[#b98b3b] text-white font-bold rounded-xl text-xs md:text-sm" onclick="readCurrentSlide()">朗讀整段</button>
+            <button class="px-2.5 py-1.5 bg-gray-200 text-gray-700 font-bold rounded-xl text-xs" onclick="stopSpeech()">停止</button>
+        </div>
+    </div>
 
-            document.getElementById('lessonTag').innerText = `第 ${num} 堂`;
-            document.getElementById('lessonFrameworkTag').innerText = d.stage;
-            document.getElementById('lessonTitle').innerText = d.title;
-            document.getElementById('lessonLang').innerText = `核心：${d.langText}`;
-            document.getElementById('lessonSentence').innerText = d.sentenceText;
+    <section class="reader-layout">
+        <div class="story-image-panel p-4 flex flex-col justify-center">
+            <div class="story-image-frame">
+                <img alt="繪本畫面" class="story-image" id="slideImage" src="slide1.jpg"/>
+            </div>
+            <p class="text-center text-xs text-gray-500 mt-2 font-bold">看圖找線索｜圖片保持完整比例</p>
+        </div>
+        <aside class="story-text-panel p-6 flex flex-col justify-between">
+            <div>
+                <span class="text-xs text-[#73804c] font-black uppercase tracking-wider">故事內文</span>
+                <p class="story-caption" id="slideCaption"></p>
+            </div>
+            <div class="border-t border-gray-200 pt-3 text-xs text-gray-500 font-bold">
+                朗讀時文字會依序柔和朗讀；金色字是核心字。
+            </div>
+        </aside>
+    </section>
 
-            document.getElementById('lessonVocabList').innerHTML = d.vocab.map(v => `
-                <div onclick="speakText('${v.c}。${v.w}。')" class="cursor-pointer p-4 bg-[#faf9f5] border border-[#dfdad0] hover:border-[#c08d46] rounded-2xl text-center space-y-1 transition hover:scale-105">
-                    <span class="text-xs text-gray-400 font-bold">${v.p}</span>
-                    <div class="text-3xl font-black text-[#c08d46]">${v.c}</div>
-                    <div class="text-xs font-bold text-[#235e2f] bg-[#edf6f0] py-1 rounded-lg">${v.w}</div>
+    <section class="hamburger-panel p-6 space-y-3">
+        <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+            <h4 class="font-black text-[#314055]">Four-Level Questioning｜四層次提問法</h4>
+            <span class="text-xs bg-[#e9eddf] text-[#4a593e] px-2.5 py-1 rounded-full font-bold" id="promptTag">第 1 頁</span>
+        </div>
+        <div class="hamburger-question-grid" id="slidePrompts"></div>
+    </section>
+</main>
+
+<footer class="text-center text-xs text-gray-500 py-4">
+    《那天風很大》線上繪本教室 ｜ 設計於 5 歲幼兒雙語沉浸課堂
+</footer>
+
+</div>
+
+<!-- 彈出視窗 -->
+<div id="infoModal" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-3xl p-6 md:p-8 max-w-md w-full border border-[#d9d2c1] shadow-xl space-y-4">
+        <h3 id="modalTitle" class="text-xl font-black text-[#314055]"></h3>
+        <p id="modalDesc" class="text-sm text-gray-600 leading-relaxed"></p>
+        <div class="text-right pt-2">
+            <button onclick="closeModal()" class="px-5 py-2 bg-[#4a5859] text-white font-bold rounded-xl text-sm">關閉</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const slides = [
+    { img: "slide1.jpg", text: "那天風很大", prompts: ["👀 看見：畫面裡有什麼顏色？", "❤️ 感受：風感覺很涼嗎？", "🔗 經驗：你有吹過大風嗎？", "✋ 決定：大風來你想做什麼？"] },
+    { img: "slide2.jpg", text: "那天風很大。小明坐在樹下，什麼都沒有做。", prompts: ["👀 看見：小明坐在哪裡？", "❤️ 感受：小明看起來舒服嗎？", "🔗 經驗：你喜歡在樹下休息嗎？", "✋ 決定：想像你在樹下聽風聲！"] },
+    { img: "slide3.jpg", text: "風一陣一陣地來，帶著一種他不認識的味道。他問：你從哪裡來？", prompts: ["👀 看見：小明的鼻子在做什麼？", "❤️ 感受：聞到新味道會好奇嗎？", "🔗 經驗：你有聞過特別的味道嗎？", "✋ 決定：你想問風什麼問題？"] },
+    { img: "slide4.jpg", text: "風沒有停，說：大海。小明說：大海是什麼樣子？風說：很大。然後就走了。", prompts: ["👀 看見：風說了哪兩個字？", "❤️ 感受：聽完你想去大海看嗎？", "🔗 經驗：你看過大海嗎？", "✋ 決定：比出你心中的很大有多大！"] },
+    { img: "slide5.jpg", text: "小明坐在那裡，聞了很久那個味道。他沒有去過大海。他也不知道很大是多大。", prompts: ["👀 看見：頭頂上的海浪是真實的嗎？", "❤️ 感受：小明在享受想像嗎？", "🔗 經驗：你有閉上眼睛想像過嗎？", "✋ 決定：你想去哪裡冒險？"] },
+    { img: "slide6.jpg", text: "但我一直坐著，直到風停了，味道也散了。", prompts: ["👀 看見：天空變成什麼顏色？", "❤️ 感受：感覺放鬆平靜嗎？", "🔗 經驗：天黑時你會想回家嗎？", "✋ 決定：風停了接下來要做什麼？"] },
+    { img: "slide7.jpg", text: "他起身，拍拍褲子上的泥。回家了。", prompts: ["👀 看見：小明最後做了什麼動作？", "❤️ 感受：他看起來有精神嗎？", "🔗 經驗：你今天最喜歡哪一張圖？", "✋ 決定：回家第一句話想跟媽媽說什麼？"] }
+];
+
+let currentLessonNum = 1;
+let currentSlideIdx = 0;
+
+function initHome() {
+    const grid = document.getElementById('homeLessonGrid');
+    grid.innerHTML = Object.keys(lessonsData).map(num => {
+        const d = lessonsData[num];
+        return `
+            <div onclick="openLesson(${num})" class="cursor-pointer p-5 rounded-2xl bg-white border border-[#d9d2c1] hover:border-[#4d5f38] transition shadow-sm space-y-2">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold px-2.5 py-0.5 bg-[#596d43] text-white rounded-full">第 ${num} 堂</span>
+                    <span class="text-xs text-gray-500 font-bold">四層提問</span>
                 </div>
-            `).join('');
+                <h3 class="text-lg font-black text-[#314055]">${d.title.split('：')[0]}</h3>
+                <p class="text-xs text-gray-600">${d.title.split('：')[1] || ''}</p>
+                <div class="text-xs text-[#6a4d2f] font-bold bg-[#f4ead3] px-2 py-1 rounded">${d.langText}</div>
+            </div>
+        `;
+    }).join('');
+}
 
-            document.getElementById('lessonFlow').innerHTML = d.flow.map(f => `
-                <div class="p-3.5 bg-[#faf9f5] border border-[#dfdad0] rounded-2xl font-bold text-gray-700">📍 ${f}</div>
-            `).join('');
+function showHome() {
+    stopSpeech();
+    document.getElementById('view-home').classList.remove('hidden');
+    document.getElementById('view-lesson').classList.add('hidden');
+    document.getElementById('view-gallery').classList.add('hidden');
+    document.getElementById('btnBackHome').classList.add('hidden');
+}
 
-            const qStyles = ['bg-[#edf5fc] border-[#cde2f5]', 'bg-[#fdf0f2] border-[#f7cbcf]', 'bg-[#fdf9e6] border-[#f8e79e]', 'bg-[#eef7ee] border-[#cce8cf]'];
-            document.getElementById('lessonQuestions').innerHTML = d.q.map((qText, i) => `
-                <div class="p-4 rounded-2xl border ${qStyles[i]} min-h-[90px] flex items-center shadow-sm">
-                    <p class="font-bold text-sm text-[#232f3e]">${qText}</p>
-                </div>
-            `).join('');
+function openLesson(num) {
+    stopSpeech();
+    currentLessonNum = num;
+    const d = lessonsData[num];
+    document.getElementById('view-home').classList.add('hidden');
+    document.getElementById('view-gallery').classList.add('hidden');
+    document.getElementById('view-lesson').classList.remove('hidden');
+    document.getElementById('btnBackHome').classList.remove('hidden');
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    document.getElementById('lessonTag').innerText = `第 ${num} 堂`;
+    document.getElementById('lessonFrameworkTag').innerText = d.stage;
+    document.getElementById('lessonTitle').innerText = d.title;
+    document.getElementById('lessonLang').innerText = `核心：${d.langText}`;
+    document.getElementById('lessonSentence').innerText = d.sentenceText;
 
-        function openLessonSlide() {
-            openGalleryDirect(lessonsData[currentLessonNum].slideIndex || 0);
-        }
+    document.getElementById('lessonVocabList').innerHTML = d.vocab.map(v => `
+        <div class="vocab-card-soft text-center space-y-2">
+            <span class="text-xs text-gray-500 font-bold">${v.pinyin}</span>
+            <div onclick="speakText('${v.char}')" class="vocab-big-char cursor-pointer hover:opacity-80">${v.char}</div>
+            <div onclick="speakText('${v.word}')" class="vocab-word-label cursor-pointer inline-block text-xs hover:opacity-80">${v.word}</div>
+        </div>
+    `).join('');
 
-        function returnToLesson() {
-            openLesson(currentLessonNum);
-        }
+    document.getElementById('lessonFlow').innerHTML = d.flowItems.map(f => `
+        <div class="p-3 bg-[#faf8f1] border border-[#ddd6c5] rounded-xl">
+            <span class="text-xs font-bold ${f.tagColor} px-2 py-0.5 rounded">${f.tag} - ${f.title}</span>
+            <p class="text-sm mt-1 text-gray-700 font-bold">${f.content}</p>
+        </div>
+    `).join('');
 
-        function openGalleryDirect(idx) {
-            stopSpeech();
-            currentSlideIdx = idx;
-            document.getElementById('view-home').classList.add('hidden');
-            document.getElementById('view-lesson').classList.add('hidden');
-            document.getElementById('view-gallery').classList.remove('hidden');
-            document.getElementById('btnBackHome').classList.remove('hidden');
-            updateSlideView();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+    document.getElementById('lessonQuestions').innerHTML = renderBotanicalQuestions(d.questions);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        function updateSlideView() {
-            stopSpeech();
-            const s = slides[currentSlideIdx];
-            document.getElementById('slideImage').src = s.img;
-            document.getElementById('slideCaption').innerText = s.text;
-            document.getElementById('pageIndicator').innerText = `${currentSlideIdx + 1} / ${slides.length}`;
-            document.getElementById('slidePrompts').innerHTML = s.prompts.map(p => `
-                <div class="p-3 bg-[#faf9f5] border border-[#dfdad0] rounded-xl font-bold text-gray-700">${p}</div>
-            `).join('');
-        }
+function openLessonSlide() {
+    openGalleryDirect(lessonsData[currentLessonNum].slideIndex || 0);
+}
 
-        function nextSlide() {
-            currentSlideIdx = (currentSlideIdx < slides.length - 1) ? currentSlideIdx + 1 : 0;
-            updateSlideView();
-        }
+function returnToLesson() {
+    openLesson(currentLessonNum);
+}
 
-        function prevSlide() {
-            currentSlideIdx = (currentSlideIdx > 0) ? currentSlideIdx - 1 : slides.length - 1;
-            updateSlideView();
-        }
+function openGalleryDirect(idx) {
+    stopSpeech();
+    currentSlideIdx = idx;
+    document.getElementById('view-home').classList.add('hidden');
+    document.getElementById('view-lesson').classList.add('hidden');
+    document.getElementById('view-gallery').classList.remove('hidden');
+    document.getElementById('btnBackHome').classList.remove('hidden');
+    updateSlideView();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        function speakText(text) {
-            if (!('speechSynthesis' in window)) return;
-            window.speechSynthesis.cancel();
-            const u = new SpeechSynthesisUtterance(text);
-            u.lang = 'zh-TW';
-            u.rate = 0.82;
-            window.speechSynthesis.speak(u);
-        }
+function updateSlideView() {
+    stopSpeech();
+    const s = slides[currentSlideIdx];
+    document.getElementById('slideImage').src = s.img;
+    document.getElementById('slideCaption').innerText = s.text;
+    document.getElementById('pageIndicator').innerText = `${currentSlideIdx + 1} / ${slides.length}`;
+    document.getElementById('promptTag').innerText = `第 ${currentSlideIdx + 1} 頁`;
+    document.getElementById('slidePrompts').innerHTML = s.prompts.map(p => `
+        <div class="hamburger-question">${p}</div>
+    `).join('');
+}
 
-        function speakCurrentSentence() {
-            speakText(lessonsData[currentLessonNum].sentenceText.replace('句型：', ''));
-        }
+function nextSlide() {
+    currentSlideIdx = (currentSlideIdx < slides.length - 1) ? currentSlideIdx + 1 : 0;
+    updateSlideView();
+}
 
-        function readCurrentSlide() {
-            speakText(slides[currentSlideIdx].text);
-        }
+function prevSlide() {
+    currentSlideIdx = (currentSlideIdx > 0) ? currentSlideIdx - 1 : slides.length - 1;
+    updateSlideView();
+}
 
-        function stopSpeech() {
-            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-        }
+function speakText(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-TW';
+    u.rate = 0.82;
+    window.speechSynthesis.speak(u);
+}
 
-        function toggleMode(type) {
-            if(type === 'parent') {
-                openModal('家長練習區指南', '為 5 歲幼兒家長設計的共讀陪伴指南：建議家長利用「你看見了什麼？這讓你想起什麼？」等自然提問，避免直接考問字詞。');
-            } else {
-                openModal('教師專區指引', '包含完整教案鷹架進程、課堂即時觀察檢核表，以及四層提問層次記錄表。');
-            }
-        }
+function speakCurrentSentence() {
+    speakText(lessonsData[currentLessonNum].rawSentence);
+}
 
-        function openModal(title, desc) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('infoModal').classList.remove('hidden');
-        }
+function readCurrentSlide() {
+    speakText(slides[currentSlideIdx].text);
+}
 
-        function closeModal() {
-            document.getElementById('infoModal').classList.add('hidden');
-        }
+function stopSpeech() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
 
-        function copyCurrentUrl() {
-            navigator.clipboard.writeText(window.location.href);
-            alert('網址已複製到剪貼簿！');
-        }
+function openParentHome() {
+    openModal('家長練習區', '提供家長離堂 3～5 分鐘共讀指南：建議家長利用「你看見了什麼？這讓你想起什麼？」等自然提問陪伴幼兒，不直接考問字詞。');
+}
 
-        initHome();
-    </script>
+function openTeacherHub() {
+    openModal('教師專區', '教師專屬形成性評量與教研鷹架指引：包含 0–1–2 課堂觀察檢核表及四層次提問紀錄工具。');
+}
+
+function openScentMuseum() {
+    openModal('氣味博物館', '第 7 堂課專屬活動：記錄孩子與家長共同發掘的家庭生活氣味與背後溫暖的故事。');
+}
+
+function openShareZone() {
+    openModal('作品分享區', '第 6 堂與第 8 堂成果展：展示幼兒抽卡組合的想像故事、繪畫創作與小小劇場發表。');
+}
+
+function openModal(title, desc) {
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalDesc').innerText = desc;
+    document.getElementById('infoModal').classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('infoModal').classList.add('hidden');
+}
+
+function copyCurrentUrl() {
+    navigator.clipboard.writeText(window.location.href);
+    alert('網址已複製到剪貼簿！');
+}
+
+initHome();
+</script>
 </body>
 </html>
